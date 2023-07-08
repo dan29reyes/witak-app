@@ -13,7 +13,7 @@ const knex = require("knex")({
 );
 
 const registerUser = async (user) => {
-    return await knex("usuarios").insert({
+    return await knex("usuarios").inserst({
         nombre_usuario: user.name,
         correo_usuario: user.email, 
         pass_usuario: user.encryptedPassword, 
@@ -23,21 +23,21 @@ const registerUser = async (user) => {
     );
   }
 
-  const getCredentials = async (email) => {
-    let credentials = await knex.select("*").from("usuarios").where("correo_usuario",email);
-    credentials = JSON.stringify(credentials);
-    return JSON.parse(credentials);
-  }
-  
-  const forgotPassword = async (user) => {
-    return await knex("usuarios").where({correo_usuario: user.email}).update({
-      pass_usuario: user.encryptedPassword,
-      salt_usuario: user.salt,
-    });
-  }
+const getCredentials = async (email) => {
+  let credentials = await knex.select("*").from("usuarios").where("correo_usuario",email);
+  credentials = JSON.stringify(credentials);
+  return JSON.parse(credentials);
+}
 
-  module.exports = {
-    getCredentials,
-    registerUser,
-    forgotPassword,
-  };
+const forgotPassword = async (user) => {
+  return await knex("usuarios").where({correo_usuario: user.email}).update({
+    pass_usuario: user.encryptedPassword,
+    salt_usuario: user.salt,
+  });
+}
+
+module.exports = {
+  getCredentials,
+  registerUser,
+  forgotPassword,
+};

@@ -46,15 +46,14 @@ async function login(req, res) {
     if (!isEmail(email)) {
       errorMessages.push("Email is not valid");
     }
-
     if (errorMessages.length) {
       res.status(HTTPCodes.BAD_REQUEST).send({ error: errorMessages });
     } else {
       const [credentials] = await getCredentials(email);
       const encryptedPassword = crypto
-        .pbkdf2Sync(password, credentials.salt_user, 30000, 64, "sha256")
+        .pbkdf2Sync(password, credentials.salt_usuario, 30000, 64, "sha256")
         .toString("base64");
-      if (encryptedPassword == credentials.password_user) {
+      if (encryptedPassword == credentials.pass_usuario) {
         const accessToken = jwt.sign({ email }, process.env.TOKEN_KEY || "AS4D5FF6G78NHCV7X6X5C",{
           expiresIn: "1d",
         });
