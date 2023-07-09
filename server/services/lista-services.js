@@ -14,7 +14,7 @@ const knex = require("knex")({
 
 async function obtenerListas(id_tablero){
   try{
-    const listas = await knex.select("*").from("listas").where("id_tablero", id_tablero);
+    let listas = await knex.select("*").from("listas").where("id_tablero", id_tablero);
     listas = JSON.stringify(listas);
     return JSON.parse(listas);
   }catch(error){

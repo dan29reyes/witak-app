@@ -1,7 +1,7 @@
 const listaServices = require('../services/lista-services');
 
 async function obtenerListas(req, res){
-    const { nombre_lista, posicion_lista, id_tablero } = req.body;
+    const {id_tablero } = req.body;
     try{
         if (typeof id_tablero === "number"){
             const listas = await listaServices.obtenerListas(id_tablero);

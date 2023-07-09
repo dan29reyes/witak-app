@@ -1,6 +1,6 @@
 const tablerosServices = require('../services/tablero-services');
 
-const obtenerTableros = async (req, res) => {
+async function obtenerTableros(req, res){
   const { id_usuario } = req.body;
   try {
     const tableros = await tablerosServices.obtenerTableros(id_usuario);
@@ -12,7 +12,7 @@ const obtenerTableros = async (req, res) => {
   }
 };
 
-const crearTablero = async (req, res) => {
+async function crearTablero(req, res){
   const { nombre_tablero, id_usuario, descripcion_tablero, fecha_limite } = req.body;
   try {
     if (typeof nombre_tablero === "string" && typeof descripcion_tablero === "string"
@@ -32,7 +32,7 @@ const crearTablero = async (req, res) => {
   }
 };
 
-const borrarTablero = async (req, res) => {
+async function borrarTablero(req, res){
     const { id_tablero, id_usuario } = req.body;
     try {
         if (typeof id_tablero === "number" && typeof id_usuario === "number") {
@@ -51,7 +51,7 @@ const borrarTablero = async (req, res) => {
     }
   }
 
-const actualizarTablero = async (req, res) => {
+async function actualizarTablero(req, res){
   const { nombre_tablero, descripcion_tablero, fecha_limite, id_tablero, id_usuario } = req.body;
   try {
     if (typeof nombre_tablero === "string" && typeof descripcion_tablero === "string"
