@@ -6,9 +6,7 @@ async function obtenerTableros(req, res){
     const tableros = await tablerosServices.obtenerTableros(id_usuario);
     res.send(tableros);
   } catch (e) {
-    res.status(500).send({
-      error: e.toString(),
-    });
+    res.status(500).send("Error obteniendo los tableros");
   }
 };
 
@@ -21,9 +19,7 @@ async function crearTablero(req, res){
       const tableros = await tablerosServices.obtenerTableros(id_usuario);
       res.send({ idTablero, tableros });
     } else {
-      res.status(400).send({
-        error: e.toString(),
-      });
+      res.status(400).send("Error creando el tablero");
     }
   } catch (e) {
     res.status(500).send({
@@ -35,15 +31,13 @@ async function crearTablero(req, res){
 async function borrarTablero(req, res){
     const { id_tablero, id_usuario } = req.body;
     try {
-        if (typeof id_tablero === "number" && typeof id_usuario === "number") {
-            const idTablero = await tablerosServices.borrarTablero(id_tablero);
-            const tableros = await tablerosServices.obtenerTableros(id_usuario);
-            res.send({ idTablero, tableros });
-        } else {
-            res.status(400).send({
-                error: e.toString(),
-            });
-        }
+      if (typeof id_tablero === "number" && typeof id_usuario === "number") {
+        const idTablero = await tablerosServices.borrarTablero(id_tablero);
+        const tableros = await tablerosServices.obtenerTableros(id_usuario);
+        res.send({ idTablero, tableros });
+      } else {
+        res.status(400).send("Error borrando el tablero")
+      }
     } catch (e) {
       res.status(500).send({
         error: e.toString(),
@@ -60,9 +54,7 @@ async function actualizarTablero(req, res){
       const tableros = await tablerosServices.obtenerTableros(id_usuario);
       res.send({ idTablero, tableros });
     }else{
-        res.status(400).send({
-            error: e.toString(),
-        });
+      res.status(400).send("Error actualizando el tablero")
     }
   } catch (e) {
     res.status(500).send({

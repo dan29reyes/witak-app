@@ -7,9 +7,7 @@ async function obtenerListas(req, res){
             const listas = await listaServices.obtenerListas(id_tablero);
             res.send(listas);
         }else{
-            res.status(400).send({
-                error: e.toString(),
-            });
+            res.status(400).send("Error obteniendo las listas")
         }
     }catch(error){
         console.log("Error obteniendo las listas", error);
@@ -24,9 +22,7 @@ async function crearLista(req, res){
             const listas = await listaServices.obtenerListas(id_tablero);
             res.status(200).send(listas);
         }else{
-            res.status(400).send({
-                error: e.toString(),
-            });
+            res.status(400).send("Error creando la lista")
         }
     }catch(error){
         console.log("Error creando la lista", error);
@@ -41,9 +37,7 @@ async function borrarLista(req, res){
             const listas = await listaServices.obtenerListas(id_tablero);
             res.status(200).send(listas);
         }else{
-            res.status(400).send({
-                error: e.toString(),
-            });
+            res.status(400).send("Error borrando la lista")
         }
     }catch(error){
         console.log("Error borrando la lista", error);
@@ -58,9 +52,7 @@ async function actualizarLista(req, res){
             const listas = await listaServices.obtenerListas(id_tablero);
             res.status(200).send(listas);
         }else{
-            res.status(400).send({
-                error: e.toString(),
-            });
+            res.status(400).send("Error actualizando la lista")
         }
     }catch(error){
         console.log("Error actualizando la lista", error);

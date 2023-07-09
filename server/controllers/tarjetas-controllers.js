@@ -6,9 +6,7 @@ async function obtenerTarjetas(req, res){
         const tarjetas = await tarjetasServices.obtenerTarjetas(id_lista);
         res.status(200).send(tarjetas);
     } catch (e) {
-        res.status(500).send({
-        error: e.toString(),
-        });
+        res.status(500).send("Error obteniendo las tarjetas")
     }
 }
 
@@ -21,9 +19,7 @@ async function crearTarjeta(req, res){
             const tarjetas = await tarjetasServices.obtenerTarjetas(id_lista);
             res.status(200).send(tarjetas);
         } else {
-            res.status(400).send({
-                error: e.toString(),
-            });
+            res.status(400).send("Error creando la tarjeta")
         }
     }
     catch (e) {
@@ -41,9 +37,7 @@ async function borrarTarjeta(req, res){
             const tarjetas = await tarjetasServices.obtenerTarjetas(id_lista);
             res.status(200).send(tarjetas);
         } else {
-            res.status(400).send({
-                error: e.toString(),
-            });
+            res.status(400).send("Error borrando la tarjeta")
         }
     }
     catch (e) {
@@ -62,9 +56,7 @@ async function actualizarTarjeta(req, res){
             const tarjetas = await tarjetasServices.obtenerTarjetas(id_lista);
             res.status(200).send(tarjetas);
         } else {
-            res.status(400).send({
-                error: e.toString(),
-            });
+            res.status(400).send("Error actualizando la tarjeta")
         }
     }
     catch (e) {
