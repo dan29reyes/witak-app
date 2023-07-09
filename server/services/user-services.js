@@ -13,7 +13,7 @@ const knex = require("knex")({
 );
 
 const registerUser = async (user) => {
-    return await knex("usuarios").inserst({
+    return await knex("usuarios").insert({
         nombre_usuario: user.name,
         correo_usuario: user.email, 
         pass_usuario: user.encryptedPassword, 

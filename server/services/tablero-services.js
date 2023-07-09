@@ -14,7 +14,7 @@ const knex = require("knex")({
 
 async function obtenerTableros(userId) {
     try{
-        let tableros = await knex.select('*').from('tableros').where('user_id',userId);
+        let tableros = await knex.select('*').from('tableros').where('id_usuario',userId);
         tableros = JSON.stringify(tableros);
         return JSON.parse(tableros);
     }catch(error){
@@ -45,7 +45,7 @@ async function borrarTablero(idTablero){
             }
             await knex('listas').where({id_lista: listId[i].id_list}).del();
         }
-        await knex('tableros').where({id_board: idTablero}).del();
+        await knex('tableros').where({id_tablero: idTablero}).del();
     }catch(error){
         console.error('Error borrando el tablero', error);
     }
