@@ -82,20 +82,30 @@ async function actualizarFormulario(req, res) {
     }
 }
 
-async function mandarCorreo(req, res) {
-    const { from, to, subject, text, html, attachments } = req.body;
+const mandarCorreo = async (req, res) => {
+    const { from, to, subject, text, html } = req.body;
+  
     try {
-        if (typeof from === "string" && typeof to === "string" 
-        && typeof subject === "string" && typeof text === "string") {
-            await formularioServices.mandarCorreo(from, to, subject, text, html, attachments);
-            res.status(200).send("Correo enviado");
-        } else {
-            res.status(400).send("Error mandando el correo")
-        }
+      if (typeof from === 'string' && typeof to === 'string' &&
+        typeof subject === 'string' && typeof text === 'string') {
+          await formularioServices.mandarCorreo(
+            from,
+            to,
+            subject,
+            text,
+            html,
+          );
+  
+          res.status(200).send('Correo enviado');
+      } else {
+        res.status(400).send('Error mandando el correo');
+      }
     } catch (error) {
-        console.log("Error mandando el correo", error);
+      console.log('Error mandando el correo', error);
+      res.status(500).send('Error mandando el correo');
     }
-}
+  };
+
 
 module.exports = {
     obtenerFormularios,
