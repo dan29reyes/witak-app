@@ -78,7 +78,7 @@ async function actualizarFormulario(formulario){
   }
 }
 
-async function mandarCorreo(from, to, text, html, attachments){
+async function mandarCorreo(from, to, asunto, text, html, attachments){
   try{
     let transporter = nodemailer.createTransport({
       service: 'Gmail',
