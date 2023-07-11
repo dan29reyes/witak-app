@@ -11,7 +11,7 @@ app.use(cors());
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './files');
+      cb(null, '../files');
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -19,20 +19,16 @@ const storage = multer.diskStorage({
     }
   });
 
-const upload = multer({ storage: storage }).single('pdf');
-
-app.post('/upload', (req, res) => {
+const upload = multer({ storage: storage });
+app.post('/upload', upload.single('pdf'), (req, res) => {
   upload(req, res, (err) => {
     if (err) {
       console.error('Error uploading file', err);
       return res.status(500).send('Error uploading file');
     }
-    
-    console.log(req.file); // File details (filename, path, etc.)
-    res.status(200).send('File uploaded');
+    res.status(200).send(req.file);
   });
 });
-
 
 const userRouter = require('./routes/user-routes');
 const tableroRouter = require('./routes/tablero-routes');

@@ -14,7 +14,7 @@ function Formularios() {
     tono: "",
     usuario: "",
     fecha_limite: "",
-    pdf: "",
+    pdf: null,
   });
 
   const fileInputRef = useRef(null);
@@ -34,15 +34,16 @@ function Formularios() {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     if (file && file.type === 'application/pdf') {
-      const formData = new FormData();
-      formData.append('pdf', file);
+      const formDT = new FormData();
+      formDT.append('pdf', file);
       
-      axios
-        .post('http://localhost:8000/upload', formData)
+      axios.post('http://localhost:8000/upload', formDT)
         .then((response) => {
-          console.log(response.data);
+          setFormData({
+            ...formData,
+            pdf: response.data
+          });
         })
         .catch((error) => {
           console.error(error);
@@ -52,7 +53,6 @@ function Formularios() {
     }
   };
   
-  
   const handleDragOver = (e) => {
     e.preventDefault();
   };
@@ -61,19 +61,28 @@ function Formularios() {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
     if (file && file.type === 'application/pdf') {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({
-          ...formData,
-          pdf: file,
+      const formDT = new FormData();
+      formDT.append('pdf', file);
+      
+      axios
+        .post('http://localhost:8000/upload', formDT)
+        .then((response) => {
+          setFormData({
+            ...formData,
+            pdf: {
+              filename: response.data.filename,
+              originalname: response.data.originalname,
+              path: response.data.path,
+            },
+          });
+        })
+        .catch((error) => {
+          console.error(error);
         });
-      };
-      reader.readAsDataURL(file);
     } else {
       console.error('Invalid file type. Only PDF files are allowed.');
     }
   };
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,14 +122,19 @@ function Formularios() {
           text: "",
           html: modifiedHtml,
           attachments: formData.pdf,
+          //   {
+          //     filename: formData.pdf.filename,
+          //     path: formData.pdf.path+".pdf",
+          //   },
+          // ],
         }
       }
-      console.log(options.data)
-      axios.request(options).then(function (response) {
-        console.log(response.data);
-      }).catch(function (error) {
-        console.error(error);
-      });
+      console.log(options.data.attachments)
+      // axios.request(options).then(function(response) {
+      //   console.log(response.data);
+      // }).catch(function (error) {
+      //   console.error(error);
+      // });
     }catch(error){
       throw(error);
     }
@@ -131,6 +145,7 @@ function Formularios() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    console.log(formData);
   };
 
   return (
@@ -257,7 +272,7 @@ function Formularios() {
               />
               {formData.pdf ? (
                 <div>
-                  <p>PDF file: {formData.pdf.name}</p>
+                  <p>File Uploaded</p>
                 </div>
               ) : (
                 <div className="image-icon" onClick={() => handleIconClick(fileInputRef)}>
