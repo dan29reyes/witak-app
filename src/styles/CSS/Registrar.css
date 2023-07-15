@@ -1,0 +1,358 @@
+.overlap-group {
+    align-items: flex-start;
+    background-color: var(--blue-ribbon);
+    border-radius: 9px;
+    box-shadow: 0px 3px 6px #00000029;
+    display: flex;
+    flex-direction: column;
+    padding: 5% 5%;
+    width: 45%;
+    margin-right: 5%;
+  }
+  
+  .group-2 {
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 49px;
+    width: 180px;
+  }
+  
+  .title {
+    color: var(--desert-storm);
+    font-family: var(--font-family-neuemontreal-bold);
+    font-size: var(--font-size-xxxl);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 55px;
+    margin-top: 6px;
+    min-height: 113px;
+    opacity: 0;
+    transform: translate(-25px, 0);
+    white-space: nowrap;
+  }
+  
+  .title.animate-enter1 {
+    animation: animate-enter1-frames 0.50s ease-in 0.00s 1 normal forwards;
+    opacity: 0;
+    transform: translate(-25px, 0);
+  }
+  
+  .mejora-la-comunicaci {
+    color: var(--desert-storm);
+    font-family: var(--font-family-neuemontreal-medium);
+    font-size: var(--font-size-xl);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 39px;
+    margin-top: 6px;
+    min-height: 118px;
+    opacity: 0;
+    transform: translate(-25px, 0);
+    white-space: nowrap;
+  }
+  
+  .mejora-la-comunicaci.animate-enter2 {
+    animation: animate-enter2-frames 0.70s ease-in 0.00s 1 normal forwards;
+    opacity: 0;
+    transform: translate(-25px, 0);
+  }
+  
+  .rectangle-3 {
+    align-self: center;
+    height: 361px;
+    margin-right: 28.0px;
+    margin-top: 32px;
+    opacity: 0;
+    transform: scale(1.1);
+    width: 361px;
+  }
+  
+  .rectangle-3 video {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+  
+  .rectangle-3 img {
+    object-fit: cover;
+  }
+  
+  .rectangle-3.animate-enter {
+    animation: animate-enter-frames 0.20s ease 0.00s 1 normal forwards;
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  
+  .flex-col {
+    align-items: left;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    width: 35%;
+    margin-right: 5%;
+  }
+  
+  .crear-cuenta {
+    color: var(--black);
+    font-family: var(--font-family-neuemontreal-bold);
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 51px;
+    min-height: 53px;
+    opacity: 0;
+    transform: translate(-25px, 0);
+    white-space: nowrap;
+  }
+  
+  .crear-cuenta.animate-enter3 {
+    animation: animate-enter3-frames 0.20s ease 0.00s 1 normal forwards;
+    opacity: 0;
+    transform: translate(-25px, 0);
+  }
+  
+  .flex-row {
+    align-items: flex-start;
+    display: flex;
+    gap: 7px;
+    height: 26px;
+    margin-top: 6px;
+    min-width: 292px;
+  }
+  
+  .ya-eres-parte-de-witak {
+    align-self: flex-end;
+    color: var(--black);
+    font-family: var(--font-family-neue_montreal);
+    font-size: var(--font-size-m);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 21px;
+    min-height: 23px;
+    min-width: 190px;
+    white-space: nowrap;
+  }
+  
+  .span1 {
+    color: var(--blue-ribbon);
+    font-family: var(--font-family-neuemontreal-medium);
+  }
+  
+  .inicia-sesin {
+    cursor: pointer;
+    letter-spacing: 0;
+    line-height: 26px;
+    min-height: 23px;
+    text-decoration: underline;
+    white-space: nowrap;
+  }
+  
+  .nombre-de-usuario {
+    letter-spacing: 0;
+    line-height: 27px;
+    margin-top: 22px;
+    min-height: 28px;
+    white-space: nowrap;
+  }
+  
+  .input-form {
+    align-self: left;
+    background-color: var(--desert-storm);
+    border: 1px solid;
+    border-color: var(--black);
+    border-radius: 15px;
+    box-shadow: 0px 3px 6px #00000029;
+    height: 5%;
+    margin-top: 8px;
+    padding: 7px 28px;
+  }
+  
+  .flex-col-item {
+    letter-spacing: 0;
+    line-height: 27px;
+    margin-top: 10px;
+    min-height: 28px;
+    white-space: nowrap;
+  }
+  
+  .witakgmailcom {
+    background-color: transparent;
+    border: 0;
+    align-self: center;
+    height: 22px;
+    letter-spacing: 0;
+    line-height: 20px;
+    opacity: 0.73;
+    padding: 0;
+    white-space: nowrap;
+    width: 139px;
+  }
+  
+  .contrasea {
+    letter-spacing: 0;
+    line-height: 27px;
+    margin-top: 24px;
+    min-height: 28px;
+    white-space: nowrap;
+  }
+  
+  .overlap-group1 {
+    align-items: center;
+    background-color: var(--desert-storm);
+    border: 1px solid;
+    border-color: var(--black);
+    border-radius: 15px;
+    box-shadow: 0px 3px 6px #00000029;
+    display: flex;
+    height: 38px;
+    margin-top: 10px;
+    min-width: 380px;
+    padding: 0 27px;
+  }
+  
+  .rectangle-9 {
+    align-self: left;
+    margin-top: 5%;
+    width: 42%;
+    background-color: var(--blue-ribbon);
+    border-radius: 30px;
+    border: none;
+    box-shadow: 0px 3px 6px #00000029;
+    cursor: pointer;
+    height: 50px;
+    top: 0;
+    transition: all 0.2s ease;
+    color: white;
+    font-family: var(--font-family-neuemontreal-bold);
+    font-size: var(--font-size-l);
+    font-weight: 700;
+  }
+  
+  .rectangle-9:hover {
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+  }
+  
+  @keyframes animate-enter3-frames {
+    from{opacity: 0;
+  transform: translate(-25px, 0);
+  }
+  to{opacity: 1;
+  transform: translate(0,0);
+  }
+  }
+  
+  @keyframes animate-enter2-frames {
+    from{opacity: 0;
+  transform: translate(-25px, 0);
+  }
+  to{opacity: 1;
+  transform: translate(0,0);
+  }
+  }
+  
+  @keyframes animate-enter1-frames {
+    from{opacity: 0;
+  transform: translate(-25px, 0);
+  }
+  to{opacity: 1;
+  transform: translate(0,0);
+  }
+  }
+  
+  @keyframes animate-enter-frames {
+    from{opacity: 0;
+  transform: scale(1.1);
+  }
+  to{opacity: 1;
+  transform: scale(1);
+  }
+  }
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+@font-face {
+  font-family: "NeueMontreal-Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("..//Fonts/NeueMontreal-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "NeueMontreal-Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../Fonts/NeueMontreal-Medium.otf") format("opentype");
+}
+
+.container-center-horizontal {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+@media (max-width: 767px) {
+  .container-center-horizontal {
+    flex-direction: column;
+    zoom: 75%;
+  }
+  .overlap-group {
+    width: fit-content;
+  }
+  .flex-col {
+    width: 100%;
+    margin-top: 5%;
+    margin-left: 12%;
+    margin-bottom: 5%;
+    align-items: center;
+  }
+  .input-form{
+    width: 75%;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-center-horizontal {
+    flex-direction: row;
+  }
+}
+
+:root { 
+  --black: #000000;
+  --blue-ribbon: #006fff;
+  --desert-storm: #f8f6f6;
+  --dove-gray: #707070;
+  --white: #ffffff;
+ 
+  --font-size-l: 22px;
+  --font-size-m: 17px;
+  --font-size-xl: 32px;
+  --font-size-xxl: 42px;
+  --font-size-xxxl: 56px;
+ 
+  --font-family-neue_montreal: "Neue Montreal", Helvetica;
+  --font-family-neuemontreal-bold: "NeueMontreal-Bold", Helvetica;
+  --font-family-neuemontreal-medium: "NeueMontreal-Medium", Helvetica;
+}
+.neuemontreal-bold-black-22px {
+  color: var(--black);
+  font-family: var(--font-family-neuemontreal-bold);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.neuemontreal-bold-dove-gray-17px {
+  color: var(--dove-gray);
+  font-family: var(--font-family-neuemontreal-bold);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.neuemontreal-medium-black-17px {
+  color: var(--black);
+  font-family: var(--font-family-neuemontreal-medium);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 500;
+}
