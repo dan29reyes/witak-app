@@ -65,7 +65,7 @@ async function login(req, res) {
           data: {
             accessToken,
             refreshToken,
-            id_user: credentials.id_user,
+            id_user: credentials.id_usuario,
           }
         });
       } else {

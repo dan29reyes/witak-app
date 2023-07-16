@@ -1,0 +1,156 @@
+.login-overlap-group {
+  align-items: center;
+  box-shadow: 0px 3px 6px #00000029;
+  display: flex;
+  flex-direction: column;
+  padding-top:8.5%;
+  padding-bottom:12%;
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-group-2 {
+  background-size: cover;
+  height: 120px;
+}
+
+.login-group-2.animate-enter {
+  animation: animate-enter-frames 0.20s ease 0.00s 1 normal forwards;
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.login-input-labels {
+  align-self: center;
+  margin-top: 10px;
+  min-height: 26px;
+  min-width: 172px;
+  color: white;
+}
+
+.login-input-form{
+  background-color: var(--desert-storm);
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 3px 6px #00000029;
+  display: flex;
+  height: 53px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  width: 20%;
+  padding-left: 1%;
+}
+
+.login-texto-extra{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  min-height: 26px;
+  min-width: 172px;
+  color: white;
+  font-family: var(--font-family-neuemontreal-bold);
+  font-size: var(--font-size-xs);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.login-input-form span {
+  margin-bottom: 10px;
+}
+
+.login-access-button {
+  background-color: var(--desert-storm);
+  border-radius: 25px;
+  border: none;
+  box-shadow: 0px 3px 6px #00000029;
+  cursor: pointer;
+  height: 40px;
+  transition: all 0.2s ease;
+  width: 12%;
+  margin-top: 1.2%;
+  margin-bottom: 1.2%;
+  font-family: var(--font-family-neuemontreal-bold);
+  font-size: var(--font-size-s);
+  font-style: normal;
+}
+
+.login-access-button:hover {
+  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.6);
+}
+
+@keyframes animate-enter-frames {
+  from{opacity: 0;
+transform: scale(1.1);
+}
+to{opacity: 1;
+transform: scale(1);
+}
+}
+
+.login-container-center-horizontal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  background-color: #006fff;
+}
+
+:root { 
+  --black: #000000;
+  --desert-storm: #f8f6f6;
+  --dove-gray: #707070;
+ 
+  --font-size-l: 27px;
+  --font-size-m: 20px;
+  --font-size-s: 18px;
+ 
+  --font-family-neuemontreal-bold: "NeueMontreal-Bold", Helvetica;
+}
+.neuemontreal-bold-desert-storm-20px {
+  color: var(--desert-storm);
+  font-family: var(--font-family-neuemontreal-bold);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.neuemontreal-bold-dove-gray-18px {
+  color: var(--dove-gray);
+  font-family: var(--font-family-neuemontreal-bold);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 700;
+}
+
+@media (max-width: 767px){
+  .login-overlap-group {
+    padding-top: 25%;
+    padding-bottom: 30%;
+  }
+  
+  .login-group-2 {
+    height: 90px;
+  }
+  
+  .login-access-button {
+    width: 40%;
+  }
+
+  .login-input-form {
+    width: 60%;
+    padding-left: 3.5%;
+  }
+  
+  .login-input-labels {
+    font-size: var(--font-size-s);
+    align-self: flex-start;
+    margin-left: 18%;
+  }
+}

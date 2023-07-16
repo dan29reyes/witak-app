@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RegistrarContainer from './components/Registrar'
+import LoginContainer from './components/Login'
 
 function App() {
   return (
@@ -8,12 +9,14 @@ function App() {
       <Routes>
         <Route path="/" element={<RegistrarContainer {...registrarData}/>} Redirect to="/Registrar"/>
         <Route path="/Registrar" element={<RegistrarContainer {...registrarData}/>}/>
+        <Route path="/InicioSesion" element={<LoginContainer {...inicioDeSesionData}/>}/>
       </Routes>
     </BrowserRouter>
   );
 };
 
 export default App;
+
 const registrarData = {
   group2: require("./styles/Images/logo-witak.png"),
   title: <React.Fragment>Optimiza <br />tu trabajo con nosotros.</React.Fragment>,
@@ -39,3 +42,13 @@ const registrarData = {
   inputType5: "text",
   inputPlaceholder5: "+(504)  9891 - 8825",
 };
+
+const inicioDeSesionData = {
+  group2: require("./styles/Images/logo-witak.png"),
+  correoElectronico: "Correo electronico",
+  inputType1: "text",
+  inputPlaceholder1: "witak@gmail.com",
+  contrasea: "Contraseña",
+  inputType2: "password",
+  inputPlaceholder2: "••••••••••••••••"
+}

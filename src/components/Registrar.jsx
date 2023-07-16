@@ -92,7 +92,7 @@ function Registrar(props) {
             <span className="span1">{spanText2}</span>
             <span className="neuemontreal-medium-black-17px">{spanText3}</span>
           </p>
-          <Link to="/inicio-de-sesion">
+          <Link to="/InicioSesion">
             <div className="inicia-sesin neuemontreal-medium-black-17px">{iniciaSesin}</div>
           </Link>
         </div>
