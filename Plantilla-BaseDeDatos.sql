@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `witak-app`.`usuarios` (
   UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC) VISIBLE,
   UNIQUE INDEX `correo_usuario_UNIQUE` (`correo_usuario` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `witak-app`.`formularios` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
