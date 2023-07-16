@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RegistrarContainer from './components/Registrar'
 import LoginContainer from './components/Login'
+import BoardContainer from './components/BoardList'
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<RegistrarContainer {...registrarData}/>} Redirect to="/Registrar"/>
         <Route path="/Registrar" element={<RegistrarContainer {...registrarData}/>}/>
+        <Route path="/Tablero" element={<BoardContainer {...boardListData}/>}/>
         <Route path="/InicioSesion" element={<LoginContainer {...inicioDeSesionData}/>}/>
       </Routes>
     </BrowserRouter>
@@ -51,4 +53,10 @@ const inicioDeSesionData = {
   contrasea: "Contraseña",
   inputType2: "password",
   inputPlaceholder2: "••••••••••••••••"
+}
+
+const boardListData = {
+  group2: require("./styles/Images/logo-witak.png"),
+  notificationImg: require("./styles/Images/campana-noti.png"),
+  menuImg: require("./styles/Images/menu-bars.png"),
 }

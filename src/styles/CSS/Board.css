@@ -1,0 +1,90 @@
+.board-container{
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 210px;
+    border: 1px solid #000000;
+    border-radius: 20px;
+}
+
+.board_title{
+    height: 20%;
+    color: white;
+    padding: 10px;
+    margin-left: 3%;
+    color: var(--white);
+    font-family: var(--font-family-montserrat);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.board_header{
+    align-items: flex-start;
+    display: flex;
+    height: 20%;
+    justify-content: flex-start;
+    width: 100%;
+    color: white;
+    border-radius: 20px 20px 0px 0px;
+    background-color: #006fff;
+    margin-bottom: 5%;
+}
+
+.board_body_1{
+    color: var(--chicago);
+    font-family: var(--font-family-montserrat);
+    font-size: var(--font-size-m);
+    font-style: normal;
+    margin-bottom: 2%;
+    font-weight: 700;
+}
+
+.board_body_2{
+    color: var(--chicago);
+    font-family: var(--font-family-montserrat-medium);
+    font-size: var(--font-size-m);
+    line-height: normal;
+    font-style: normal;
+    font-weight: 500;
+    margin-bottom: 5%;
+}
+
+.board_body{
+    margin-left: 5%;
+}
+
+.board-estado-pendiente{
+    width: 20px;
+    height: 20px;
+    align-self: flex-end;
+    border-radius: 20%;
+    border: 1px solid #000000;
+    background-color: rgb(228, 228, 228);
+}
+
+.board-estado-enviado{
+    align-self: flex-end;
+    width: 20px;
+    height: 20px;
+    border-radius: 20%;
+    border: 1px solid #000000;
+    background-color: rgb(12, 185, 0);
+}
+
+:root {
+    --white: #ffffff;
+    
+    --font-size-l: 15px;
+    --font-size-m: 12px;
+    --font-size-s: 8px;
+    --font-size-xl: 17px;
+    --font-size-xxl: 22px;
+    --font-size-xxxl: 23px;
+    --font-size-xxxxl: 32px;
+
+    --font-family-montserrat: "Montserrat", Helvetica;
+    --font-family-montserrat-medium: "Montserrat-Medium", Helvetica;
+    --font-family-montserrat-regular: "Montserrat-Regular", Helvetica;
+    --font-family-montserrat-semibold: "Montserrat-SemiBold", Helvetica;
+}

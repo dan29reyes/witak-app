@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
 const { isEmail } = require("../utils/validator");
-const { registerUser, getCredentials, forgotPassword } = require("../services/user-services");
+const { registerUser, getCredentials, forgotPassword, getData } = require("../services/user-services");
 
 async function register(req, res) {
   try{
@@ -66,6 +66,7 @@ async function login(req, res) {
             accessToken,
             refreshToken,
             id_user: credentials.id_usuario,
+            nombre_usuario: credentials.nombre_usuario,
           }
         });
       } else {

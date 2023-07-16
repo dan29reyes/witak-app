@@ -1,9 +1,11 @@
 import {React, useState} from "react";
 import "../styles/CSS/InicioDeSesion.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function InicioDeSesion(props) {
+  const navigate = useNavigate();
+
   const {
     group2,
     correoElectronico,
@@ -37,10 +39,11 @@ function InicioDeSesion(props) {
         }
     };
     axios.request(options).then(function (response) {
-        console.log(response.data.data);
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
         localStorage.setItem("id_usuario", response.data.data.id_user);
+        localStorage.setItem("nombre_usuario", response.data.data.nombre_usuario);
+        navigate("/Tablero");
     }).catch(function (error) {
         console.error(error);
     });
