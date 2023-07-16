@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<RegistrarContainer {...registrarData}/>} Redirect to="/Registrar"/>
+        <Route path="/" element={<LoginContainer {...inicioDeSesionData}/>} Redirect to="/InicioSesion"/>
         <Route path="/Registrar" element={<RegistrarContainer {...registrarData}/>}/>
         <Route path="/Tablero" element={<BoardContainer {...boardListData}/>}/>
         <Route path="/InicioSesion" element={<LoginContainer {...inicioDeSesionData}/>}/>

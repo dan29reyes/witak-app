@@ -11,7 +11,6 @@ function Board({name_board, description_board, fecha_limite, estado_board}){
         } else {
             setEstado('PENDIENTE');
         }
-        console.log(estado_board)
     }
     
     return(

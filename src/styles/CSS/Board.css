@@ -1,8 +1,8 @@
 .board-container{
     display: flex;
     flex-direction: column;
-    height: 200px;
-    width: 210px;
+    height: 190px;
+    width: 190px;
     border: 1px solid #000000;
     border-radius: 20px;
 }
@@ -34,7 +34,7 @@
 .board_body_1{
     color: var(--chicago);
     font-family: var(--font-family-montserrat);
-    font-size: var(--font-size-m);
+    font-size: var(--bd-font-size-m);
     font-style: normal;
     margin-bottom: 2%;
     font-weight: 700;
@@ -43,7 +43,7 @@
 .board_body_2{
     color: var(--chicago);
     font-family: var(--font-family-montserrat-medium);
-    font-size: var(--font-size-m);
+    font-size: var(--bd-font-size-m);
     line-height: normal;
     font-style: normal;
     font-weight: 500;
@@ -75,13 +75,13 @@
 :root {
     --white: #ffffff;
     
-    --font-size-l: 15px;
-    --font-size-m: 12px;
-    --font-size-s: 8px;
-    --font-size-xl: 17px;
-    --font-size-xxl: 22px;
-    --font-size-xxxl: 23px;
-    --font-size-xxxxl: 32px;
+    --bd-font-size-l: 15px;
+    --bd-font-size-m: 12px;
+    --bd-font-size-s: 8px;
+    --bd-font-size-xl: 17px;
+    --bd-font-size-xxl: 22px;
+    --bd-font-size-xxxl: 23px;
+    --bd-font-size-xxxxl: 32px;
 
     --font-family-montserrat: "Montserrat", Helvetica;
     --font-family-montserrat-medium: "Montserrat-Medium", Helvetica;

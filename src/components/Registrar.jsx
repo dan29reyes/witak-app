@@ -2,8 +2,10 @@ import {React, useState} from "react";
 import { Link } from "react-router-dom";
 import "../styles/CSS/Registrar.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Registrar(props) {
+  const navigate = useNavigate();
   const {
     group2,
     title,
@@ -65,7 +67,11 @@ function Registrar(props) {
         phone: formData.phone,
       }
     }
-    axios.request(options);
+    axios.request(options).then(function (response) {
+      navigate("/InicioSesion");
+    }).catch(function (error) {
+      console.error(error);
+    })
   }
 
   return (
