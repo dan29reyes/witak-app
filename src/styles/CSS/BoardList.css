@@ -14,6 +14,17 @@
   height: 8vh;
 }
 
+.modal-label{
+  font-family: var(--font-family-montserrat);
+  margin-top: 2.5%;
+}
+
+.modal-input{
+  font-family: var(--font-family-montserrat);
+  color: rgb(138, 138, 138);
+  font-size: "15px";
+}
+
 .informacion-header{
   border-bottom: 1px solid #4e4e4e;
 }

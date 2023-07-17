@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     padding: 5% 5%;
-    width: 45%;
+    width: 50%;
     margin-right: 5%;
   }
   
@@ -19,7 +19,7 @@
   
   .title {
     color: var(--desert-storm);
-    font-family: var(--font-family-neuemontreal-bold);
+    font-family: var(--reg-font-family-neuemontreal-bold);
     font-size: var(--reg-font-size-xxxl);
     font-weight: 700;
     letter-spacing: 0;
@@ -39,7 +39,7 @@
   
   .mejora-la-comunicaci {
     color: var(--desert-storm);
-    font-family: var(--font-family-neuemontreal-medium);
+    font-family: var(--reg-font-family-neuemontreal-medium);
     font-size: var(--reg-font-size-xl);
     font-weight: 500;
     letter-spacing: 0;
@@ -88,13 +88,13 @@
     display: flex;
     flex-direction: column;
     margin-top: 5%;
-    width: 35%;
+    width: 45%;
     margin-right: 5%;
   }
   
   .crear-cuenta {
     color: var(--black);
-    font-family: var(--font-family-neuemontreal-bold);
+    font-family: var(--reg-font-family-neuemontreal-bold);
     font-size: var(--reg-font-size-xxl);
     font-weight: 700;
     letter-spacing: 0;
@@ -117,13 +117,12 @@
     gap: 7px;
     height: 26px;
     margin-top: 6px;
-    min-width: 292px;
+    min-width: 262px;
   }
   
   .ya-eres-parte-de-witak {
-    align-self: flex-end;
     color: var(--black);
-    font-family: var(--font-family-neue_montreal);
+    font-family: var(--reg-font-family-neue_montreal);
     font-size: var(--reg-font-size-m);
     font-weight: 500;
     letter-spacing: 0;
@@ -135,7 +134,7 @@
   
   .span1 {
     color: var(--blue-ribbon);
-    font-family: var(--font-family-neuemontreal-medium);
+    font-family: var(--reg-font-family-neuemontreal-medium);
   }
   
   .inicia-sesin {
@@ -223,7 +222,7 @@
     top: 0;
     transition: all 0.2s ease;
     color: white;
-    font-family: var(--font-family-neuemontreal-bold);
+    font-family: var(--reg-font-family-neuemontreal-bold);
     font-size: var(--reg-font-size-l);
     font-weight: 700;
   }
@@ -330,21 +329,21 @@
   --reg-font-size-xxl: 42px;
   --reg-font-size-xxxl: 56px;
  
-  --font-family-neue_montreal: "Neue Montreal", Helvetica;
-  --font-family-neuemontreal-bold: "NeueMontreal-Bold", Helvetica;
-  --font-family-neuemontreal-medium: "NeueMontreal-Medium", Helvetica;
+  --reg-font-family-neue_montreal: "Neue Montreal", Helvetica;
+  --reg-font-family-neuemontreal-bold: "NeueMontreal-Bold", Helvetica;
+  --reg-font-family-neuemontreal-medium: "NeueMontreal-Medium", Helvetica;
 }
 .neuemontreal-bold-black-22px {
   color: var(--black);
-  font-family: var(--font-family-neuemontreal-bold);
-  font-size: var(--font-size-l);
+  font-family: var(--reg-font-family-neuemontreal-bold);
+  font-size: var(--reg-font-size-l);
   font-style: normal;
   font-weight: 700;
 }
 
 .neuemontreal-bold-dove-gray-17px {
   color: var(--dove-gray);
-  font-family: var(--font-family-neuemontreal-bold);
+  font-family: var(--reg-font-family-neuemontreal-bold);
   font-size: var(--reg-font-size-m);
   font-style: normal;
   font-weight: 700;
@@ -352,7 +351,7 @@
 
 .neuemontreal-medium-black-17px {
   color: var(--black);
-  font-family: var(--font-family-neuemontreal-medium);
+  font-family: var(--reg-font-family-neuemontreal-medium);
   font-size: var(--reg-font-size-m);
   font-style: normal;
   font-weight: 500;

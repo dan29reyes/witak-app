@@ -25,11 +25,16 @@ function BoardList(props) {
     position: "absolute",
     top: "40%",
     left: "50%",
-    transform: "translate(-50%,-50%)"
+    transform: "translate(-50%,-50%)",
+    width: "30%",
   }
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+    if (name === "fecha_limite") {
+      value = value.replace("/", "-");
+      value += " 23:59:59";
+    }
     setForm((prevState) => ({
       ...prevState,
       [name]: value
@@ -50,10 +55,11 @@ function BoardList(props) {
       data: {
         nombre_tablero: form.nombre_tablero,
         descripcion_tablero: form.descripcion_tablero,
-        id_usuario: form.id_usuario,
+        id_usuario: parseInt(form.id_usuario ),
         fecha_limite: form.fecha_limite
       }
     };
+    console.log(options.data)
     axios.request(options)
       .then(function (response) {
         console.log(response.data);
@@ -98,7 +104,7 @@ function BoardList(props) {
       <div className="board-main-body">
         <div className="informacion-header">
           <h1 className="name-user">Bienvenido {localStorage.getItem("nombre_usuario")} ☆</h1>
-          <h2 className="description-tablero">Tablero de forms de trabajos en GF marketing | Ordenar</h2>
+          <h2 className="description-tablero">Tablero de forms de trabajos en GF marketing</h2>
         </div>
         {boards.length > 0 ? (
           <div className="lista-boards">
@@ -127,28 +133,36 @@ function BoardList(props) {
         </button>
       </footer>
       <Modal isOpen={modal} style={modalStyles}>
-        <ModalHeader>Nuevo Tablero</ModalHeader>
+        <ModalHeader style={{backgroundColor: "#006fff", color:"white"}}>
+          Nuevo Tablero
+        </ModalHeader>
         <ModalBody>
           <FormGroup>
-            <Label>Nombre Tablero</Label>
+            <Label className="modal-label">Nombre</Label>
             <Input
               type="text"
               id="nombre_tablero"
               name="nombre_tablero"
+              className="modal-input"
+              placeholder="Escribe un nombre..."
               onChange={handleChange}
             />
-            <Label>Descripcion</Label>
+            <Label className="modal-label">Descripcion</Label>
             <Input
-              type="text"
+              type="textarea"
               id="descripcion_tablero"
               name="descripcion_tablero"
+              className="modal-input"
+              style={{height: "150px", resize: "none"}}
+              placeholder="Escribe una descripcion..."
               onChange={handleChange}
             />
-            <Label>Fecha Limite</Label>
+            <Label className="modal-label">Fecha Limite</Label>
             <Input
               type="date"
               id="fecha_limite"
               name="fecha_limite"
+              className="modal-input"
               onChange={handleChange}
             />
           </FormGroup>
@@ -157,7 +171,7 @@ function BoardList(props) {
           <Button color="primary" onClick={agregarTablero}>
             Agregar
           </Button>
-          <Button color="secondary" onClick={abrirModal}>
+          <Button color="danger" onClick={abrirModal}>
             Cancelar
           </Button>
         </ModalFooter>
