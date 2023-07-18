@@ -1,0 +1,14 @@
+.navigation-text{
+    color: "black";
+    font-family: var(--nb-font-family-neuemontreal-medium);
+    font-size: var(--nb-font-size-m);
+    font-style: normal;
+    font-weight: 500;
+}
+
+:root { 
+    --black: #000000;
+    --nb-font-size-m: 20px;
+    --nb-font-family-neuemontreal-medium: "NeueMontreal-Medium", Helvetica;
+  }
+  

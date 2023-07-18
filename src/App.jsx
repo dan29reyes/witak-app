@@ -59,4 +59,7 @@ const boardListData = {
   group2: require("./styles/Images/logo-witak.png"),
   notificationImg: require("./styles/Images/campana-noti.png"),
   menuImg: require("./styles/Images/menu-bars.png"),
+  homeIcon: require("./styles/Images/home-icon.png"),
+  taskIcon: require("./styles/Images/task-icon.png"),
+  formIcon: require("./styles/Images/form-icon.png"),
 }
