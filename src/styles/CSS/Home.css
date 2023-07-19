@@ -1,0 +1,106 @@
+.home-container{
+    position: relative;
+}
+
+.home-header{
+    display: flex;
+    flex-direction: row;
+}
+
+.home-body{
+    display: flex;
+    flex-direction: row;
+}
+
+.home-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 5%;
+    margin-right: 5%;
+  }
+
+  .home-footer img {
+    margin-left: 30px;
+  }
+
+.home-text-1{
+    color: var(--blue-ribbon);
+    font-family: var(--home-font-family-montserrat-semibold);
+    font-size: 52px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 41px;
+    white-space: nowrap;
+    transform: translate(25px, 0);
+}
+
+.home-text-2{
+    color: #020202;
+    font-family: var(--home-font-family-montserrat-semibold);
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 31px;
+    margin-top: 2%;
+    white-space: nowrap;
+    transform: translate(25px, 0);
+}
+
+.home-text-3{
+    align-self: flex-end;
+    color: #0f0f0f;
+    font-family: var(--home-font-family-montserrat-medium);
+    font-size: 19px;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-top: 2%;
+    transform: translate(25px, 0);
+    width: 80%;
+}
+
+.home-link-style {
+    text-decoration: none;
+    color: black;
+    margin-left: 35px;
+    font-family: var(--home-font-family-helvetica-regular);
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.links-home {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 25px;
+    transition: 0.5s;
+}
+
+.witak-logo-home {
+    filter: brightness(0);
+    transition: 0.5s;
+    padding: 20px;
+    width: 220px;
+  }
+
+.home-comenzar{
+    color: white;
+    font-family: var(--home-font-family-montserrat-semibold);
+    font-size: 20px;
+    font-weight: 600;
+    background-color: var(--blue-ribbon);
+    border-radius: 5px;
+    border: none;
+    width: 200px;
+    height: 50px;
+    margin-top: 5%;
+    transform: translate(25px, 0);
+}
+  
+  :root{
+    --blue-ribbon: #006fff;
+    --home-font-family-helvetica-regular: "Helvetica-Regular", Helvetica;
+    --home-font-family-montserrat-semibold: "Montserrat-SemiBold", Helvetica;
+    ---home-font-family-montserrat-medium: "Montserrat-Medium", Helvetica;
+  }

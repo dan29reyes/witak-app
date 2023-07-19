@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RegistrarContainer from './components/Registrar'
 import LoginContainer from './components/Login'
 import BoardContainer from './components/BoardList'
+import HomeContainer from './components/Home'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/Registrar" element={<RegistrarContainer {...registrarData}/>}/>
         <Route path="/Tablero" element={<BoardContainer {...boardListData}/>}/>
         <Route path="/InicioSesion" element={<LoginContainer {...inicioDeSesionData}/>}/>
+        <Route path="/Inicio" element={<HomeContainer {...homeData}/>}/>
       </Routes>
     </BrowserRouter>
   );
@@ -62,4 +64,13 @@ const boardListData = {
   homeIcon: require("./styles/Images/home-icon.png"),
   taskIcon: require("./styles/Images/task-icon.png"),
   formIcon: require("./styles/Images/form-icon.png"),
+}
+
+const homeData = {
+  logoWitakNegro: require("./styles/Images/logo-witak.png"), 
+  chicaHome: require("./styles/Images/chica-home.png"),
+  InstaIcon: require("./styles/Images/instagram-icon.png"),
+  FaceIcon: require("./styles/Images/facebook-icon.png"),
+  TwitIcon: require("./styles/Images/twitter-icon.png"),
+  imageCircle: require("./styles/Images/circles-white.png"),
 }
