@@ -1,0 +1,22 @@
+.Formulario-header{
+    background-color: var(--blue-ribbon);
+    height: 55px;
+}
+
+.form-header-title{
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.Formulario-body{
+
+}
+
+.Formulario-footer{
+    background-color: var(--blue-ribbon);
+}
+
+:root{
+    --blue-ribbon: #006fff;
+}

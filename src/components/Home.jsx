@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/CSS/Home.css"
 
 function Home(props) {
-    const { logoWitakNegro, chicaHome, InstaIcon, FaceIcon, TwitIcon, imageCircle } = props;
+    const { logoWitakNegro, chicaHome, InstaIcon, FaceIcon, TwitIcon } = props;
 
     return (
         <div className="home-container">
@@ -15,8 +15,8 @@ function Home(props) {
                     <Link to="/QuienesSomos" className="home-link-style">¿Quiénes somos?</Link>
                 </div>
             </div>
-            <div className="home-body">
-                <div style={{marginTop:"5%"}}>
+            <div className="home-body animated-element">
+                <div style={{marginTop:"10%"}}>
                     <h1 className="home-text-1">Todo lo que necesitas</h1>
                     <h1 className="home-text-1">Para optimizar tu trabajo</h1>
                     <h2 className="home-text-2">Expresa mejor tus ideas</h2>
@@ -27,8 +27,6 @@ function Home(props) {
                     <Link to="/Registrar">
                         <button className="home-comenzar">Comenzar</button>
                     </Link>
-                    <img src={imageCircle} alt="" style={{width:"20%"}}/>
-                    <img src={imageCircle} alt="" style={{width:"20%"}}/>
                 </div>
                 <img src={chicaHome} alt="" className="home-image" style={{width:"45%", marginTop:"1%"}}/>
             </div>

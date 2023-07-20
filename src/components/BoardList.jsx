@@ -135,7 +135,7 @@ function BoardList(props) {
               </Link>
             </div>
             <div>
-              <Link to="/Formulario" style={{ color: 'black', textDecoration: 'none' }}>
+              <Link to="/Formularios" style={{ color: 'black', textDecoration: 'none' }}>
                 <img src={formIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
                 <label className="navigation-text">Formulario</label>
               </Link>

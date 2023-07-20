@@ -4,6 +4,7 @@ import RegistrarContainer from './components/Registrar'
 import LoginContainer from './components/Login'
 import BoardContainer from './components/BoardList'
 import HomeContainer from './components/Home'
+import FormContainer from './components/Formulario'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/Tablero" element={<BoardContainer {...boardListData}/>}/>
         <Route path="/InicioSesion" element={<LoginContainer {...inicioDeSesionData}/>}/>
         <Route path="/Inicio" element={<HomeContainer {...homeData}/>}/>
+        <Route path="/Formularios" element={<FormContainer {...formularioData}/>} />
       </Routes>
     </BrowserRouter>
   );
@@ -73,4 +75,11 @@ const homeData = {
   FaceIcon: require("./styles/Images/facebook-icon.png"),
   TwitIcon: require("./styles/Images/twitter-icon.png"),
   imageCircle: require("./styles/Images/circles-white.png"),
+}
+
+const formularioData = {
+  menuImg: require("./styles/Images/menu-bars.png"),
+  homeIcon: require("./styles/Images/home-icon.png"),
+  taskIcon: require("./styles/Images/task-icon.png"),
+  formIcon: require("./styles/Images/form-icon.png"),
 }
