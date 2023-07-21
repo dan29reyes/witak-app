@@ -78,8 +78,5 @@ const homeData = {
 }
 
 const formularioData = {
-  menuImg: require("./styles/Images/menu-bars.png"),
-  homeIcon: require("./styles/Images/home-icon.png"),
-  taskIcon: require("./styles/Images/task-icon.png"),
-  formIcon: require("./styles/Images/form-icon.png"),
+  backIcon: require("./styles/Images/backIcon.png")
 }
