@@ -13,6 +13,7 @@ function Home(props) {
                     <Link to="/InicioSesion" className="home-link-style">Iniciar sesión</Link>
                     <Link to="/Registrar" className="home-link-style">Registrarse</Link>
                     <Link to="/QuienesSomos" className="home-link-style">¿Quiénes somos?</Link>
+                    <Link to="/Formularios" className="home-link-style">Contacta un Diseñador</Link>
                 </div>
             </div>
             <div className="home-body animated-element">

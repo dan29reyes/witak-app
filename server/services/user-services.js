@@ -36,8 +36,15 @@ const forgotPassword = async (user) => {
   });
 }
 
+const getUsers = async () => {
+  let users = await knex.select("*").from("usuarios");
+  users = JSON.stringify(users);
+  return JSON.parse(users);
+}
+
 module.exports = {
   getCredentials,
   registerUser,
   forgotPassword,
+  getUsers,
 };

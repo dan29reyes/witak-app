@@ -29,12 +29,11 @@ async function obtenerFormulario(req, res) {
 }
 
 async function crearFormulario(req, res) {
-    const { idea_formulario, nombre_formulario, objetivo_formulario, descripcion_formulario,
+    const { nombre_formulario, objetivo_formulario, descripcion_formulario,
         publico_formulario, tono_formulario, fecha_limite, id_usuario } = req.body;
     try {
         if (typeof nombre_formulario === "string" && typeof id_usuario === "number" &&
-        typeof idea_formulario === "string" && typeof objetivo_formulario === "string" &&
-        typeof descripcion_formulario === "string" && typeof publico_formulario === "string" &&
+        typeof objetivo_formulario === "string" && typeof descripcion_formulario === "string" && typeof publico_formulario === "string" &&
         typeof tono_formulario === "string" && typeof fecha_limite === "string") {
             await formularioServices.crearFormulario(req.body);
             res.status(200).send({
@@ -64,11 +63,10 @@ async function borrarFormulario(req, res) {
 }
 
 async function actualizarFormulario(req, res) {
-    const { idea_formulario, nombre_formulario, objetivo_formulario, descripcion_formulario,
+    const { nombre_formulario, objetivo_formulario, descripcion_formulario,
         publico_formulario, tono_formulario, fecha_limite, id_formulario, id_usuario } = req.body;
     try {
-        if (typeof nombre_formulario === "string" && typeof id_usuario === "number" &&
-        typeof idea_formulario === "string" && typeof objetivo_formulario === "string" &&
+        if (typeof nombre_formulario === "string" && typeof id_usuario === "number" && typeof objetivo_formulario === "string" &&
         typeof descripcion_formulario === "string" && typeof publico_formulario === "string" &&
         typeof tono_formulario === "string" && typeof fecha_limite === "string" && typeof id_formulario === "number") {
             await formularioServices.actualizarFormulario(req.body);

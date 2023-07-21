@@ -3,7 +3,7 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
 const { isEmail } = require("../utils/validator");
-const { registerUser, getCredentials, forgotPassword, getData } = require("../services/user-services");
+const { registerUser, getCredentials, forgotPassword, getUsers } = require("../services/user-services");
 
 async function register(req, res) {
   try{
@@ -116,8 +116,24 @@ async function forgot(req, res) {
   }
 }
 
+async function getUsuarios(req, res) {
+  try{
+    const users = await getUsers();
+    res.send({
+      success: true,
+      data: users,
+    });
+  }catch(e){
+    res.status(HTTPCodes.INTERNAL_SERVER_ERROR).send({
+      message: "Internal server error",
+      detail: e.toString(),
+    });
+  }
+}
+
 module.exports = {
   register,
   login,
   forgot,
+  getUsuarios,
 };

@@ -8,6 +8,9 @@ import '../styles/CSS/Formulario.css'
 function Formulario(props){
     const {menuImg, homeIcon, taskIcon, formIcon} = props;
 
+    //Conseguir diseñadores
+    const [designers, setDesigners] = useState([]);
+    
     //Boton de menu
     const [menuModal, setmenuModal] = useState(false);
 
@@ -69,13 +72,51 @@ function Formulario(props){
                 <button 
                     style={{ background: "none", border: "none", cursor: "pointer", marginRight: "0.8%", marginLeft: "0.5%" }}
                     onClick={() => setmenuModal(true)}>
-                    <img src={menuImg} style={{ height: "20px" }} alt="" />
+                    <img src={menuImg} style={{ height: "25px", marginTop:"-55%" }} alt="" />
                 </button>
                 <label className="form-header-title">Creative Board</label>
             </div>
             <div className="Formulario-body">
+                <div className="Formulario-body-row">
+                    <label>Objetivo</label>
+                    <input type="text" className="formulario-input" placeholder="Objetivo" />
+                    <label>Diseñador Grafico</label>
+                    <select>
+                        <option value="value1">Value 1</option>
+                        <option value="value2" selected>Value 2</option>
+                    </select>
+                </div>
+                <div className="Formulario-body-row">
+                    <label>Descripciòn</label>
+                    <textarea type="text" className="formulario-input" placeholder="Descripciòn" />
+                </div>
+                <div className="Formulario-body-row">
+                    <div className="Formulario-body-column">
+                        <label>Tono</label>
+                        <div>
+                            <button>Elegante</button>
+                            <button>Jugueton</button>
+                            <button>Ejecutivo</button>
+                            <button>Llamativo</button>
+                            <button>Persuasivo</button>
+                        </div>
+                    </div>
+                    <div className="Formulario-body-column">
+                        <label>Publico</label>
+                        <input type="text" className="formulario-input" placeholder="Publico" />
+                    </div>
+                    <div className="Formulario-body-column">
+                        <label>Tamaño</label>
+                        <input type="text" className="formulario-input" placeholder="Tamaño" />
+                    </div>
+                    <div className="Formulario-body-column">
+                        <label>Fecha Limite</label>
+                        <input type="date" className="formulario-date" placeholder="Fecha Limite" />
+                    </div>
+                </div>
             </div>
             <div className="Formulario-footer">
+                <button className="formulario-button">Enviar Formulario</button>
             </div>
         </div>
     )

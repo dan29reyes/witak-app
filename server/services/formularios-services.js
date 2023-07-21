@@ -37,7 +37,6 @@ async function obtenerFormulario(idFormulario){
 async function crearFormulario(formulario){
   try{
     await knex("formularios").insert({
-      idea_formulario: formulario.idea_formulario,
       nombre_formulario: formulario.nombre_formulario,
       objetivo_formulario: formulario.objetivo_formulario,
       descripcion_formulario: formulario.descripcion_formulario,
@@ -64,7 +63,6 @@ async function actualizarFormulario(formulario){
   try{
     await knex("formularios").where({id_formulario: formulario.id_formulario})
     .update({
-      idea_formulario: formulario.idea_formulario,
       nombre_formulario: formulario.nombre_formulario,
       objetivo_formulario: formulario.objetivo_formulario,
       descripcion_formulario: formulario.descripcion_formulario,

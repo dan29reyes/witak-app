@@ -10,7 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginContainer {...inicioDeSesionData}/>} Redirect to="/InicioSesion"/>
+      <Route path="/" element={<HomeContainer {...homeData}/>} Redirect to="/Inicio"/>
         <Route path="/Registrar" element={<RegistrarContainer {...registrarData}/>}/>
         <Route path="/Tablero" element={<BoardContainer {...boardListData}/>}/>
         <Route path="/InicioSesion" element={<LoginContainer {...inicioDeSesionData}/>}/>
