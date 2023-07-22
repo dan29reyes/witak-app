@@ -70,7 +70,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 CREATE TABLE IF NOT EXISTS `witak-app`.`tableros` (
   `id_tablero` INT NOT NULL AUTO_INCREMENT,
   `nombre_tablero` VARCHAR(40) NOT NULL,
-  `descripcion_tablero` VARCHAR(80) NOT NULL,
+  `descripcion_tablero` VARCHAR(120) NOT NULL,
+  `estado_tablero` VARCHAR(15) NOT NULL DEFAULT "PENDIENTE",
   `fecha_creacion` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_limite` DATETIME NOT NULL,
   `id_usuario` INT NOT NULL,

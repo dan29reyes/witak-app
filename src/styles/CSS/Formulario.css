@@ -25,6 +25,7 @@
 .formulario-body-row {
     display: flex;
     flex-direction: row;
+    height: 100%;
 }
 
 .formulario-area {
@@ -61,6 +62,12 @@
 
 .formulario-date{
     border: none;
+    height: 60px;
+}
+
+.formulario-select{
+    border: none;
+    height: 60px;
 }
 
 .label-formulario {
@@ -87,6 +94,7 @@
     height: 100%;
     flex-direction: row;
     justify-content: flex-end;
+    align-self: flex-end
 }
 
 :root {
