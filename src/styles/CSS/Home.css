@@ -12,6 +12,15 @@
     flex-direction: row;
 }
 
+.columna-texto{
+    margin-top: 10%;
+}
+
+.home-image{
+    width:45%;
+    margin-top: 1%;
+}
+
 .home-footer {
     display: flex;
     flex-direction: row;
@@ -126,4 +135,87 @@
 .home-footer,
 .witak-logo-home {
     animation-delay: 0.5s;
+}
+
+@media (max-width: 728px){
+    .home-container{
+        flex-direction:column;
+        align-items: center;
+        width: 100%;
+        zoom: 90%;
+    }
+    .home-header{
+        flex-direction:column;
+        align-items: center;
+        width: 100%;
+    }
+    .witak-logo-home{
+        width: 50%;
+        margin-top: 10%;
+        padding: 0%;
+    }
+    .links-home {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 0px;
+        text-align: center;
+        align-items: center;
+        transition: 0.5s;
+    }
+    .home-link-style {
+        text-decoration: none;
+        color: black;
+        font-family: var(--home-font-family-helvetica-regular);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        margin: 0 15px;
+    }
+    .home-link-style:not(:last-child) {
+        margin-right: 15px;
+    }
+    .home-body{
+        flex-direction:column-reverse;
+        align-content: center;
+        height: 100%;
+        width: fit-content;
+    }
+
+    .home-text-1{
+        font-size: 32px;
+        line-height: 31px;
+        transform: none;
+    }
+    .home-text-2{
+        font-size: 30px;
+        line-height: 31px;
+        margin: 10px 0px 0px 0px;
+        transform: none;
+    }
+    .home-text-3{
+        font-size: 15px;
+        line-height: 21px;
+        margin: 10px 0px 20px 0px;
+        align-self: center;
+        text-align: center;
+        transform: none;
+    }
+    .home-comenzar{
+        transform: none;
+    }
+    .home-image {
+        width: 85%;
+        margin: 5% auto 0 auto;
+        display: block; /* Add display: block to override the default inline behavior */
+      }      
+    .columna-texto{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .home-footer{
+        justify-content: center;
+        margin-bottom: 5%;
+    }
 }

@@ -17,7 +17,7 @@ function Home(props) {
                 </div>
             </div>
             <div className="home-body animated-element">
-                <div style={{marginTop:"10%"}}>
+                <div className="columna-texto">
                     <h1 className="home-text-1">Todo lo que necesitas</h1>
                     <h1 className="home-text-1">Para optimizar tu trabajo</h1>
                     <h2 className="home-text-2">Expresa mejor tus ideas</h2>
@@ -29,7 +29,7 @@ function Home(props) {
                         <button className="home-comenzar">Comenzar</button>
                     </Link>
                 </div>
-                <img src={chicaHome} alt="" className="home-image" style={{width:"45%", marginTop:"1%"}}/>
+                <img src={chicaHome} alt="" className="home-image"/>
             </div>
             <div className="home-footer">
                 <Link to="https://www.instagram.com/witak.co/">

@@ -108,16 +108,16 @@ function BoardList(props) {
     }
   };
 
-  const menuModalStyle = {
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    width: '20%',
-  };
+  const menuModalStyles = {
+    position: "absolute",
+    top: "-4%",
+    left: "0%",
+    width: "100%",
+  }
 
   return (
     <div className="board-main-container">
-      <Modal isOpen={menuModal} style={menuModalStyle} backdrop={true} keyboard={true}>
+      <Modal isOpen={menuModal} style={menuModalStyles} backdrop={true} keyboard={true}>
         <div ref={modalRef}>
           <ModalHeader style={{ borderBottom: '1px solid' }}>
             <div>
@@ -127,7 +127,7 @@ function BoardList(props) {
               </Link>
             </div>
           </ModalHeader>
-          <ModalBody>
+          <ModalBody style={{marginBottom:"164%"}}>
             <div style={{ marginBottom: '25px' }}>
               <Link to="/Tablero" style={{ color: 'black', textDecoration: 'none' }}>
                 <img src={taskIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
@@ -135,7 +135,7 @@ function BoardList(props) {
               </Link>
             </div>
             <div>
-              <Link to="/Formularios" style={{ color: 'black', textDecoration: 'none' }}>
+              <Link to="/Formularios" style={{ color: 'black', textDecoration: 'none', marginBottom: '100vh'}}>
                 <img src={formIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
                 <label className="navigation-text">Formulario</label>
               </Link>
@@ -144,13 +144,11 @@ function BoardList(props) {
         </div>
       </Modal>
       <div className="board-main-header">
-        <button 
-          style={{ background: "none", border: "none", padding: "0", cursor: "pointer", marginRight: "0.8%", marginLeft: "0.5%" }}
-          onClick={() => setmenuModal(true)}>
-          <img src={menuImg} style={{ height: "20px" }} alt="" />
+        <button className="menu-button" onClick={() => setmenuModal(true)}>
+          <img src={menuImg} className="menu-image" alt="" />
         </button>
         <Link to="/Inicio">
-          <img style={{ height: "40px" }} src={group2} alt="" />
+          <img className="logo-witak-head" src={group2} alt="" />
         </Link>
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", marginRight: "3%"}}>
           <button style={{ background: "none", border: "none", padding: "0", cursor: "pointer" }}>

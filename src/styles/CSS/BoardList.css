@@ -11,22 +11,7 @@
   align-items: center;
   background-color: #006fff;
   width: 100%;
-  height: 8vh;
-}
-
-.modal-label{
-  font-family: var(--font-family-montserrat);
-  margin-top: 2.5%;
-}
-
-.modal-input{
-  font-family: var(--font-family-montserrat);
-  color: rgb(138, 138, 138);
-  font-size: "15px";
-}
-
-.informacion-header{
-  border-bottom: 1px solid #4e4e4e;
+  height: 9vh;
 }
 
 .board-main-body{
@@ -46,13 +31,46 @@
   z-index: 1;
 }
 
+.menu-button{
+  background: none;
+  border: none;
+  cursor: "pointer";
+  margin-right: 0.8%;
+  margin-left: 0.5%;
+}
+
+.menu-image{
+  height: 1.6rem;
+}
+
+.logo-witak-head{
+  height: 3.5rem;
+  margin-left: 1.5%;
+  margin-top: 5%;
+}
+
+.modal-label{
+  font-family: var(--font-family-montserrat);
+  margin-top: 2.5%;
+}
+
+.modal-input{
+  font-family: var(--font-family-montserrat);
+  color: rgb(138, 138, 138);
+  font-size: "15px";
+}
+
+.informacion-header{
+  border-bottom: 1px solid #4e4e4e;
+}
+
 .create-board-button {
   display: flex;
   color: var(--blue-ribbon);
   background-color: white;
   border: none;
   margin-bottom: 4%;
-  padding: 10px 20px;
+  padding: 1px 20px;
   font-size: 20px;
   cursor: pointer;
   align-self: flex-start
@@ -60,10 +78,10 @@
 
 .create-board-button h3{
   font-family: var(--font-family-montserrat);
-  font-weight: 300;
-  font-size: 20px;
+  font-weight: 250;
+  font-size: 18px;
   margin-right: 8px;
-  margin: 10px;
+  margin: 12px;
 }
 
 .div-create-board{
@@ -114,6 +132,8 @@
   justify-content: center;
   height:fit-content;
   padding: 3%;
+  border: 0.5px solid #4e4e4e;
+  border-radius: 0 0 15px 15px;
 }
 
 .board-card{
@@ -127,6 +147,7 @@
   padding-left: 5%;
   font-weight: 600;
   margin: 3%;
+  cursor: pointer;
 }
 
 .name-user{
@@ -164,4 +185,21 @@
 
   --font-family-montserrat: "Montserrat", Helvetica;
   --font-family-montserrat-medium: "Montserrat-Medium", Helvetica;
+}
+
+@media (max-width: 728px){
+  .name-user{
+    font-size: 24px;
+  }
+  .description-tablero{
+    font-size: 14px;
+  }
+  .lista-boards{
+    flex-direction: column;
+    align-items: center;
+  }
+  .board-list-card{
+    margin-top: 3%;
+    margin-bottom: 5%;
+  }
 }
