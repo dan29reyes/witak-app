@@ -48,7 +48,7 @@ async function borrarTablero(req, res){
 async function actualizarTablero(req, res){
   const { nombre_tablero, descripcion_tablero, fecha_limite, id_tablero, id_usuario } = req.body;
   try {
-    if (typeof nombre_tablero === "string" && typeof descripcion_tablero === "string"
+    if (typeof nombre_tablero === "string" && typeof descripcion_tablero === "string" && typeof columna_referencia === "number"
      && typeof fecha_limite === "string" && typeof id_tablero === "number" && typeof id_usuario === "number") {
       const idTablero = await tablerosServices.actualizarTablero(req.body);
       const tableros = await tablerosServices.obtenerTableros(id_usuario);

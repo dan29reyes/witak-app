@@ -47,17 +47,24 @@
 }
 
 .create-board-button {
-  background-color: #006fff;
-  color: white;
+  display: flex;
+  color: var(--blue-ribbon);
+  background-color: white;
   border: none;
-  border-radius: 20px;
-  margin-right: 6%;
-  margin-bottom: 6%;
+  margin-bottom: 4%;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
+  align-self: flex-start
 }
 
+.create-board-button h3{
+  font-family: var(--font-family-montserrat);
+  font-weight: 300;
+  font-size: 20px;
+  margin-right: 8px;
+  margin: 10px;
+}
 
 .div-create-board{
   display: flex;
@@ -70,43 +77,56 @@
 }
 
 .lista-boards {
-  display: grid;
+  display: flex;
   margin-top: 2.5%;
-  margin-left: 6%;
   gap: 6.5%;
-  width: fit-content;
-  justify-items: start;
-  justify-content: flex-start;
-  margin-bottom: 5%;
+  align-items: flex-start;
+  justify-content: center;
   height: fit-content;
 }
 
-@media (max-width: 768px) {
-  .lista-boards {
-    justify-content: center;
-    justify-items: center;
-    flex-direction: column;
-    margin-top: 0;
-    grid-template-columns: repeat(2, 1fr);
-  }
+.board-list-head{
+  display: flex;
+  background-color: var(--blue-ribbon);
+  border-radius: 15px 15px 0 0;
+  color:white;
+  justify-content: center;
+  border: 0.5px solid #4e4e4e;
+  padding-top: 4.5%;
 }
 
-@media (min-width: 768px) {
-  .lista-boards{
-    grid-template-columns: repeat(3, 1fr);
-  }
+.board-list-head h1{
+  font-family: var(--font-family-montserrat);
+  font-weight: 700;
+  font-size: 27px;
 }
 
-@media (min-width: 920px) {
-  .lista-boards{
-    grid-template-columns: repeat(4, 1fr);
-  }
+.board-list-card{
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+  border-radius: 15px;
+  width: 270px;
 }
 
-@media (min-width: 1090px) {
-  .lista-boards{
-    grid-template-columns: repeat(5, 1fr);
-  }
+.board-list-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height:fit-content;
+  padding: 3%;
+}
+
+.board-card{
+  background-color: var(--blue-sky);
+  color: white;
+  border-radius: 8px;
+  font-family: var(--font-family-montserrat);
+  font-size: 18px;
+  width: 95%;
+  padding: 2.5%;
+  padding-left: 5%;
+  font-weight: 600;
+  margin: 3%;
 }
 
 .name-user{
@@ -131,6 +151,8 @@
 :root{
   --black: #000000;
   --chicago: #5c5c5c;
+  --blue-ribbon: #006fff;
+  --blue-sky: rgb(120,162,216);
 
   --bl-font-size-l: 15px;
   --bl-font-size-m: 12px;

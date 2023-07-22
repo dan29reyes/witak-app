@@ -37,14 +37,6 @@ async function crearTablero(tablero){
 
 async function borrarTablero(idTablero){
     try{
-        const listId = await knex.select('id_lista').from('listas').where({id_tablero: idTablero});
-        for(let i = 0; i < listId.length; i++){
-            const id_tarjetas = await knex.select('id_tarjeta').from('tarjetas').where({id_tarjeta: listId[i].id_lista});
-            for(let i = 0; i < id_tarjetas.length; i++){
-                await knex('tarjetas').where({id_tarjeta: id_tarjetas[i].id_tarjeta}).del();
-            }
-            await knex('listas').where({id_lista: listId[i].id_list}).del();
-        }
         await knex('tableros').where({id_tablero: idTablero}).del();
     }catch(error){
         console.error('Error borrando el tablero', error);
@@ -59,6 +51,7 @@ async function actualizarTablero(tablero){
             nombre_tablero: tablero.nombre_tablero,
             descripcion_tablero: tablero.descripcion_tablero,
             fecha_limite: tablero.fecha_limite,
+            columna_referencia: tablero.columna_referencia,
         })
     }catch(error){
         console.error('Error actualizando el tablero', error);

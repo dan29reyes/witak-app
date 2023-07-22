@@ -163,76 +163,72 @@ function BoardList(props) {
           <h1 className="name-user">Bienvenido {localStorage.getItem("nombre_usuario")} ☆</h1>
           <h2 className="description-tablero">Tablero de forms de trabajos en GF marketing</h2>
         </div>
-        {boards.length > 0 ? (
-          <div className="lista-boards">
-            {boards.map((board) => (
-              <div key={board.id_tablero}>
-                <Board
-                  name_board={board.nombre_tablero}
-                  description_board={board.descripcion_tablero}
-                  fecha_limite={board.fecha_limite.substring(0, 10).replace(/-/g, "/")}
-                  estado_board={board.estado_tablero}
-                />
-              </div>
-            ))}
+        <div className="lista-boards">
+          <div className="board-list-card">
+            <div className="board-list-head">
+            <h1>PENDIENTES</h1>
+            </div>
+            <div className="board-list-body">
+              {boards.map((board) => {
+                if (board.columna_referencia === 1) {
+                  return (
+                    <div className="board-card">
+                      <label>{board.nombre_tablero}</label>
+                      <img></img>
+                    </div>
+                  );
+                }
+              })}
+              <button className="create-board-button">
+                <h3>Añade otra tarjeta</h3>
+                <h2>+</h2>
+              </button>
+            </div>
           </div>
-        ) : (
-          <div>
-            <h1>No hay tableros</h1>
+          <div className="board-list-card">
+            <div className="board-list-head">
+              <h1>EN PROCESO</h1>
+            </div>
+            <div className="board-list-body">
+              {boards.map((board) => {
+                if (board.columna_referencia === 2) {
+                  return (
+                    <div>
+                      <label>{board.nombre_tablero}</label>
+                      <img></img>
+                    </div>
+                  );
+                }
+              })}
+              <button className="create-board-button">
+                <h3>Añade otra tarjeta</h3>
+                <h2>+</h2>
+              </button>
+            </div>
           </div>
-        )}
+          <div className="board-list-card">
+            <div className="board-list-head">
+              <h1>TERMINADOS</h1>
+            </div>
+            <div className="board-list-body">
+              {boards.map((board) => {
+                if (board.columna_referencia === 3) {
+                  return (
+                    <div>
+                      <label>{board.nombre_tablero}</label>
+                      <img></img>
+                    </div>
+                  );
+                }
+              })}
+              <button className="create-board-button">
+                <h3>Añade otra tarjeta</h3>
+                <h2>+</h2>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <footer className="board-main-footer">
-        <button 
-          className="create-board-button"
-          onClick={abrirModal}
-          >AGREGAR  +
-        </button>
-      </footer>
-      <Modal isOpen={modal} style={modalStyles}>
-        <ModalHeader style={{backgroundColor: "#006fff", color:"white"}}>
-          Nuevo Tablero
-        </ModalHeader>
-        <ModalBody>
-          <FormGroup>
-            <Label className="modal-label">Nombre</Label>
-            <Input
-              type="text"
-              id="nombre_tablero"
-              name="nombre_tablero"
-              className="modal-input"
-              placeholder="Escribe un nombre..."
-              onChange={handleChange}
-            />
-            <Label className="modal-label">Descripcion</Label>
-            <Input
-              type="textarea"
-              id="descripcion_tablero"
-              name="descripcion_tablero"
-              className="modal-input"
-              style={{height: "150px", resize: "none"}}
-              placeholder="Escribe una descripcion..."
-              onChange={handleChange}
-            />
-            <Label className="modal-label">Fecha Limite</Label>
-            <Input
-              type="date"
-              id="fecha_limite"
-              name="fecha_limite"
-              className="modal-input"
-              onChange={handleChange}
-            />
-          </FormGroup>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={agregarTablero}>
-            Agregar
-          </Button>
-          <Button color="danger" onClick={abrirModal}>
-            Cancelar
-          </Button>
-        </ModalFooter>
-      </Modal>
     </div>
   );
 }

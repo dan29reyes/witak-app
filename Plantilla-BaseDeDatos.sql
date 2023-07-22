@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `witak-app`.`usuarios` (
   UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC) VISIBLE,
   UNIQUE INDEX `correo_usuario_UNIQUE` (`correo_usuario` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -41,15 +41,15 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `witak-app`.`formularios` (
   `id_formulario` INT NOT NULL AUTO_INCREMENT,
-  `idea_formulario` VARCHAR(35) NOT NULL,
   `nombre_formulario` VARCHAR(45) NOT NULL,
   `objetivo_formulario` VARCHAR(65) NOT NULL,
   `descripcion_formulario` VARCHAR(100) NOT NULL,
   `publico_formulario` VARCHAR(30) NOT NULL,
-  `tono_formulario` VARCHAR(15) NOT NULL,
-  `id_usuario` INT NOT NULL,
+  `tono_formulario` VARCHAR(55) NOT NULL,
+  `estado_formulario` VARCHAR(10) NULL DEFAULT 'PENDIENTE',
   `fecha_limite` DATETIME NOT NULL,
   `fecha_creacion` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_usuario` INT NOT NULL,
   PRIMARY KEY (`id_formulario`),
   UNIQUE INDEX `id_formulario_UNIQUE` (`id_formulario` ASC) VISIBLE,
   INDEX `fk_formulario_usuario_idx` (`id_usuario` ASC) VISIBLE,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `witak-app`.`tableros` (
   `id_tablero` INT NOT NULL AUTO_INCREMENT,
   `nombre_tablero` VARCHAR(40) NOT NULL,
   `descripcion_tablero` VARCHAR(120) NOT NULL,
-  `estado_tablero` VARCHAR(15) NOT NULL DEFAULT "PENDIENTE",
+  `columna_referencia` INT NULL DEFAULT '1',
   `fecha_creacion` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_limite` DATETIME NOT NULL,
   `id_usuario` INT NOT NULL,
@@ -85,50 +85,7 @@ CREATE TABLE IF NOT EXISTS `witak-app`.`tableros` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `witak-app`.`listas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `witak-app`.`listas` (
-  `id_lista` INT NOT NULL AUTO_INCREMENT,
-  `nombre_lista` VARCHAR(45) NOT NULL,
-  `posicion_lista` INT NOT NULL,
-  `id_tablero` INT NOT NULL,
-  PRIMARY KEY (`id_lista`),
-  UNIQUE INDEX `id_lista_UNIQUE` (`id_lista` ASC) VISIBLE,
-  UNIQUE INDEX `nombre_lista_UNIQUE` (`nombre_lista` ASC) VISIBLE,
-  INDEX `fk_lista_tablero_idx` (`id_tablero` ASC) VISIBLE,
-  CONSTRAINT `fk_lista_tablero`
-    FOREIGN KEY (`id_tablero`)
-    REFERENCES `witak-app`.`tableros` (`id_tablero`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `witak-app`.`tarjetas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `witak-app`.`tarjetas` (
-  `id_tarjeta` INT NOT NULL AUTO_INCREMENT,
-  `nombre_tarjeta` VARCHAR(35) NOT NULL,
-  `descripcion_tarjeta` VARCHAR(70) NOT NULL,
-  `posicion_tarjeta` INT NOT NULL,
-  `id_lista` INT NOT NULL,
-  PRIMARY KEY (`id_tarjeta`),
-  UNIQUE INDEX `id_tarjeta_UNIQUE` (`id_tarjeta` ASC) VISIBLE,
-  INDEX `fk_tarjeta_lista_idx` (`id_lista` ASC) VISIBLE,
-  CONSTRAINT `fk_tarjeta_lista`
-    FOREIGN KEY (`id_lista`)
-    REFERENCES `witak-app`.`listas` (`id_lista`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
+AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
