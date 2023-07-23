@@ -63,12 +63,9 @@ async function borrarFormulario(req, res) {
 }
 
 async function actualizarFormulario(req, res) {
-    const { nombre_formulario, objetivo_formulario, descripcion_formulario, estado_formulario,
-        publico_formulario, tono_formulario, fecha_limite, id_formulario, id_usuario } = req.body;
+    const { estado_formulario, id_formulario, id_usuario } = req.body;
     try {
-        if (typeof nombre_formulario === "string" && typeof id_usuario === "number" && typeof objetivo_formulario === "string" &&
-        typeof descripcion_formulario === "string" && typeof publico_formulario === "string" && typeof estado_formulario === "string" &&
-        typeof tono_formulario === "string" && typeof fecha_limite === "string" && typeof id_formulario === "number") {
+        if (typeof estado_formulario === "string" && typeof id_formulario === "number") {
             await formularioServices.actualizarFormulario(req.body);
             const formularios = await formularioServices.obtenerFormularios(id_usuario);
             res.status(200).send(formularios);

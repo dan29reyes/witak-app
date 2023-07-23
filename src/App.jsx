@@ -66,6 +66,9 @@ const boardListData = {
   homeIcon: require("./styles/Images/home-icon.png"),
   taskIcon: require("./styles/Images/task-icon.png"),
   formIcon: require("./styles/Images/form-icon.png"),
+  pencilIcon: require("./styles/Images/pencil-icon.png"),
+  trianguloIcon: require("./styles/Images/triangulo-notificacion.png"),
+  closeIcon: require("./styles/Images/close-icon.png"),
 }
 
 const homeData = {

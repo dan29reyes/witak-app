@@ -1,0 +1,103 @@
+.caja-notificaciones{
+    position: absolute;
+    top: auto;
+    right: 0;
+    width:320px;
+    border: 0.01px solid #000000;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.25);
+}
+
+.centro-notificaciones{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--blue-ribbon);
+    border-radius: 5px 5px 0px 0px;
+}
+
+.titulo-centro{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #FFFFFF;
+}
+
+.carta-notificacion{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin: 5%;
+    border: 0.01px solid var(--blue-ribbon);
+    box-shadow: 0px 3px 3px 0px #006eff3b;
+    border-radius: 25px;
+    height:120px;
+}
+
+.carta-h1{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 450;
+    font-size: 18px;
+    color: #909090;
+}
+
+.no-hay-notificaciones{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 5%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 450;
+    font-size: 18px;
+    color: #909090;
+}
+
+.carta-botones{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px 8px 10px 15px;
+    height:100px;
+}
+
+.boton-rechazar{
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid var(--blue-ribbon);
+    width:80px;
+    font-size: 12px;
+    color: var(--blue-ribbon);
+    font-family: var(--nt-font-family-montserrat);
+    font-weight: 700;
+}
+
+.boton-aceptar{
+    margin-bottom: 10px;
+    background-color: var(--blue-ribbon);
+    border-radius: 10px;
+    border: none;
+    width:80px;
+    font-size:12px;
+    color: white;
+    font-family: var(--nt-font-family-montserrat);
+    font-weight: 700;
+}
+
+:root{
+    --black: #000000;
+    --chicago: #5c5c5c;
+    --blue-ribbon: #006fff;
+    --blue-sky: rgb(120,162,216);
+    --hover-sky: rgb(120,162,216, 0.5);
+  
+    --nt-font-family-montserrat: "Montserrat", Helvetica;
+    --nt-font-family-montserrat-medium: "Montserrat-Medium", Helvetica;
+  }
