@@ -11,10 +11,10 @@ async function obtenerTableros(req, res){
 };
 
 async function crearTablero(req, res){
-  const { nombre_tablero, id_usuario, descripcion_tablero, fecha_limite } = req.body;
+  const { nombre_tablero, id_usuario, descripcion_tablero, fecha_limite, columna_referencia } = req.body;
   try {
     if (typeof nombre_tablero === "string" && typeof descripcion_tablero === "string"
-     && typeof id_usuario === "number" && typeof fecha_limite === "string") {
+     && typeof id_usuario === "number" && typeof fecha_limite === "string" && typeof columna_referencia === "number") {
       const idTablero = await tablerosServices.crearTablero(req.body);
       const tableros = await tablerosServices.obtenerTableros(id_usuario);
       res.send({ idTablero, tableros });

@@ -4,18 +4,63 @@ import "../styles/CSS/BoardList.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/CSS/NavigationBar.css'
 import axios from "axios";
-import Board from "./Board";
+// import Board from "./Board";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label, Input, FormGroup, Button } from 'reactstrap';
 import Notificaciones from "./Notificaciones";
 
 function BoardList(props) {
-  const { group2, notificationImg, menuImg, trianguloIcon, closeIcon, homeIcon, taskIcon, formIcon, pencilIcon } = props;
+  const { group2, notificationImg, menuImg, closeIcon, homeIcon, taskIcon, formIcon, pencilIcon } = props;
 
   const [boards, setBoards] = useState([]);
 
   useEffect(() => {
     getBoards();
   }, []);
+
+  async function getBoards (){
+      const options = {
+          method: 'POST',
+          url: 'http://localhost:8000/tablero/obtener',
+          data: { id_usuario: localStorage.getItem("id_usuario")}
+      };
+      return await axios.request(options)
+          .then(function (response) {
+            setBoards(response.data);
+          })
+          .catch(function (error) {
+            throw error;
+          });
+    }
+
+  const [form, setForm] = useState({
+    nombre_tablero: "",
+    descripcion_tablero: "",
+    fecha_limite: "",
+    id_usuario: localStorage.getItem("id_usuario"),
+
+  });
+
+  const agregarTablero = () => {
+    const options = {
+      method: 'POST',
+      url: 'http://localhost:8000/tablero/crear',
+      data: {
+        nombre_tablero: form.nombre_tablero,
+        descripcion_tablero: form.descripcion_tablero,
+        id_usuario: parseInt(form.id_usuario ),
+        fecha_limite: form.fecha_limite,
+        columna_referencia: parseInt(form.columna_referencia)
+      }
+    };
+    axios.request(options)
+      .then(function (response) {
+        getBoards();
+        abrirModal();
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
 
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -29,56 +74,14 @@ function BoardList(props) {
     }));
   }
 
-  const [form, setForm] = useState({
-    nombre_tablero: "",
-    descripcion_tablero: "",
-    fecha_limite: "",
-    id_usuario: localStorage.getItem("id_usuario")
-  });
-
-  const agregarTablero = () => {
-    const options = {
-      method: 'POST',
-      url: 'http://localhost:8000/tablero/crear',
-      data: {
-        nombre_tablero: form.nombre_tablero,
-        descripcion_tablero: form.descripcion_tablero,
-        id_usuario: parseInt(form.id_usuario ),
-        fecha_limite: form.fecha_limite
-      }
-    };
-    console.log(options.data)
-    axios.request(options)
-      .then(function (response) {
-        console.log(response.data);
-        getBoards();
-        abrirModal();
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  }
-
-  const getBoards = () => {
-    const options = {
-        method: 'POST',
-        url: 'http://localhost:8000/tablero/obtener',
-        data: { id_usuario: localStorage.getItem("id_usuario")}
-    };
-    return axios.request(options)
-        .then(function (response) {
-          setBoards(response.data);
-        })
-        .catch(function (error) {
-          throw error;
-        });
-  }
-
-  //Modal de agregar tablero
   const [modalAgregar, setModal] = useState(false);
 
-  const abrirModal = () => {
+  const abrirModal = (columna) => {
     setModal(!modalAgregar);
+    setForm({
+      ...form,
+      columna_referencia: columna
+    });
   }
 
   //Menu Desplegable
@@ -95,7 +98,7 @@ function BoardList(props) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-    });
+  });
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -152,7 +155,49 @@ function BoardList(props) {
           </ModalBody>
         </div>
       </Modal>
-      <Modal isOpen={modalAgregar} style={{position: "absolute", top: "40%", left: "50%", transform: "translate(-50%,-50%)", width: "30%",}} backdrop={true} keyboard={true}>
+      <Modal isOpen={modalAgregar} style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "90%",}} backdrop={true} keyboard={true}>
+        <ModalHeader style={{backgroundColor: "#006fff", color:"white"}}>
+          Nuevo Tablero
+        </ModalHeader>
+        <ModalBody>
+          <FormGroup>
+            <Label className="modal-label">Nombre</Label>
+            <Input
+              type="text"
+              id="nombre_tablero"
+              name="nombre_tablero"
+              className="modal-input"
+              placeholder="Escribe un nombre..."
+              onChange={handleChange}
+            />
+            <Label className="modal-label">Descripcion</Label>
+            <Input
+              type="textarea"
+              id="descripcion_tablero"
+              name="descripcion_tablero"
+              className="modal-input"
+              style={{height: "150px", resize: "none"}}
+              placeholder="Escribe una descripcion..."
+              onChange={handleChange}
+            />
+            <Label className="modal-label">Fecha Limite</Label>
+            <Input
+              type="date"
+              id="fecha_limite"
+              name="fecha_limite"
+              className="modal-input"
+              onChange={handleChange}
+            />
+          </FormGroup>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={agregarTablero}>
+            Agregar
+          </Button>
+          <Button color="danger" onClick={abrirModal}>
+            Cancelar
+          </Button>
+        </ModalFooter>
       </Modal>
       <div className="board-main-header">
         <button className="menu-button" onClick={() => setmenuModal(true)}>
@@ -191,8 +236,9 @@ function BoardList(props) {
                     </div>
                   );
                 }
+                return null;
               })}
-              <button className="create-board-button">
+              <button className="create-board-button" onClick={()=>abrirModal(1)}>
                 <h3>Añade otra tarjeta</h3>
                 <h2>+</h2>
               </button>
@@ -206,14 +252,15 @@ function BoardList(props) {
               {boards.map((board) => {
                 if (board.columna_referencia === 2) {
                   return (
-                    <div>
+                    <div className="board-card">
                       <label>{board.nombre_tablero}</label>
-                      <img></img>
+                      <img src={pencilIcon} alt="" className="pencil-icon"/>
                     </div>
                   );
                 }
+                return null;
               })}
-              <button className="create-board-button">
+              <button className="create-board-button" onClick={()=>abrirModal(2)}>
                 <h3>Añade otra tarjeta</h3>
                 <h2>+</h2>
               </button>
@@ -227,14 +274,15 @@ function BoardList(props) {
               {boards.map((board) => {
                 if (board.columna_referencia === 3) {
                   return (
-                    <div>
+                    <div className="board-card">
                       <label>{board.nombre_tablero}</label>
-                      <img></img>
+                      <img src={pencilIcon} alt="" className="pencil-icon"/>
                     </div>
                   );
                 }
+                return null;
               })}
-              <button className="create-board-button">
+              <button className="create-board-button" onClick={()=>abrirModal(3)}>
                 <h3>Añade otra tarjeta</h3>
                 <h2>+</h2>
               </button>

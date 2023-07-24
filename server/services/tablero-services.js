@@ -29,6 +29,7 @@ async function crearTablero(tablero){
             descripcion_tablero: tablero.descripcion_tablero,
             fecha_limite: tablero.fecha_limite,
             id_usuario: tablero.id_usuario,
+            columna_referencia: tablero.columna_referencia,
         })
     }catch(error){
         console.error("Error insertando el tablero: ",error);

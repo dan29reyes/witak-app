@@ -1,18 +1,28 @@
-import {React, useState} from "react";
+import {React, useEffect, useState} from "react";
 import "../styles/CSS/Board.css";
 
 function Board({name_board, description_board, fecha_limite, estado_board}){
+    const [tablero, setTablero] = useState([]);
 
-    const [estado , setEstado] = useState(estado_board);
-
-    const handleEstado = () => {
-        if (estado === 'PENDIENTE') {
-            setEstado('ENVIADO');
-        } else {
-            setEstado('PENDIENTE');
-        }
+    const getTablero = () => {
+        const options = {
+            method: 'GET',
+            url: 'http://localhost:8000/tablero/obtener',
+            data: { id_usuario: localStorage.getItem("id_usuario")}
+        };
+        return axios.request(options)
+            .then(function (response) {
+                setTablero(response.data);
+            })
+            .catch(function (error) {
+                throw error;
+            });
     }
-    
+
+    useEffect(() => {
+        getTablero();
+    }, []);
+
     return(
         <div className="board-container">
             <div className="board_header">

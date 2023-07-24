@@ -179,6 +179,17 @@
   white-space: nowrap;
 }
 
+.modal-label{
+  font-family: var(--font-family-montserrat);
+  margin-top: 2.5%;
+}
+
+.modal-input{
+  font-family: var(--font-family-montserrat);
+  color: rgb(138, 138, 138);
+  font-size: "15px";
+}
+
 .description-tablero{
   color: var(--chicago);
   font-family: var(--font-family-montserrat);
