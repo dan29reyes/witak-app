@@ -24,7 +24,6 @@ function Board({abrirTablero, idTablero, idColumna}){
                 console.log(response.data.length)
                 for (let i = 0; i < response.data.length; i++){
                     if (response.data[i].id_tablero === idTablero){
-                        console.log(response.data[i])
                         setTablero(response.data[i]);
                         return;
                     }else{
