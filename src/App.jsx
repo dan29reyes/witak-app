@@ -5,6 +5,7 @@ import LoginContainer from './components/Login'
 import BoardContainer from './components/BoardList'
 import HomeContainer from './components/Home'
 import FormContainer from './components/Formulario'
+import AboutUs from './components/AboutUs';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/InicioSesion" element={<LoginContainer {...inicioDeSesionData}/>}/>
         <Route path="/Inicio" element={<HomeContainer {...homeData}/>}/>
         <Route path="/Formularios" element={<FormContainer {...formularioData}/>} />
+        <Route path="/QuienesSomos" element={<AboutUs {...aboutData}/>} />
       </Routes>
     </BrowserRouter>
   );
@@ -78,6 +80,16 @@ const homeData = {
   FaceIcon: require("./styles/Images/facebook-icon.png"),
   TwitIcon: require("./styles/Images/twitter-icon.png"),
   imageCircle: require("./styles/Images/circles-white.png"),
+}
+
+const aboutData = {
+  logoWitakNegro: require("./styles/Images/logo-witak.png"), 
+  chicaHome: require("./styles/Images/chica-home.png"),
+  InstaIcon: require("./styles/Images/instagram-icon.png"),
+  FaceIcon: require("./styles/Images/facebook-icon.png"),
+  TwitIcon: require("./styles/Images/twitter-icon.png"),
+  imageCircle: require("./styles/Images/circles-white.png"),
+  backIcon: require("./styles/Images/backIcon.png")
 }
 
 const formularioData = {

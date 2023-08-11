@@ -1,25 +1,11 @@
--- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
--- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema witak-app
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema witak-app
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `witak-app` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `witak-app` ;
 
--- -----------------------------------------------------
--- Table `witak-app`.`usuarios`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `witak-app`.`usuarios` (
   `id_usuario` INT NOT NULL AUTO_INCREMENT,
   `nombre_usuario` VARCHAR(60) NOT NULL,
@@ -35,10 +21,6 @@ AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
--- -----------------------------------------------------
--- Table `witak-app`.`formularios`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `witak-app`.`formularios` (
   `id_formulario` INT NOT NULL AUTO_INCREMENT,
   `nombre_formulario` VARCHAR(45) NOT NULL,
@@ -63,10 +45,6 @@ AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
-
--- -----------------------------------------------------
--- Table `witak-app`.`tableros`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `witak-app`.`tableros` (
   `id_tablero` INT NOT NULL AUTO_INCREMENT,
   `nombre_tablero` VARCHAR(40) NOT NULL,

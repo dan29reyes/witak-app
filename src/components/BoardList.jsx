@@ -7,10 +7,26 @@ import axios from "axios";
 // import Board from "./Board";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label, Input, FormGroup, Button } from 'reactstrap';
 import Notificaciones from "./Notificaciones";
+import Board from "./Board"
 
 function BoardList(props) {
   const { group2, notificationImg, menuImg, closeIcon, homeIcon, taskIcon, formIcon, pencilIcon } = props;
 
+  //Logica mostrar tablero
+  const [propsTablero, setpropsTablero] = useState({ 
+    abrirTablero: false,
+    idTablero: 0,
+    idColumna: 0
+  });
+
+  const handleAbrir = (id_referencia, columna) => {
+    setpropsTablero({
+      abrirTablero: !propsTablero.abrirTablero,
+      idTablero: id_referencia,
+      idColumna: columna
+    })
+  }
+  //Modal y logica de agregar tablero
   const [boards, setBoards] = useState([]);
 
   useEffect(() => {
@@ -199,6 +215,7 @@ function BoardList(props) {
           </Button>
         </ModalFooter>
       </Modal>
+      {propsTablero.abrirTablero === true && <Board {...propsTablero}/>}
       <div className="board-main-header">
         <button className="menu-button" onClick={() => setmenuModal(true)}>
           <img src={menuImg} className="menu-image" alt="" />
@@ -230,7 +247,7 @@ function BoardList(props) {
               {boards.map((board) => {
                 if (board.columna_referencia === 1) {
                   return (
-                    <div className="board-card">
+                    <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 1)}>
                       <label>{board.nombre_tablero}</label>
                       <img src={pencilIcon} alt="" className="pencil-icon"/>
                     </div>
@@ -252,7 +269,7 @@ function BoardList(props) {
               {boards.map((board) => {
                 if (board.columna_referencia === 2) {
                   return (
-                    <div className="board-card">
+                    <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 2)}>
                       <label>{board.nombre_tablero}</label>
                       <img src={pencilIcon} alt="" className="pencil-icon"/>
                     </div>
@@ -274,7 +291,7 @@ function BoardList(props) {
               {boards.map((board) => {
                 if (board.columna_referencia === 3) {
                   return (
-                    <div className="board-card">
+                    <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 3)}>
                       <label>{board.nombre_tablero}</label>
                       <img src={pencilIcon} alt="" className="pencil-icon"/>
                     </div>
