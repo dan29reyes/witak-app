@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState,useRef } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/CSS/NavigationBar.css'
 import '../styles/CSS/Formulario.css'
@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 
 function Formulario(props){
-    const {backIcon} = props;
+    const {backIcon, sendIcon} = props;
 
     //Conseguir diseñadores
     const [designers, setDesigners] = useState([]);
@@ -58,6 +58,73 @@ function Formulario(props){
         })
         console.log(formularioData)
     }
+
+    const fileInputRef = useRef(null);
+
+    const handleIconClick = (ref) => {
+        ref.current.click();
+    };
+
+    const handleTono = (e) => {
+        e.preventDefault();
+        setFormularioData({
+        ...formularioData,
+        tono: e.target.value,
+        });
+        console.log(formularioData.tono);
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file && file.type === 'application/pdf') {
+        const formDT = new FormData();
+        formDT.append('pdf', file);
+        
+        axios.post('http://localhost:8000/upload', formDT)
+            .then((response) => {
+            setFormularioData({
+                ...formularioData,
+                pdf: response.data
+            });
+            })
+            .catch((error) => {
+            console.error(error);
+            });
+        } else {
+        console.error('Invalid file type. Only PDF files are allowed.');
+        }
+    };
+    
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        const file = e.dataTransfer.files[0];
+        if (file && file.type === 'application/pdf') {
+        const formDT = new FormData();
+        formDT.append('pdf', file);
+        
+        axios
+            .post('http://localhost:8000/upload', formDT)
+            .then((response) => {
+            setFormularioData({
+                ...formularioData,
+                pdf: {
+                filename: response.data.filename,
+                originalname: response.data.originalname,
+                path: response.data.path,
+                },
+            });
+            })
+            .catch((error) => {
+            console.error(error);
+            });
+        } else {
+        console.error('Invalid file type. Only PDF files are allowed.');
+        }
+    };
     
     return(
         <div className="formulario-container">
@@ -79,13 +146,13 @@ function Formulario(props){
                         <textarea type="text" name="publico" className="formulario-area" placeholder="A que publico esta dirigido" onChange={handleInputChange}/>
                     </div>
                 </div>
-                    <div className="formulario-group" style={{width:"100%"}}>
+                    <div className="formulario-group-area" style={{width:"100%"}}>
                     <label className="label-formulario">Descripción</label>
                     <textarea type="text" name="descripcion" className="formulario-area" placeholder="Describe tu proyecto" onChange={handleInputChange}/>
                 </div>
                 <div className="formulario-body-row">
                     <div className="formulario-body-column">
-                        <div className="formulario-group" style={{width:"100%"}}>
+                        <div className="formulario-group-tono" style={{width:"100%"}}>
                             <label className="label-formulario">Tono</label>
                             <div className="tono-group">
                                 <button className="tono-button">Elegante</button>
@@ -113,15 +180,25 @@ function Formulario(props){
                             <input type="date" className="formulario-date" onChange={handleInputChange} name="fecha_limite"/>
                         </div>
                     </div>
-                    <div className="formulario-group" style={{height:"100%"}}>
+                    <div className="formulario-group-file">
                         <label className="label-formulario">Inspiración</label>
-                        <input type="file" className="formulario-file" onChange={handleInputChange} name="inspiracion"/>
+                        <label 
+                            for="images" 
+                            className="formulario-file" 
+                            onDragOver={handleDragOver} 
+                            onDrop={(e) => handleDrop(e, 1)}>
+                            <span className="drop-title">Arrastra un archivo</span>
+                            o
+                            <input type="file" onClick={() => handleIconClick(fileInputRef)} name="inspiracion"/>
+                        </label>
                     </div>
                 </div>
-
             </div>
             <div className="Formulario-footer">
-                <button className="formulario-button">Enviar Formulario</button>
+                <button className="formulario-button-send">
+                    <label className="formulario-button-label">Enviar Formulario</label>
+                    <img src={sendIcon} alt="" className="formulario-send-icon"/>
+                </button>
             </div>
         </div>
     )

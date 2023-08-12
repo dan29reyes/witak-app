@@ -136,7 +136,7 @@ transform: scale(1);
   }
   
   .login-group-2 {
-    height: 90px;
+    height: 80px;
   }
   
   .login-access-button {
@@ -152,5 +152,17 @@ transform: scale(1);
     font-size: var(--log-font-size-s);
     align-self: flex-start;
     margin-left: 18%;
+  }
+  .login-container-center-horizontal{
+    height: 100%;
+  }
+  .login-texto-extra{
+    font-size: 14px;
+  }
+  .login-overlap-group{
+    margin-bottom: 5%;
+  }
+  .login-input-form{
+    font-size: 15px;
   }
 }

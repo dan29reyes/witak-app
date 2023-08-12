@@ -13,19 +13,25 @@
     height: 25px;
     margin-bottom:1%
 }
+.formulario-send-icon{
+    height: 25px;
+    margin-right: 5%;
+    margin-bottom:1%;
+    margin-left: 5%;
+}
 
 .Formulario-body {
     display: flex;
     flex-direction: column;
     background-color: white;
-    height: 60%;
+    height: 84vh;
     width: 100%;
 }
 
 .formulario-body-row {
     display: flex;
     flex-direction: row;
-    height: 100%;
+    height: fit-content;
 }
 
 .formulario-area {
@@ -79,8 +85,94 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 35%;
+    height: 12vh;
     border: 1px solid #d9d9d9;
+    padding: 0.5%;
+}
+
+.formulario-group-tono {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 22vh;
+    border: 1px solid #d9d9d9;
+    padding: 0.5%;
+}
+
+.formulario-file{
+    position: relative;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 46vh;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 30px 50px 0 50px;
+    border: 2px dashed #555;
+    color: #444;
+    cursor: pointer;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+}
+
+.formulario-file:hover {
+    background: #eee;
+    border-color: #111;
+}
+
+.formulario-file::hover .drop-title {
+    color: #222;
+  }
+  
+.drop-title {
+    color: #444;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: color .2s ease-in-out;
+  }
+
+.formulario-group-file {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 58vh;
+    border: 1px solid #d9d9d9;
+    padding: 0.5%;
+}
+
+input[type=file]::file-selector-button {
+    margin-right: 20px;
+    border: none;
+    background: var(--blue-ribbon);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+  }
+  
+  input[type=file]::file-selector-button:hover {
+    background: #275dbb;
+  }
+  input[type=file] {
+    width: 350px;
+    max-width: 100%;
+    color: #444;
+    padding: 5px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #555;
+  }
+
+.formulario-group-area{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 14vh;
+    border: 1px solid #d9d9d9;
+    padding: 0.5%;
 }
 
 .formulario-body-column{
@@ -90,11 +182,26 @@
 
 .Formulario-footer {
     background-color: var(--blue-ribbon);
+    height: 8vh;
     display: flex;
-    height: 100%;
-    flex-direction: row;
     justify-content: flex-end;
-    align-self: flex-end
+    align-items: center;
+}
+
+.formulario-button-label{
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 1%;
+    cursor: pointer;
+}
+
+.formulario-button-send{
+    background-color: rgb(0,0,0,0);
+    border: none;
+    width: 280px;
+    color: white;
+    margin-right: 1%;
 }
 
 :root {
@@ -108,11 +215,30 @@
     .formulario-group{
         width: 100%;
     }
+    .formulario-group-tono{
+        width: 100%;
+        height: 34vh;
+    }
+    .formulario-group-area{
+        width: 100%;
+    }
+    .formulario-group-file{
+        width: 100%;
+    }
+    .formulario-file{
+        margin: 30px 10px 50px 10px;
+    }
     .formulario-body-column{
         width: 100%;
+        height:auto;
     }
     .formulario-back-icon{
         margin-bottom: 3.5%;
         margin-right: 2%;
+    }
+    .Formulario-footer{
+        position: fixed;
+        justify-content: center;
+        width: 100%;
     }
 }

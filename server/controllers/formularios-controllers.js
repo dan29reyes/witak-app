@@ -30,11 +30,11 @@ async function obtenerFormulario(req, res) {
 
 async function crearFormulario(req, res) {
     const { nombre_formulario, objetivo_formulario, descripcion_formulario,
-        publico_formulario, tono_formulario, fecha_limite, id_usuario } = req.body;
+        publico_formulario, tono_formulario, fecha_limite, id_usuario, tamaño_formulario } = req.body;
     try {
         if (typeof nombre_formulario === "string" && typeof id_usuario === "number" &&
         typeof objetivo_formulario === "string" && typeof descripcion_formulario === "string" && typeof publico_formulario === "string" &&
-        typeof tono_formulario === "string" && typeof fecha_limite === "string") {
+        typeof tamaño_formulario === "string" && typeof tono_formulario === "string" && typeof fecha_limite === "string") {
             await formularioServices.crearFormulario(req.body);
             res.status(200).send({
                 message: "Formulario creado exitosamente",

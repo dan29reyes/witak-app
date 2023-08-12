@@ -79,7 +79,6 @@ const homeData = {
   InstaIcon: require("./styles/Images/instagram-icon.png"),
   FaceIcon: require("./styles/Images/facebook-icon.png"),
   TwitIcon: require("./styles/Images/twitter-icon.png"),
-  imageCircle: require("./styles/Images/circles-white.png"),
 }
 
 const aboutData = {
@@ -93,5 +92,6 @@ const aboutData = {
 }
 
 const formularioData = {
-  backIcon: require("./styles/Images/backIcon.png")
+  backIcon: require("./styles/Images/backIcon.png"),
+  sendIcon: require("./styles/Images/send-icon.png"),
 }
