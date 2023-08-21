@@ -1,9 +1,8 @@
 import {React, useEffect, useState} from "react";
 import "../styles/CSS/Board.css";
 import axios from "axios"
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
-function Board({abrirTablero, idTablero, idColumna}){
+function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fechaIcon}){
     const [tablero, setTablero] = useState({
         id_tablero: "",
         nombre_tablero: "",
@@ -11,7 +10,22 @@ function Board({abrirTablero, idTablero, idColumna}){
         columna_referencia: 0,
         fecha_creacion: "",
         fecha_limite: "",
+        abrir_tablero: abrirTablero,
     });
+
+    const handleAbrirTablero = () => {
+        if (tablero.abrir_tablero === "none"){
+            setTablero({
+                ...tablero,
+                abrir_tablero: "block",
+            });
+        }else{
+            setTablero({
+                ...tablero,
+                abrir_tablero: "none",
+            });
+        }
+    }
 
     const getTablero = () => {
         const options = {
@@ -21,13 +35,19 @@ function Board({abrirTablero, idTablero, idColumna}){
         };
         return axios.request(options)
             .then(function (response) {
-                console.log(response.data.length)
                 for (let i = 0; i < response.data.length; i++){
                     if (response.data[i].id_tablero === idTablero){
-                        setTablero(response.data[i]);
+                        setTablero({
+                            id_tablero: response.data[i].id_tablero,
+                            nombre_tablero: response.data[i].nombre_tablero,
+                            descripcion_tablero: response.data[i].descripcion_tablero,
+                            columna_referencia: response.data[i].columna_referencia,
+                            fecha_creacion: response.data[i].fecha_creacion,
+                            fecha_limite: response.data[i].fecha_limite
+                            .replace("T", " ").replace(".000Z", "").replace("-", "/").replace("-", "/"),
+                            abrir_tablero: tablero.abrir_tablero,
+                        });
                         return;
-                    }else{
-                        console.log("Tablero no existe")
                     }
                 }
             })
@@ -41,25 +61,44 @@ function Board({abrirTablero, idTablero, idColumna}){
     }, []);
 
     return(
-        <Modal isOpen={abrirTablero} style={{color: "#006fff", backdropFilter: "blur(8px)", position: "absolute", top: "50%", left: "50%", transform: "translate(-53%,-50%)", width: "80%" }} backdrop={true} keyboard={true}>
-            <ModalHeader>
-                <div className="header-modal-tablero">
-                    <div>
-                        <h3>{tablero.nombre_tablero}</h3>
-                        {idColumna === 1 ? <h5>En la Lista Pendientes</h5> :
-                        idColumna === 2 ? <h5>En la Lista Proceso</h5> :
-                        idColumna === 3 ? <h5>En la Lista Terminado</h5> : 
-                        null
-                        }
-                    </div>
-                    <button>
-                        <img src="" alt=""/>
-                    </button>
+        <div className='modal-design' style={{display: tablero.abrir_tablero}}>
+            <div className="modal-design-header">
+                <div>
+                    <h3 className="nombre-board">{tablero.nombre_tablero}</h3>
+                    {idColumna === 1 ? <h5 className="columna-board">En la Lista Pendientes</h5> :
+                    idColumna === 2 ? <h5 className="columna-board">En la Lista Proceso</h5> :
+                    idColumna === 3 ? <h5 className="columna-board">En la Lista Terminado</h5> : 
+                    null
+                    }
                 </div>
-            </ModalHeader>
-            <ModalBody>
-            </ModalBody>
-        </Modal>
+                <button className="modal-exit-button" onClick={()=>{handleAbrirTablero()}}>
+                    <img src={exitIcon} alt="" className="modal-exit-icon"/>
+                </button>
+            </div>
+            <div>
+                <div className="board-row-container">
+                    <img src={descripIcon} alt="" className="modal-icon-i"/>
+                    <h5 className="label-board">Descripcion</h5>
+                </div>
+                <p className="paragraph-board" 
+                    style={{marginBottom:"20px"}}>
+                    {tablero.descripcion_tablero}
+                </p>
+                <div className="board-row-container">
+                    <img src={fechaIcon} alt="" className="modal-icon-i"/>
+                    <h5 className="label-board">Fecha Limite</h5>
+                </div>
+                <p className="paragraph-board">{tablero.fecha_limite}</p>
+            </div>
+            <div className="modal-design-footer">
+                <button>
+                    Ver Formulario
+                </button>
+                <button>
+                    Marcar como Terminado
+                </button>
+            </div>
+        </div>
     );
 }
 

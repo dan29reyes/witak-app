@@ -1,10 +1,19 @@
 .login-overlap-group {
   align-items: center;
-  box-shadow: 0px 3px 6px #00000029;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding-top:8.5%;
   padding-bottom:12%;
+  height: 100vh;
+}
+
+.login-division-input{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .login-form{
@@ -17,7 +26,7 @@
 
 .login-group-2 {
   background-size: cover;
-  height: 120px;
+  height: 140px;
 }
 
 .login-group-2.animate-enter {
@@ -27,11 +36,12 @@
 }
 
 .login-input-labels {
-  align-self: center;
+  color: var(--desert-storm);
+  font-family: var(--font-family-neuemontreal-bold);
+  font-size: var(--log-font-size-m);
+  font-style: normal;
+  font-weight: 700;
   margin-top: 10px;
-  min-height: 26px;
-  min-width: 172px;
-  color: white;
 }
 
 .login-input-form{
@@ -39,11 +49,10 @@
   border: none;
   border-radius: 15px;
   box-shadow: 0px 3px 6px #00000029;
-  display: flex;
   height: 53px;
   margin-top: 8px;
   margin-bottom: 10px;
-  width: 20%;
+  width: 45%;
   padding-left: 1%;
 }
 
@@ -73,7 +82,39 @@
   cursor: pointer;
   height: 40px;
   transition: all 0.2s ease;
-  width: 12%;
+  width: 20%;
+  margin-top: 1.2%;
+  margin-bottom: 1.2%;
+  font-family: var(--font-family-neuemontreal-bold);
+  font-size: var(--log-font-size-s);
+  font-style: normal;
+}
+
+.enviar-correo{
+  background-color: var(--desert-storm);
+  border-radius: 25px;
+  border: none;
+  box-shadow: 0px 3px 6px #00000029;
+  cursor: pointer;
+  height: 40px;
+  transition: all 0.2s ease;
+  width: 200px;
+  margin-top: 1.2%;
+  margin-bottom: 1.2%;
+  font-family: var(--font-family-neuemontreal-bold);
+  font-size: var(--log-font-size-s);
+  font-style: normal;
+}
+
+.cambiar-contra{
+  background-color: var(--desert-storm);
+  border-radius: 25px;
+  border: none;
+  box-shadow: 0px 3px 6px #00000029;
+  cursor: pointer;
+  height: 40px;
+  transition: all 0.2s ease;
+  width: 200px;
   margin-top: 1.2%;
   margin-bottom: 1.2%;
   font-family: var(--font-family-neuemontreal-bold);
@@ -100,6 +141,7 @@ transform: scale(1);
   justify-content: center;
   width: 100%;
   background-color: #006fff;
+  height: 100vh;
 }
 
 :root { 
@@ -135,10 +177,6 @@ transform: scale(1);
     padding-bottom: 30%;
   }
   
-  .login-group-2 {
-    height: 80px;
-  }
-  
   .login-access-button {
     width: 40%;
   }
@@ -147,11 +185,17 @@ transform: scale(1);
     width: 60%;
     padding-left: 3.5%;
   }
+
+  .login-group-2{
+    width: 450px;
+  }
   
+  .enviar-correo{
+    width: 150px;
+  }
+
   .login-input-labels {
     font-size: var(--log-font-size-s);
-    align-self: flex-start;
-    margin-left: 18%;
   }
   .login-container-center-horizontal{
     height: 100%;

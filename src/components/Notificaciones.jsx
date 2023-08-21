@@ -33,11 +33,13 @@ function Notificaciones(props){
                 nombre_tablero: nombre,
                 descripcion_tablero: descripcion,
                 id_usuario: parseInt(localStorage.getItem("id_usuario")),
-                fecha_limite: fecha.substring(0, 10)+" 23:59:59"
+                fecha_limite: fecha.substring(0, 10)+" 23:59:59",
+                columna_referencia: 1
             }
         };
 
         axios.request(options).then(function (response) {
+            console.log(response);
         }).catch(function (error) {
             console.error(error);
         });

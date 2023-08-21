@@ -71,6 +71,9 @@ const boardListData = {
   pencilIcon: require("./styles/Images/pencil-icon.png"),
   trianguloIcon: require("./styles/Images/triangulo-notificacion.png"),
   closeIcon: require("./styles/Images/close-icon.png"),
+  exitIcon: require("./styles/Images/log-out.png"),
+  fechaIcon: require("./styles/Images/fecha-icon.png"),
+  descripIcon: require("./styles/Images/descrip-icon.png"),
 }
 
 const homeData = {

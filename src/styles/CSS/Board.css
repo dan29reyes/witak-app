@@ -1,10 +1,84 @@
-.header-modal-tablero{
+.modal-design{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    color: #ffffff;
+    width: 450px;
+    height: 360px;
+    background-color: rgba(237, 237, 237, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+}
+
+.modal-design-header{
+    background: none;
+    display:flex;
+    flex-direction: row;
+    border-radius: 20px 20px 0px 0px;
+    padding: 15px 0px 10px 45px;
+}
+
+.modal-design-footer{
+
+}
+
+.modal-exit-button{
+    background: none;
+    border: none;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.modal-exit-button img{
+    width: 30px;
+}
+
+.modal-icon-i{
+    width: 30px;
+    margin-left: 15px;
+}
+
+.board-row-container{
     display: flex;
-    justify-content: row;
+    flex-direction: row;
+    margin: 0px 0px 8px 0px;
+}
+
+.nombre-board{
+    color: var(--blue-ribbon);
+    font-weight: 700;
+    font-size: 27px;
+    margin: 0px 0px 0px 8px;
+}
+
+.columna-board{
+    color: rgb(83, 160, 255);
+    font-weight: 350;
+    font-size: 20px;
+    margin: 0px 0px 0px 8px;
+}
+
+.paragraph-board{
+    color: black;
+    font-weight: 300;
+    font-size: 16px;
+    margin: 0px 0px 0px 10px;
+    background-color: #ffffff; 
+    border-radius: 6px;  
+    padding: 15px;
+    margin: 0px 0px 0px 11%;
+    width: 80%;
+}
+
+.label-board{
+    color: black;
+    margin: 5px 0px 0px 5px;
 }
 
 :root {
     --white: #ffffff;
+    --blue-ribbon: #006fff;
     
     --bd-font-size-l: 15px;
     --bd-font-size-m: 12px;

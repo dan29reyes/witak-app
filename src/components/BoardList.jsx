@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/CSS/BoardList.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/CSS/NavigationBar.css'
+import "../styles/CSS/Board.css";
 import axios from "axios";
 // import Board from "./Board";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label, Input, FormGroup, Button } from 'reactstrap';
@@ -10,20 +11,30 @@ import Notificaciones from "./Notificaciones";
 import Board from "./Board"
 
 function BoardList(props) {
-  const { group2, notificationImg, menuImg, closeIcon, homeIcon, taskIcon, formIcon, pencilIcon } = props;
+  const { group2, notificationImg, menuImg, closeIcon, homeIcon, 
+    taskIcon, formIcon, pencilIcon, exitIcon, descripIcon, fechaIcon } = props;
 
   //Logica mostrar tablero
   const [propsTablero, setpropsTablero] = useState({ 
-    abrirTablero: false,
+    abrirTablero: 'none',
     idTablero: 0,
     idColumna: 0
   });
 
   const handleAbrir = (id_referencia, columna) => {
+    let abrir = '';
+    if (propsTablero.abrirTablero === 'none'){
+      abrir = 'fixed';
+    }else{
+      abrir = 'none';
+    }
     setpropsTablero({
-      abrirTablero: !propsTablero.abrirTablero,
+      abrirTablero: abrir,
       idTablero: id_referencia,
-      idColumna: columna
+      idColumna: columna,
+      exitIcon: exitIcon,
+      descripIcon: descripIcon,
+      fechaIcon: fechaIcon
     })
   }
   //Modal y logica de agregar tablero
@@ -215,7 +226,7 @@ function BoardList(props) {
           </Button>
         </ModalFooter>
       </Modal>
-      {propsTablero.abrirTablero === true && <Board {...propsTablero}/>}
+      {propsTablero.abrirTablero === 'fixed' && <Board {...propsTablero}/>}
       <div className="board-main-header">
         <button className="menu-button" onClick={() => setmenuModal(true)}>
           <img src={menuImg} className="menu-image" alt="" />
@@ -236,7 +247,7 @@ function BoardList(props) {
         {caja && <Notificaciones {...props}/>}
         <div className="informacion-header">
           <h1 className="name-user">Bienvenido {localStorage.getItem("nombre_usuario")} ☆</h1>
-          <h2 className="description-tablero">Tablero de forms de trabajos en GF marketing</h2>
+          <h2 className="description-tablero">Tablero de forms de trabajos</h2>
         </div>
         <div className="lista-boards">
           <div className="board-list-card">
