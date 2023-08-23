@@ -67,11 +67,18 @@ function Formulario(props){
 
     const handleTono = (e) => {
         e.preventDefault();
-        setFormularioData({
-        ...formularioData,
-        tono: e.target.value,
-        });
-        console.log(formularioData.tono);
+        if (formularioData.tono === "") {
+            setFormularioData({
+                ...formularioData,
+                tono: e.target.value,
+            });
+        } else {
+            setFormularioData({
+                ...formularioData,
+                tono: [...formularioData.tono, e.target.value],
+            });
+        }
+        console.log(formularioData.tono)
     };
 
     const handleFileChange = (e) => {
@@ -155,11 +162,11 @@ function Formulario(props){
                         <div className="formulario-group-tono" style={{width:"100%"}}>
                             <label className="label-formulario">Tono</label>
                             <div className="tono-group">
-                                <button className="tono-button">Elegante</button>
-                                <button className="tono-button">Jugueton</button>
-                                <button className="tono-button">Ejecutivo</button>
-                                <button className="tono-button">Llamativo</button>
-                                <button className="tono-button">Persuasivo</button>
+                                <button className="tono-button" onClick={()=> handleTono}>Elegante</button>
+                                <button className="tono-button" onClick={()=> handleTono}>Jugueton</button>
+                                <button className="tono-button" onClick={()=> handleTono}>Ejecutivo</button>
+                                <button className="tono-button" onClick={()=> handleTono}>Llamativo</button>
+                                <button className="tono-button" onClick={()=> handleTono}>Persuasivo</button>
                             </div>
                         </div>
                         <div className="formulario-group" style={{width:"100%"}}>

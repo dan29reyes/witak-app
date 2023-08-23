@@ -4,7 +4,7 @@
     transform: translate(-50%, 50%);
     color: #ffffff;
     width: 450px;
-    height: 360px;
+    height: auto;
     background-color: rgba(237, 237, 237, 0.75);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -19,7 +19,32 @@
 }
 
 .modal-design-footer{
+    background: none;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
+.ver-formulario{
+    background-color: var(--blue-ribbon);
+    border-radius: 10px;
+    color: #ffffff;
+    height: 30px;
+    border: none;
+    font-family: var(--font-family-montserrat-semibold);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.marcar-terminado{
+    background-color: var(--blue-ribbon);
+    border-radius: 10px;
+    height: 30px;
+    color: #ffffff;
+    border: none;
+    font-family: var(--font-family-montserrat-semibold);
+    margin-top: 10px;
 }
 
 .modal-exit-button{

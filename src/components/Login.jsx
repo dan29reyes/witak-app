@@ -60,6 +60,13 @@ function InicioDeSesion(props) {
     });
   };
 
+  const handleFormChange = (e) => {
+    setResetPassword({
+        ...resetPassword,
+        [e.target.name]: e.target.value,
+    });
+};
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const options = {
@@ -82,18 +89,18 @@ function InicioDeSesion(props) {
   };
 
   const handleReset = (e) => {
-    e.preventDefault();
     try{
         setResetPassword({
             ...resetPassword,
             emailSent: true,
+            tokenSent: true
         });
         const templateParams = {
             to_email: resetPassword.email,
             message: 'Ingresa el siguiente codigo para cambiar tu contraseña: ' +
                 token + '\nSi no solicitaste un cambio de contraseña, ignora este correo.',
         };
-        emailjs.send('service_vjk9kxd', 'template_qgp002o', templateParams, 'kg_5ysJdpJrEsa2zm')
+        emailjs.send('service_vjk9kxd', 'template_68ejdt1', templateParams, 'kg_5ysJdpJrEsa2zm')
         .then(() => {
             alert("Revisa tu correo para cambiar tu contraseña");
         })
@@ -107,24 +114,46 @@ function InicioDeSesion(props) {
         alert("An error occurred:", error);
         }
     }
-    const options = {
-        method: "POST",
-        url: "http://localhost:8000/usuarios/reset",
-        data: {
-            email: resetPassword.email,
-            password: resetPassword.pass,
-            newPassword: resetPassword.newPass,
+  }
+
+  const handleCambiar = (e) => {
+    e.preventDefault();
+    try{
+        if(resetPassword.token === token){
+            if(resetPassword.pass === resetPassword.newPass){
+                console.log("ping")
+                const options = {
+                    method: "POST",
+                    url: "http://localhost:8000/usuarios/forgot-password",
+                    data: {
+                        email: resetPassword.email,
+                        password: resetPassword.newPass,
+                    }
+                };
+                axios.request(options).then(function (response) {
+                    alert("Contraseña cambiada exitosamente");
+                    setResetPassword({
+                        ...resetPassword,
+                        emailSent: false,
+                        tokenSent: false
+                    });
+                }).catch(function (error) {
+                    console.error(error);
+                });
+                console.log("pong")
+            }else{
+                alert("Las contraseñas no coinciden");
+            }
+        }else{
+            alert("El token ingresado es incorrecto");
         }
-    };
-    axios.request(options).then(function (response) {
-        setResetPassword({
-            ...resetPassword,
-            reset: false,
-        });
+    } catch (error) {
+        if (error.response && error.response.status === 401) {
+        alert("Email not found");
+        } else {
+        alert("An error occurred:", error);
+        }
     }
-    ).catch(function (error) {
-        console.error(error);
-    });
   }
 
   return (
@@ -160,7 +189,7 @@ function InicioDeSesion(props) {
                     <button className="login-access-button" type="submit">Iniciar Sesion</button>
                 </form>
             ) : (resetPassword.tokenSent === false &&
-                <form onSubmit={handleReset} className="login-form">
+                <form className="login-form" onSubmit={handleReset}>
                     <div className="login-division-input">
                         <label className="login-input-labels">{correoElectronico}</label>
                         <input
@@ -170,20 +199,14 @@ function InicioDeSesion(props) {
                             placeholder={inputPlaceholder1}
                             type={inputType1}
                             required
-                            onChange={handleChange}
+                            onChange={handleFormChange}
                         />
-                        <button className="enviar-correo"
-                            onClick={() => setResetPassword({
-                                ...resetPassword,
-                                tokenSent: true
-                            })}
-                        >Enviar Correo
-                        </button>
+                        <button type='submit' className="enviar-correo">Enviar Correo</button>
                     </div>
                 </form>
             )}
             {resetPassword.tokenSent === true &&
-                <form onSubmit={handleReset} className="login-form">
+                <form onSubmit={handleCambiar} className="login-form">
                     <div className="login-division-input">
                         <label className="login-input-labels">Token de Confirmación</label>
                         <input
@@ -193,7 +216,7 @@ function InicioDeSesion(props) {
                             placeholder="WT-2JA920SL"
                             type={inputType1}
                             required
-                            onChange={handleChange}
+                            onChange={handleFormChange}
                         />
                     </div>
                     <div className="login-division-input">
@@ -205,28 +228,22 @@ function InicioDeSesion(props) {
                             placeholder={inputPlaceholder2}
                             type={inputType2}
                             required
-                            onChange={handleChange}
+                            onChange={handleFormChange}
                         />
                     </div>
                     <div className="login-division-input">
                         <label className="login-input-labels">Confirmar Contraseña</label>
                         <input
                             className="login-input-form neuemontreal-bold-dove-gray-18px"
-                            id="password"
-                            name="password"
+                            id="newPass"
+                            name="newPass"
                             placeholder={inputPlaceholder2}
                             type={inputType2}
                             required
-                            onChange={handleChange}
+                            onChange={handleFormChange}
                         />
                     </div>
-                    <button className="cambiar-contra"
-                        onClick={() => setResetPassword({
-                            ...resetPassword,
-                            tokenSent: true
-                        })}
-                        >Cambiar Contraseña
-                    </button>
+                    <button type='submit' className="cambiar-contra">Cambiar Contraseña</button>
                 </form>
             }
             {resetPassword.reset === false && 

@@ -91,11 +91,11 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
                 <p className="paragraph-board">{tablero.fecha_limite}</p>
             </div>
             <div className="modal-design-footer">
-                <button>
-                    Ver Formulario
-                </button>
-                <button>
+                <button className="marcar-terminado">
                     Marcar como Terminado
+                </button>
+                <button className="ver-formulario">
+                    Ver Formulario
                 </button>
             </div>
         </div>
