@@ -96,7 +96,37 @@ async function mandarCorreo(from, to, asunto, text, html, attachments){
   }
 }
 
+async function uploadFile(fileContent, fileName) {
+  const accessToken = process.env.TokenDropbox;
+
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/octet-stream',
+      'Dropbox-API-Arg': JSON.stringify({
+        path: `/uploads/${fileName}`,
+        mode: 'add',
+        autorename: true,
+        mute: false,
+      }),
+    },
+  };
+
+  try {
+    const response = await axios.post('https://content.dropboxapi.com/2/files/upload', fileContent, config);
+
+    if (response.status === 200) {
+      return 'Archivo subido a Dropbox exitosamente.';
+    } else {
+      throw new Error('Error al subir el archivo a Dropbox.');
+    }
+  } catch (error) {
+    throw new Error('Hubo un error en la subida a Dropbox.');
+  }
+}
+
 module.exports = {
+  uploadFile,
   obtenerFormularios,
   obtenerFormulario,
   crearFormulario,

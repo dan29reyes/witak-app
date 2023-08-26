@@ -34,11 +34,12 @@ function Formulario(props){
         objetivo: "",
         publico: "",
         descripcion: "",
-        tono: [],
-        diseñador: "",
+        tono: "",
+        nombre: "",
         tamaño: "",
         fecha_limite: "",
-        inspiracion: []
+        inspiracion: [],
+        id_usuario: 0,
     });
 
     const handleInputChange = (event) => {
@@ -52,9 +53,24 @@ function Formulario(props){
             })
             return;
         }
+        if(event.target.name === "diseñador"){
+            let id = 0;
+            designers.map((designer) => {
+                if(designer.nombre_usuario === event.target.value){
+                    id = designer.id_usuario;
+                }
+            })
+            setFormularioData({
+                ...formularioData,
+                [event.target.name]: event.target.value,
+                id_usuario: id
+            })
+            console.log(formularioData)
+            return;
+        }
         setFormularioData({
             ...formularioData,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
         })
         console.log(formularioData)
     }
@@ -66,7 +82,6 @@ function Formulario(props){
     };
 
     const handleTono = (e) => {
-        e.preventDefault();
         if (formularioData.tono === "") {
             setFormularioData({
                 ...formularioData,
@@ -75,32 +90,32 @@ function Formulario(props){
         } else {
             setFormularioData({
                 ...formularioData,
-                tono: [...formularioData.tono, e.target.value],
+                tono: formularioData.tono + ", "+ e.target.value
             });
         }
-        console.log(formularioData.tono)
+        console.log(formularioData)
     };
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file && file.type === 'application/pdf') {
-        const formDT = new FormData();
-        formDT.append('pdf', file);
+    // const handleFileChange = (e) => {
+    //     const file = e.target.files[0];
+    //     if (file && file.type === 'application/pdf') {
+    //     const formDT = new FormData();
+    //     formDT.append('pdf', file);
         
-        axios.post('http://localhost:8000/upload', formDT)
-            .then((response) => {
-            setFormularioData({
-                ...formularioData,
-                pdf: response.data
-            });
-            })
-            .catch((error) => {
-            console.error(error);
-            });
-        } else {
-        console.error('Invalid file type. Only PDF files are allowed.');
-        }
-    };
+    //     axios.post('http://localhost:8000/upload', formDT)
+    //         .then((response) => {
+    //         setFormularioData({
+    //             ...formularioData,
+    //             pdf: response.data
+    //         });
+    //         })
+    //         .catch((error) => {
+    //         console.error(error);
+    //         });
+    //     } else {
+    //     console.error('Invalid file type. Only PDF files are allowed.');
+    //     }
+    // };
     
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -132,6 +147,31 @@ function Formulario(props){
         console.error('Invalid file type. Only PDF files are allowed.');
         }
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const options = {
+            method: 'POST',
+            url: 'http://localhost:8000/formularios/crear',
+            data: {
+                nombre_formulario: formularioData.nombre, 
+                objetivo_formulario: formularioData.objetivo, 
+                descripcion_formulario: formularioData.descripcion,
+                publico_formulario: formularioData.publico, 
+                tono_formulario: formularioData.tono, 
+                fecha_limite: formularioData.fecha_limite,
+                id_usuario: formularioData.id_usuario,
+                tamaño_formulario: formularioData.tamaño,
+            }
+        };
+        console.log(options.data)
+        axios.request(options).then(function (response) {
+            console.log(response.data);
+            alert("Formulario creado con exito");
+        }).catch(function (error) {
+            console.error(error);
+        })
+    };
     
     return(
         <div className="formulario-container">
@@ -145,46 +185,52 @@ function Formulario(props){
             <div className="Formulario-body">
                 <div className="formulario-body-row">
                     <div className="formulario-group">
-                        <label className="label-formulario">Objetivo</label>
-                        <textarea type="text" name="objetivo" className="formulario-area" placeholder="Escribe tus objetivos" onChange={handleInputChange}/>
+                        <label className="label-formulario">Nombre</label>
+                        <textarea type="text" name="nombre" className="formulario-area" required placeholder="Ingresa tu nombre" onChange={handleInputChange}/>
                     </div>
                     <div className="formulario-group">
                         <label className="label-formulario">Publico</label>
-                        <textarea type="text" name="publico" className="formulario-area" placeholder="A que publico esta dirigido" onChange={handleInputChange}/>
+                        <textarea type="text" name="publico" className="formulario-area" required placeholder="A que publico esta dirigido" onChange={handleInputChange}/>
                     </div>
                 </div>
-                    <div className="formulario-group-area" style={{width:"100%"}}>
-                    <label className="label-formulario">Descripción</label>
-                    <textarea type="text" name="descripcion" className="formulario-area" placeholder="Describe tu proyecto" onChange={handleInputChange}/>
+                <div className="formulario-body-row">
+                    <div className="formulario-group">
+                        <label className="label-formulario">Descripción</label>
+                        <textarea type="text" name="descripcion" className="formulario-area" required placeholder="Describe tu proyecto" onChange={handleInputChange}/>
+                    </div>
+                    <div className="formulario-group">
+                        <label className="label-formulario">Objetivo</label>
+                        <textarea type="text" name="objetivo" className="formulario-area" required placeholder="Escribe tus objetivos" onChange={handleInputChange}/>
+                    </div>
                 </div>
                 <div className="formulario-body-row">
                     <div className="formulario-body-column">
-                        <div className="formulario-group-tono" style={{width:"100%"}}>
+                        <div className="formulario-group-tono" >
                             <label className="label-formulario">Tono</label>
                             <div className="tono-group">
-                                <button className="tono-button" onClick={()=> handleTono}>Elegante</button>
-                                <button className="tono-button" onClick={()=> handleTono}>Jugueton</button>
-                                <button className="tono-button" onClick={()=> handleTono}>Ejecutivo</button>
-                                <button className="tono-button" onClick={()=> handleTono}>Llamativo</button>
-                                <button className="tono-button" onClick={()=> handleTono}>Persuasivo</button>
+                                <button className="tono-button" value="Elegante" name="tono" onClick={(e)=> {handleTono(e)}}>Elegante</button>
+                                <button className="tono-button" value="Jugueton" name="tono" onClick={(e)=> {handleTono(e)}}>Jugueton</button>
+                                <button className="tono-button" value="Ejecutivo" name="tono" onClick={(e)=>{handleTono(e)}}>Ejecutivo</button>
+                                <button className="tono-button" value="Llamativo" name="tono" onClick={(e)=> {handleTono(e)}}>Llamativo</button>
+                                <button className="tono-button" value="Persuasivo" name="tono" onClick={(e)=> {handleTono(e)}}>Persuasivo</button>
                             </div>
                         </div>
                         <div className="formulario-group" style={{width:"100%"}}>
                             <label className="label-formulario">Diseñador Grafico</label>
-                            <select className="formulario-select" onSelect={handleInputChange} name="diseñador">
+                            <select className="formulario-select" required onChange={(e)=>handleInputChange(e)} name="diseñador">
                                 <option value="" disabled selected>Selecciona un diseñador</option>
                                 {designers.map((designer) => (
-                                    <option>{designer.nombre_usuario}</option>
+                                    <option value={designer.nombre_usuario}>{designer.nombre_usuario}</option>
                                 ))}
                             </select>
                         </div>
                         <div className="formulario-group" style={{width:"100%"}}>
                             <label className="label-formulario">Tamaño</label>
-                            <textarea type="text" name="tamaño" className="formulario-area" placeholder="Tamaño de tu post" onChange={handleInputChange}/>
+                            <textarea type="text" name="tamaño" required className="formulario-area" placeholder="Tamaño de tu post" onChange={handleInputChange}/>
                         </div>
                         <div className="formulario-group" style={{width:"100%"}}>
                             <label className="label-formulario">Fecha Limite</label>
-                            <input type="date" className="formulario-date" onChange={handleInputChange} name="fecha_limite"/>
+                            <input type="date" className="formulario-date" required onChange={handleInputChange} name="fecha_limite"/>
                         </div>
                     </div>
                     <div className="formulario-group-file">
@@ -202,7 +248,7 @@ function Formulario(props){
                 </div>
             </div>
             <div className="Formulario-footer">
-                <button className="formulario-button-send">
+                <button className="formulario-button-send" onClick={(e)=>(handleSubmit(e))}>
                     <label className="formulario-button-label">Enviar Formulario</label>
                     <img src={sendIcon} alt="" className="formulario-send-icon"/>
                 </button>

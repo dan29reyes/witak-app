@@ -1,6 +1,6 @@
 .Formulario-header {
     background-color: var(--blue-ribbon);
-    height: 28%;
+    height: 8vh;
 }
 
 .form-header-title {
@@ -13,6 +13,7 @@
     height: 25px;
     margin-bottom:1%
 }
+
 .formulario-send-icon{
     height: 25px;
     margin-right: 5%;
@@ -93,8 +94,8 @@
 .formulario-group-tono {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    height: 22vh;
+    width: 100%;
+    height: 24vh;
     border: 1px solid #d9d9d9;
     padding: 0.5%;
 }
@@ -137,7 +138,7 @@
     display: flex;
     flex-direction: column;
     width: 50%;
-    height: 58vh;
+    height: 60vh;
     border: 1px solid #d9d9d9;
     padding: 0.5%;
 }
@@ -153,18 +154,19 @@ input[type=file]::file-selector-button {
     transition: background .2s ease-in-out;
   }
   
-  input[type=file]::file-selector-button:hover {
-    background: #275dbb;
-  }
-  input[type=file] {
-    width: 350px;
-    max-width: 100%;
-    color: #444;
-    padding: 5px;
-    background: #fff;
-    border-radius: 10px;
-    border: 1px solid #555;
-  }
+input[type=file]::file-selector-button:hover {
+background: #275dbb;
+}
+
+input[type=file] {
+width: 350px;
+max-width: 100%;
+color: #444;
+padding: 5px;
+background: #fff;
+border-radius: 10px;
+border: 1px solid #555;
+}
 
 .formulario-group-area{
     display: flex;
