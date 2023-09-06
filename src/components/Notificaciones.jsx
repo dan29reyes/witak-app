@@ -14,7 +14,7 @@ function Notificaciones(props){
         };
         return axios.request(options)
             .then(function (response) {
-            setNotificaciones(response.data);
+                setNotificaciones(response.data);
             })
             .catch(function (error) {
             throw error;
@@ -34,7 +34,8 @@ function Notificaciones(props){
                 descripcion_tablero: descripcion,
                 id_usuario: parseInt(localStorage.getItem("id_usuario")),
                 fecha_limite: fecha.substring(0, 10)+" 23:59:59",
-                columna_referencia: 1
+                columna_referencia: 1,
+                id_formulario: id
             }
         };
 

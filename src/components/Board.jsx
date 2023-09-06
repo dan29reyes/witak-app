@@ -14,6 +14,7 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
         fecha_creacion: "",
         fecha_limite: "",
         abrir_tablero: abrirTablero,
+        id_formulario: null,
     });
 
     const handleAbrirTablero = () => {
@@ -49,6 +50,7 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
                             fecha_limite: response.data[i].fecha_limite
                             .replace("T", " ").replace(".000Z", "").replace("-", "/").replace("-", "/"),
                             abrir_tablero: tablero.abrir_tablero,
+                            id_formulario: response.data[i].id_formulario,
                         });
                         return;
                     }
@@ -60,7 +62,7 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
     }
 
     const verFormulario = () => {
-        localStorage.setItem("id_tablero", tablero.id_tablero);
+        localStorage.setItem("id_formulario", tablero.id_formulario);
         navigate("/Formularios");
     }
 

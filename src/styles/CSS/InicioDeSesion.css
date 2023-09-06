@@ -145,6 +145,7 @@ transform: scale(1);
 }
 
 :root { 
+  zoom: 80%;
   --black: #000000;
   --desert-storm: #f8f6f6;
   --dove-gray: #707070;

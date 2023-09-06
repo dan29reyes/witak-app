@@ -14,6 +14,7 @@ function Formulario(props){
 
     useEffect(() => {
         getDesigners();
+        getFormulario();
     }, []);
     
     const getDesigners = async () => {
@@ -61,7 +62,8 @@ function Formulario(props){
         id_usuario: 0,
         formularioP: "block",
         nombre_diseñador: "",
-        designerMail:""
+        designerMail:"",
+        id_diseñador: 0,
     });
 
     const handleInputChange = (event) => {
@@ -228,13 +230,18 @@ function Formulario(props){
 
     //Llenado de formulario con Board
     const getFormulario = () => {
-        const options = {
-            method: 'POST',
-            url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formularios/obtener',
-            data: { id_formulario: localStorage.getItem("id_formulario")}
-        };
-        axios.request(options)
-            .then(function (response) {
+        if (localStorage.getItem("id_formulario") !== null) {
+            const options = {
+                method: 'POST',
+                url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formularios/obtenerUno',
+                data: { 
+                    id_formulario: parseInt(localStorage.getItem("id_formulario"))
+                }
+            };
+            axios.request(options).then(function (response) {
+                console.log(response.data)
+                let fecha = response.data[0].fecha_limite
+                fecha = fecha.replace("T", " ").replace(".000Z", "").replace("-", "/").replace("-", "/");
                 setFormularioData({
                     ...formularioData, 
                     nombre: response.data[0].nombre_formulario,
@@ -243,15 +250,17 @@ function Formulario(props){
                     publico: response.data[0].publico_formulario,
                     tono: response.data[0].tono_formulario,
                     tamaño: response.data[0].tamaño_formulario,
-                    fecha_limite: response.data[0].fecha_limite.replace("T", " ").replace(".000Z", "").replace("-", "/").replace("-", "/"),
-                    
+                    fecha_limite: fecha, 
+                    id_diseñador: response.data[0].id_usuario,                  
                 })
-            })
-            .catch(function (error) {
-                console.error(error);
+            }).catch(function (error) {
+              console.error(error);
             });
+        }else{
+            return;
+        }
     }
-    
+
     return(
         <div>
             {showEnviado && (
@@ -265,7 +274,7 @@ function Formulario(props){
             )}
             <div className="formulario-container-cb animate-enter" style={{display: formularioData.formularioP}}>
                 <div className="Formulario-header">
-                    {localStorage.getItem("id_tablero") === null ?
+                    {localStorage.getItem("id_formulario") === null ?
                         <Link to="/Inicio"
                             style={{ marginRight: "0.8%", marginLeft: "0.5%" }}>
                             <img src={backIcon} className="formulario-back-icon" alt=""/>
@@ -273,7 +282,7 @@ function Formulario(props){
                         :
                         <Link to="/Tablero"
                             style={{ marginRight: "0.8%", marginLeft: "0.5%" }}>
-                            <img src={backIcon} className="formulario-back-icon" alt="" onClick={()=>{localStorage.removeItem("id_tablero")}}/>
+                            <img src={backIcon} className="formulario-back-icon" alt="" onClick={()=>{localStorage.removeItem("id_formulario")}}/>
                         </Link>
                     }
                     <label className="form-header-title">Creative Board</label>
@@ -282,51 +291,96 @@ function Formulario(props){
                     <div className="formulario-body-row">
                         <div className="formulario-group">
                             <label className="label-formulario">Nombre</label>
-                            <textarea type="text" name="nombre" className="formulario-area" required placeholder="Ingresa tu nombre" onChange={handleInputChange}/>
+                            {localStorage.getItem("id_formulario") !== null ?
+                                <textarea type="text" name="nombre" value={formularioData.nombre} className="formulario-area" disabled placeholder="Ingresa tu nombre" onChange={handleInputChange}/>
+                                :
+                                <textarea type="text" name="nombre" className="formulario-area" required placeholder="Ingresa tu nombre" onChange={handleInputChange}/>
+                            }
                         </div>
                         <div className="formulario-group">
                             <label className="label-formulario">Publico</label>
-                            <textarea type="text" name="publico" className="formulario-area" required placeholder="A que publico esta dirigido" onChange={handleInputChange}/>
+                            {localStorage.getItem("id_formulario") !== null ?
+                                <textarea type="text" name="publico" value={formularioData.publico} className="formulario-area" disabled placeholder="A que publico esta dirigido" onChange={handleInputChange}/>
+                                :
+                                <textarea type="text" name="publico" className="formulario-area" required placeholder="A que publico esta dirigido" onChange={handleInputChange}/>
+                            }        
                         </div>
                     </div>
                     <div className="formulario-body-row">
                         <div className="formulario-group">
                             <label className="label-formulario">Descripción</label>
-                            <textarea type="text" name="descripcion" className="formulario-area" required placeholder="Describe tu proyecto" onChange={handleInputChange}/>
+                            {localStorage.getItem("id_formulario") !== null ?
+                                <textarea type="text" name="descripcion" value={formularioData.descripcion} className="formulario-area" disabled placeholder="Describe tu proyecto" onChange={handleInputChange}/>
+                                :
+                                <textarea type="text" name="descripcion" className="formulario-area" required placeholder="Describe tu proyecto" onChange={handleInputChange}/>
+                            }
                         </div>
                         <div className="formulario-group">
                             <label className="label-formulario">Objetivo</label>
-                            <textarea type="text" name="objetivo" className="formulario-area" required placeholder="Escribe tus objetivos" onChange={handleInputChange}/>
+                            {localStorage.getItem("id_formulario") !== null ?
+                                <textarea type="text" name="objetivo" value={formularioData.objetivo} className="formulario-area" disabled placeholder="Escribe tus objetivos" onChange={handleInputChange}/>
+                                :
+                                <textarea type="text" name="objetivo" className="formulario-area" required placeholder="Escribe tus objetivos" onChange={handleInputChange}/>
+                            }
                         </div>
                     </div>
                     <div className="formulario-body-row">
                         <div className="formulario-body-column">
                             <div className="formulario-group-tono" >
                                 <label className="label-formulario">Tono</label>
-                                <div className="tono-group">
-                                    <button className="tono-button" value="Elegante" name="tono" onClick={(e)=> {handleTono(e)}}>Elegante</button>
-                                    <button className="tono-button" value="Jugueton" name="tono" onClick={(e)=> {handleTono(e)}}>Jugueton</button>
-                                    <button className="tono-button" value="Ejecutivo" name="tono" onClick={(e)=>{handleTono(e)}}>Ejecutivo</button>
-                                    <button className="tono-button" value="Llamativo" name="tono" onClick={(e)=> {handleTono(e)}}>Llamativo</button>
-                                    <button className="tono-button" value="Persuasivo" name="tono" onClick={(e)=> {handleTono(e)}}>Persuasivo</button>
+                                <div>
+                                    {localStorage.getItem("id_formulario") !== null ? 
+                                        <div>
+                                            {formularioData.tono.split(", ").map((tono) => (
+                                                <button className="tono-button">{tono}</button>
+                                            ))}
+                                        </div>
+                                        :
+                                        <div className="tono-group">
+                                            <button className="tono-button" value="Elegante" name="tono" onClick={(e)=> {handleTono(e)}}>Elegante</button>
+                                            <button className="tono-button" value="Jugueton" name="tono" onClick={(e)=> {handleTono(e)}}>Jugueton</button>
+                                            <button className="tono-button" value="Ejecutivo" name="tono" onClick={(e)=>{handleTono(e)}}>Ejecutivo</button>
+                                            <button className="tono-button" value="Llamativo" name="tono" onClick={(e)=> {handleTono(e)}}>Llamativo</button>
+                                            <button className="tono-button" value="Persuasivo" name="tono" onClick={(e)=> {handleTono(e)}}>Persuasivo</button>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <div className="formulario-group" style={{width:"100%"}}>
                                 <label className="label-formulario">Diseñador Grafico</label>
-                                <select className="formulario-select" required onChange={(e)=>handleInputChange(e)} name="diseñador">
-                                    <option value="" disabled selected>Selecciona un diseñador</option>
-                                    {designers.map((designer) => (
-                                        <option value={designer.nombre_usuario}>{designer.nombre_usuario}</option>
-                                    ))}
-                                </select>
+                                {localStorage.getItem("id_formulario") !== null ?
+                                    <div>
+                                        {designers.map((designer) => designer.id_usuario === formularioData.id_diseñador ? 
+                                            (<select className="formulario-select" disabled>
+                                                <option value={designer.nombre_usuario} selected>{designer.nombre_usuario}</option>
+                                            </select>)
+                                            :null
+                                        )}
+                                    </div>
+                                    :
+                                    <select className="formulario-select" required onChange={(e)=>handleInputChange(e)} name="diseñador">
+                                        <option value="" disabled selected>Selecciona un diseñador</option>
+                                        {designers.map((designer) => (
+                                            <option value={designer.nombre_usuario}>{designer.nombre_usuario}</option>
+                                        ))}
+                                    </select>
+                                }
                             </div>
                             <div className="formulario-group" style={{width:"100%"}}>
                                 <label className="label-formulario">Tamaño</label>
-                                <textarea type="text" name="tamaño" required className="formulario-area" placeholder="Tamaño de tu post" onChange={handleInputChange}/>
+                                {localStorage.getItem("id_formulario") !== null ?
+                                    <textarea type="text" name="tamaño" value={formularioData.tamaño} disabled className="formulario-area" placeholder="Tamaño de tu post" onChange={handleInputChange}/>
+                                    :  
+                                    <textarea type="text" name="tamaño" required className="formulario-area" placeholder="Tamaño de tu post" onChange={handleInputChange}/>
+                                }
                             </div>
                             <div className="formulario-group" style={{width:"100%"}}>
                                 <label className="label-formulario">Fecha Limite</label>
-                                <input type="date" className="formulario-date" required onChange={handleInputChange} name="fecha_limite"/>
+                                {localStorage.getItem("id_formulario") !== null ?
+                                    <input type="text" value={formularioData.fecha_limite} className="formulario-date" disabled onChange={handleInputChange} name="fecha_limite"/>
+                                    :
+                                    <input type="date" className="formulario-date" required onChange={handleInputChange} name="fecha_limite"/>
+                                }
                             </div>
                         </div>
                         <div className="formulario-group-file">
@@ -344,7 +398,7 @@ function Formulario(props){
                     </div>
                 </div>
                 <div className="Formulario-footer">
-                    {localStorage.getItem("id_tablero") !== null ? null :
+                    {localStorage.getItem("id_formulario") !== null ? null :
                     <button className="formulario-button-send" onClick={(e)=>(handleEnviadoPreview(), handleSubmit(e))}>
                         <label className="formulario-button-label">Enviar Formulario</label>
                         <img src={sendIcon} alt="" className="formulario-send-icon"/>
