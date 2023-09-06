@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import { Link } from "react-router-dom";
 import "../styles/CSS/Home.css"
 
@@ -10,7 +10,11 @@ function Home(props) {
             <div className="home-header">
                 <img src={logoWitakNegro} alt="" className="witak-logo-home"/>
                 <div className="links-home">
-                    <Link to="/InicioSesion" className="home-link-style">Iniciar sesión</Link>
+                    {localStorage.getItem("id_usuario") !== null ? 
+                        <Link to="/Tablero" className="home-link-style">Tablero</Link>
+                        : 
+                        <Link to="/InicioSesion" className="home-link-style">Iniciar sesión</Link>
+                    }
                     <Link to="/Registrar" className="home-link-style">Registrarse</Link>
                     <Link to="/QuienesSomos" className="home-link-style">¿Quiénes somos?</Link>
                     <Link to="/Formularios" className="home-link-style">Contacta un Diseñador</Link>

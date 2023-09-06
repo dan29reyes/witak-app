@@ -71,7 +71,7 @@ function InicioDeSesion(props) {
     e.preventDefault();
     const options = {
         method: "POST",
-        url: "http://localhost:8000/usuarios/login",
+        url: "https://quiet-wildwood-64002-14321b752be3.herokuapp.com/usuarios/login",
         data: {
             email: formData.email,
             password: formData.password,
@@ -124,7 +124,7 @@ function InicioDeSesion(props) {
                 console.log("ping")
                 const options = {
                     method: "POST",
-                    url: "http://localhost:8000/usuarios/forgot-password",
+                    url: "https://quiet-wildwood-64002-14321b752be3.herokuapp.com/usuarios/forgot-password",
                     data: {
                         email: resetPassword.email,
                         password: resetPassword.newPass,

@@ -9,7 +9,7 @@ function Notificaciones(props){
     const getNotificaciones = () => {
         const options = {
         method: 'POST',
-        url: 'http://localhost:8000/formularios/obtenerVarios',
+        url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formularios/obtenerVarios',
         data: { id_usuario: parseInt(localStorage.getItem("id_usuario"))}
         };
         return axios.request(options)
@@ -28,7 +28,7 @@ function Notificaciones(props){
     const agregarTablero = (id, nombre, descripcion, fecha) => {
         const options = {
             method: 'POST',
-            url: 'http://localhost:8000/tablero/crear',
+            url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/tablero/crear',
             data: {
                 nombre_tablero: nombre,
                 descripcion_tablero: descripcion,
@@ -46,7 +46,7 @@ function Notificaciones(props){
 
         const options2 = {
             method: 'POST',
-            url: 'http://localhost:8000/formularios/actualizar',
+            url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formularios/actualizar',
             data: {
                 id_formulario: id,
                 estado_formulario: "ACEPTADO",
@@ -64,7 +64,7 @@ function Notificaciones(props){
     const rechazarTablero = (id) => {
         const options = {
             method: 'POST',
-            url: 'http://localhost:8000/formularios/actualizar',
+            url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formularios/actualizar',
             data: {
                 id_formulario: id,
                 estado_formulario: "RECHAZADO",

@@ -74,6 +74,7 @@ const boardListData = {
   exitIcon: require("./styles/Images/log-out.png"),
   fechaIcon: require("./styles/Images/fecha-icon.png"),
   descripIcon: require("./styles/Images/descrip-icon.png"),
+  logIcon: require("./styles/Images/logout.png"),
 }
 
 const homeData = {
@@ -97,4 +98,7 @@ const aboutData = {
 const formularioData = {
   backIcon: require("./styles/Images/backIcon.png"),
   sendIcon: require("./styles/Images/send-icon.png"),
+  checkIcon: require("./styles/Images/check.png"),
+  logoWitak: require("./styles/Images/logo-witak.png"),
+  homeIcon: require("./styles/Images/home-icon.png")
 }

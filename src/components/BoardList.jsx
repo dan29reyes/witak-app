@@ -11,7 +11,7 @@ import Notificaciones from "./Notificaciones";
 import Board from "./Board"
 
 function BoardList(props) {
-  const { group2, notificationImg, menuImg, closeIcon, homeIcon, 
+  const { group2, notificationImg, menuImg, closeIcon, homeIcon, logIcon,
     taskIcon, formIcon, pencilIcon, exitIcon, descripIcon, fechaIcon } = props;
 
   //Logica mostrar tablero
@@ -47,7 +47,7 @@ function BoardList(props) {
   async function getBoards (){
       const options = {
           method: 'POST',
-          url: 'http://localhost:8000/tablero/obtener',
+          url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/tablero/obtener',
           data: { id_usuario: localStorage.getItem("id_usuario")}
       };
       return await axios.request(options)
@@ -70,7 +70,7 @@ function BoardList(props) {
   const agregarTablero = () => {
     const options = {
       method: 'POST',
-      url: 'http://localhost:8000/tablero/crear',
+      url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/tablero/crear',
       data: {
         nombre_tablero: form.nombre_tablero,
         descripcion_tablero: form.descripcion_tablero,
@@ -139,6 +139,10 @@ function BoardList(props) {
     return modalHeight;
   };
 
+  const logOut = () => {
+    localStorage.clear();
+  }
+
   const [modalHeight, setModalHeight] = useState(calculateModalHeight());
 
   useEffect(() => {
@@ -155,10 +159,10 @@ function BoardList(props) {
   const [caja, setCaja] = useState(false);
 
   return (
-    <div className="board-main-container">
-      <Modal isOpen={menuModal} backdrop={true} keyboard={true} style={{marginTop:"auto", position:"absolute",marginLeft:"auto"}}>
+    <div className="board-main-container animate-enter">
+      <Modal isOpen={menuModal} backdrop={true} keyboard={true} style={{marginTop:"auto", position:"fixed",marginLeft:"auto"}}>
         <div ref={modalRef}>
-          <ModalHeader style={{ borderBottom: '1px solid' }}>
+          <ModalHeader style={{ borderBottom: '1px solid'}}>
             <div>
               <Link to="/Inicio" style={{ color: 'black', textDecoration: 'none' }}>
                 <img src={homeIcon} alt="" style={{ height: '40px', marginRight: '15px' }} />
@@ -174,9 +178,15 @@ function BoardList(props) {
               </Link>
             </div>
             <div>
-              <Link to="/Formularios" style={{ color: 'black', textDecoration: 'none', marginBottom: '100vh'}}>
+              <Link to="/Formularios" style={{ color: 'black', textDecoration: 'none'}}>
                 <img src={formIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
                 <label className="navigation-text">Formulario</label>
+              </Link>
+            </div>
+            <div style={{marginTop:"62vh"}}>
+              <Link to="/Inicio" onClick={()=>{logOut()}} style={{ color: 'black', textDecoration: 'none' }}>
+                <img src={logIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
+                <label className="navigation-text">Cerrar Sesion</label>
               </Link>
             </div>
           </ModalBody>

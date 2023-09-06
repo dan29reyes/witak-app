@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `witak-app`.`formularios` (
   `fecha_limite` DATETIME NOT NULL,
   `fecha_creacion` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `id_usuario` INT NOT NULL,
+  `tamaño_formulario` VARCHAR(15) NOT NULL,
   PRIMARY KEY (`id_formulario`),
   UNIQUE INDEX `id_formulario_UNIQUE` (`id_formulario` ASC) VISIBLE,
   INDEX `fk_formulario_usuario_idx` (`id_usuario` ASC) VISIBLE,

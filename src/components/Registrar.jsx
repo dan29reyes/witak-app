@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/CSS/Registrar.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import emailjs from 'emailjs-com';
 
 function Registrar(props) {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ function Registrar(props) {
     }
     const options = {
       method: "POST",
-      url: "http://localhost:8000/usuarios/register",
+      url: "https://quiet-wildwood-64002-14321b752be3.herokuapp.com/usuarios/register",
       data: {
         name: formData.name,
         email: formData.mail,
@@ -72,6 +73,20 @@ function Registrar(props) {
     }).catch(function (error) {
       console.error(error);
     })
+    const templateParams = {
+      to_email: formData.mail,
+      message: 'Organiza, colabora y sigue el progreso de tus proyectos de manera fácil y eficiente.'
+      +'Simplifica tu trabajo y mantén todo bajo control con WiTaK.'
+      +'\n¡Comienza a gestionar tus proyectos de forma efectiva hoy mismo!',
+      to_name: formData.name
+    };
+    emailjs.send('service_vjk9kxd', 'template_68ejdt1', templateParams, 'kg_5ysJdpJrEsa2zm')
+      .then(() => {
+        alert('Correo de registro enviado con éxito');
+      })
+      .catch((error) => {
+        alert('Error al enviar el correo de confirmación:', error);
+      });
   }
 
   return (
