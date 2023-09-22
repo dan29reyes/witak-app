@@ -56,6 +56,7 @@ function Notificaciones(props){
         };
         return axios.request(options2).then(function (response) {
             getNotificaciones();
+            window.location.reload();
         }
         ).catch(function (error) {
             throw error;

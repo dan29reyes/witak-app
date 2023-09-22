@@ -1,6 +1,6 @@
 .home-container{
     position: relative;
-    height: 100vh;
+    height: 105vh;
 }
 
 .home-header{
@@ -21,33 +21,84 @@
 }
 
 .home-image{
-    width:48%;
+    width:45%;
     height: auto;
-    margin-top: 1%;
-    margin-right: 4%;
+    margin-top: 4%;
+    margin-left: 5%;
 }
 
 .home-footer {
-    display: flex;
+    background-color: #0057c8;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
     position: absolute;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 3%;
+    bottom: -20vh;
     width: 100%;
-    background-color:#006fff;
-    bottom: 0;
-    height: 50px;
-  }
+    height: auto;
+}
 
-  .home-footer img {
-    margin-left: 30px;
-  }
+.footer-upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+}
+
+.redes-footer{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.redes-footer p{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.contact-email-footer p{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.pages-footer{
+    display:flex;
+    justify-content: flex-start;
+    align-self: center;
+    flex-direction: column;
+}
+
+.pages-footer-link{
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.white-line-footer {
+    display:flex;
+    justify-content: center;
+    align-self: center;
+    margin-top: 20px; /* Ajusta el margen superior según tus preferencias */
+    margin-bottom: 20px; /* Ajusta el margen inferior según tus preferencias */
+    width: 100%;
+    border-top: 1px solid #ffffff; /* Esto establece una línea sólida de 1 píxel de ancho en color blanco */
+}
+
+.redes-footer img {
+    vertical-align: middle;
+}
+
+.rights-footer {
+    font-size: 14px;
+}
+
 
 .home-text-1{
     color: var(--blue-ribbon);
-    font-family: var(--home-font-family-montserrat-semibold);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 52px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0;
     line-height: 50px;
     white-space: nowrap;
@@ -245,5 +296,28 @@
     .home-footer{
         justify-content: center;
         margin-bottom: 5%;
+    }
+}
+
+@media (max-width: 1024px){
+    .home-text-1{
+        font-size: 32px;
+        line-height: 31px;
+    }
+    .home-text-2{
+        font-size: 30px;
+        line-height: 31px;
+        margin: 10px 0px 0px 0px;
+    }
+    .home-text-3{
+        font-size: 15px;
+        line-height: 21px;
+        margin: 10px 0px 20px 0px;
+    }
+    .circleImg1-home{
+        width: 200px;
+    }
+    .circleImg2-home{
+        width: 200px;
     }
 }

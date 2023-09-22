@@ -35,18 +35,31 @@ function Home(props) {
                 </div>
                 <img src={chicaHome} alt="" className="home-image"/>
             </div>
+            <img src={imageCircle} alt="" className="circleImg1-home"/>
+            <img src={imageCircle} alt="" className="circleImg2-home"/>
             <div className="home-footer">
-                <Link to="https://www.instagram.com/witak.co/">
-                    <img src={InstaIcon} alt="" style={{ height: "35px" }} />
-                    <img src={imageCircle} alt="" className="circleImg1-home"/>
-                    <img src={imageCircle} alt="" className="circleImg2-home"/>
-                </Link>
-                <Link>
-                    <img src={FaceIcon} alt="" style={{ height: "35px" }} />
-                </Link>
-                <Link>
-                    <img src={TwitIcon} alt="" style={{ height: "35px",borderRadius:"9px" }} />
-                </Link>
+                <div className="footer-upper">
+                    <div className="contact-email-footer">
+                        <p>Contactanos</p>
+                        <a href="mailto:hnwitak@gmail.com" style={{color: "white"}}>hnwitak@gmail.com</a>
+                    </div>
+                    <div className="redes-footer">
+                        <p>Redes Sociales</p>
+                        <Link to="https://www.instagram.com/witak.co/">
+                            <img src={InstaIcon} alt="" style={{ height: "30px", marginRight: "10px" }} />
+                        </Link>
+                        <Link to="https://www.facebook.com/">
+                            <img src={FaceIcon} alt="" style={{ height: "25px" , marginRight: "10px" }} />
+                        </Link>
+                        <Link>
+                            <img src={TwitIcon} alt="" style={{ height: "25px", borderRadius:"6px" }} />
+                        </Link>
+                    </div>
+                </div>
+                <div className="white-line-footer"/>
+                <div className="rights-footer">
+                    <p>&copy; Witak 2023. Todos los derechos reservados.</p>
+                </div>
             </div>
         </div>
     );

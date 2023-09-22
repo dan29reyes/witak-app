@@ -81,6 +81,9 @@ const boardListData = {
   fechaIcon: require("./styles/Images/fecha-icon.png"),
   descripIcon: require("./styles/Images/descrip-icon.png"),
   logIcon: require("./styles/Images/logout.png"),
+  InstaIcon: require("./styles/Images/instagram-icon.png"),
+  FaceIcon: require("./styles/Images/facebook-icon.png"),
+  TwitIcon: require("./styles/Images/x-icon.png"),
 }
 
 const homeData = {

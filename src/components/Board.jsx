@@ -86,6 +86,7 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
                 columna_referencia: 3,
                 abrir_tablero: "none",
             });
+            window.location.reload();
         }
         ).catch(function (error) {
             console.error(error);
@@ -112,6 +113,7 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
                 columna_referencia: 2,
                 abrir_tablero: "none",
             });
+            window.location.reload();
         }
         ).catch(function (error) {
             console.error(error);

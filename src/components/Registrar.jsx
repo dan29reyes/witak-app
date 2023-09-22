@@ -96,6 +96,7 @@ function Registrar(props) {
       <div className="home-header">
           <img src={logoWitakNegro} alt="" className="witak-logo-home"/>
           <div className="links-home">
+              <Link to="/Inicio" className="home-link-style">Inicio</Link>
               {localStorage.getItem("id_usuario") !== null ? 
                   <Link to="/Tablero" className="home-link-style">Tablero</Link>
                   : 

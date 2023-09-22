@@ -7,12 +7,13 @@ import "../styles/CSS/Board.css";
 import axios from "axios";
 // import Board from "./Board";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label, Input, FormGroup, Button } from 'reactstrap';
+import {DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Notificaciones from "./Notificaciones";
 import Board from "./Board"
 
 function BoardList(props) {
   const { group2, notificationImg, menuImg, closeIcon, homeIcon, logIcon,
-    taskIcon, formIcon, pencilIcon, exitIcon, descripIcon, fechaIcon } = props;
+    taskIcon, formIcon, pencilIcon, exitIcon, descripIcon, fechaIcon, InstaIcon, FaceIcon, TwitIcon } = props;
 
   //Logica mostrar tablero
   const [propsTablero, setpropsTablero] = useState({ 
@@ -154,182 +155,287 @@ function BoardList(props) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  //Drag and Drop
+  const onDragEnd = (result) => {
+    if (!result.destination) return;
+      const { source, destination } = result;
+      if (source.droppableId !== destination.droppableId){
+        const sourceColumn = source.droppableId;
+        const destColumn = destination.droppableId;
+        const sourceIndex = source.index;
+        boards[sourceIndex].columna_referencia = parseInt(destColumn);
+        try{
+          const options = {
+            method: 'POST',
+            url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/tablero/actualizar',
+            data: {
+              id_tablero: boards[sourceIndex].id_tablero,
+              nombre_tablero: boards[sourceIndex].nombre_tablero,
+              descripcion_tablero: boards[sourceIndex].descripcion_tablero,
+              id_usuario: boards[sourceIndex].id_usuario,
+              fecha_limite: boards[sourceIndex].fecha_limite,
+              columna_referencia: parseInt(destination.droppableId)
+            }
+          };
+          axios.request(options)
+            .then(function (response) {
+              // console.log(response.data);
+            })
+            .catch(function (error) {
+              // console.error(error);
+            });
+          }catch(error){
+            // console.log(error);
+          }
+        }
+  }
   
   //Modal de notificaciones
   const [caja, setCaja] = useState(false);
 
   return (
-    <div className="board-main-container animate-enter">
-      <Modal isOpen={menuModal} backdrop={true} keyboard={true} style={{marginTop:"auto", position:"fixed",marginLeft:"auto"}}>
-        <div ref={modalRef}>
-          <ModalHeader style={{ borderBottom: '1px solid'}}>
-            <div>
-              <Link to="/Inicio" style={{ color: 'black', textDecoration: 'none' }}>
-                <img src={homeIcon} alt="" style={{ height: '40px', marginRight: '15px' }} />
-                <label className="navigation-text">Inicio</label>
-              </Link>
-            </div>
+    <DragDropContext onDragEnd={result => onDragEnd(result,[1,2, 3])}>
+      <div className="board-main-container animate-enter">
+        <Modal isOpen={menuModal} backdrop={true} keyboard={true} style={{marginTop:"auto", position:"fixed",marginLeft:"auto"}}>
+          <div ref={modalRef}>
+            <ModalHeader style={{ borderBottom: '1px solid'}}>
+              <div>
+                <Link to="/Inicio" style={{ color: 'black', textDecoration: 'none' }}>
+                  <img src={homeIcon} alt="" style={{ height: '40px', marginRight: '15px' }} />
+                  <label className="navigation-text">Inicio</label>
+                </Link>
+              </div>
+            </ModalHeader>
+            <ModalBody style={{ height: `${modalHeight}px`, overflowY: "auto" }}>
+              <div style={{ marginBottom: '25px' }}>
+                <Link to="/Tablero" style={{ color: 'black', textDecoration: 'none' }}>
+                  <img src={taskIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
+                  <label className="navigation-text">Tablero</label>
+                </Link>
+              </div>
+              <div>
+                <Link to="/Formularios" style={{ color: 'black', textDecoration: 'none'}}>
+                  <img src={formIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
+                  <label className="navigation-text">Formulario</label>
+                </Link>
+              </div>
+              <div style={{marginTop:"62vh"}}>
+                <Link to="/Inicio" onClick={()=>{logOut()}} style={{ color: 'black', textDecoration: 'none' }}>
+                  <img src={logIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
+                  <label className="navigation-text">Cerrar Sesion</label>
+                </Link>
+              </div>
+            </ModalBody>
+          </div>
+        </Modal>
+        <Modal isOpen={modalAgregar} style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "90%",}} backdrop={true} keyboard={true}>
+          <ModalHeader style={{backgroundColor: "#006fff", color:"white"}}>
+            Nuevo Tablero
           </ModalHeader>
-          <ModalBody style={{ height: `${modalHeight}px`, overflowY: "auto" }}>
-            <div style={{ marginBottom: '25px' }}>
-              <Link to="/Tablero" style={{ color: 'black', textDecoration: 'none' }}>
-                <img src={taskIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
-                <label className="navigation-text">Tablero</label>
-              </Link>
-            </div>
-            <div>
-              <Link to="/Formularios" style={{ color: 'black', textDecoration: 'none'}}>
-                <img src={formIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
-                <label className="navigation-text">Formulario</label>
-              </Link>
-            </div>
-            <div style={{marginTop:"62vh"}}>
-              <Link to="/Inicio" onClick={()=>{logOut()}} style={{ color: 'black', textDecoration: 'none' }}>
-                <img src={logIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
-                <label className="navigation-text">Cerrar Sesion</label>
-              </Link>
-            </div>
+          <ModalBody>
+            <FormGroup>
+              <Label className="modal-label">Nombre</Label>
+              <Input
+                type="text"
+                id="nombre_tablero"
+                name="nombre_tablero"
+                className="modal-input"
+                placeholder="Escribe un nombre..."
+                onChange={handleChange}
+              />
+              <Label className="modal-label">Descripcion</Label>
+              <Input
+                type="textarea"
+                id="descripcion_tablero"
+                name="descripcion_tablero"
+                className="modal-input"
+                style={{height: "150px", resize: "none"}}
+                placeholder="Escribe una descripcion..."
+                onChange={handleChange}
+              />
+              <Label className="modal-label">Fecha Limite</Label>
+              <Input
+                type="date"
+                id="fecha_limite"
+                name="fecha_limite"
+                className="modal-input"
+                onChange={handleChange}
+              />
+            </FormGroup>
           </ModalBody>
-        </div>
-      </Modal>
-      <Modal isOpen={modalAgregar} style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: "90%",}} backdrop={true} keyboard={true}>
-        <ModalHeader style={{backgroundColor: "#006fff", color:"white"}}>
-          Nuevo Tablero
-        </ModalHeader>
-        <ModalBody>
-          <FormGroup>
-            <Label className="modal-label">Nombre</Label>
-            <Input
-              type="text"
-              id="nombre_tablero"
-              name="nombre_tablero"
-              className="modal-input"
-              placeholder="Escribe un nombre..."
-              onChange={handleChange}
-            />
-            <Label className="modal-label">Descripcion</Label>
-            <Input
-              type="textarea"
-              id="descripcion_tablero"
-              name="descripcion_tablero"
-              className="modal-input"
-              style={{height: "150px", resize: "none"}}
-              placeholder="Escribe una descripcion..."
-              onChange={handleChange}
-            />
-            <Label className="modal-label">Fecha Limite</Label>
-            <Input
-              type="date"
-              id="fecha_limite"
-              name="fecha_limite"
-              className="modal-input"
-              onChange={handleChange}
-            />
-          </FormGroup>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={agregarTablero}>
-            Agregar
-          </Button>
-          <Button color="danger" onClick={abrirModal}>
-            Cancelar
-          </Button>
-        </ModalFooter>
-      </Modal>
-      {propsTablero.abrirTablero === 'fixed' && <Board {...propsTablero}/>}
-      <div className="board-main-header">
-        <button className="menu-button" onClick={() => setmenuModal(true)}>
-          <img src={menuImg} className="menu-image" alt="" />
-        </button>
-        <Link to="/Inicio">
-          <img className="logo-witak-head" src={group2} alt="" />
-        </Link>
-        <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", marginRight: "3%"}}>
-          <button style={{ background: "none", border: "none", padding: "0", cursor: "pointer" }}>
-            {caja === false ? (<img src={notificationImg} style={{ height: "27px" }} alt="" onClick={()=>setCaja(!caja)}/>
-            ) : (
-              <img src={closeIcon} style={{ height: "27px" }} alt="" onClick={()=>setCaja(!caja)}/>
-            )}
+          <ModalFooter>
+            <Button color="primary" onClick={agregarTablero}>
+              Agregar
+            </Button>
+            <Button color="danger" onClick={abrirModal}>
+              Cancelar
+            </Button>
+          </ModalFooter>
+        </Modal>
+        {propsTablero.abrirTablero === 'fixed' && <Board {...propsTablero}/>}
+        <div className="board-main-header">
+          <button className="menu-button" onClick={() => setmenuModal(true)}>
+            <img src={menuImg} className="menu-image" alt="" />
           </button>
+          <Link to="/Inicio">
+            <img className="logo-witak-head" src={group2} alt="" />
+          </Link>
+          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", marginRight: "3%"}}>
+            <button style={{ background: "none", border: "none", padding: "0", cursor: "pointer" }}>
+              {caja === false ? (<img src={notificationImg} style={{ height: "27px" }} alt="" onClick={()=>setCaja(!caja)}/>
+              ) : (
+                <img src={closeIcon} style={{ height: "27px" }} alt="" onClick={()=>setCaja(!caja)}/>
+              )}
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="board-main-body">
-        {caja && <Notificaciones {...props}/>}
-        <div className="informacion-header">
-          <h1 className="name-user">Bienvenido {localStorage.getItem("nombre_usuario")} ☆</h1>
-          <h2 className="description-tablero">Tablero de forms de trabajos</h2>
-        </div>
+        <div className="board-main-body">
+          {caja && <Notificaciones {...props}/>}
+          <div className="informacion-header">
+            <h1 className="name-user">Bienvenido {localStorage.getItem("nombre_usuario")} ☆</h1>
+            <h2 className="description-tablero">Tablero de forms de trabajos</h2>
+          </div>
         <div className="lista-boards">
           <div className="board-list-card">
-            <div className="board-list-head">
-            <h1>PENDIENTES</h1>
+            <div className="board-list-head" style={{backgroundColor:"#ffe000"}}>
+              <h1>PENDIENTES</h1>
             </div>
-            <div className="board-list-body">
-              {boards.map((board) => {
-                if (board.columna_referencia === 1) {
-                  return (
-                    <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 1)}>
-                      <label>{board.nombre_tablero}</label>
-                      <img src={pencilIcon} alt="" className="pencil-icon"/>
-                    </div>
-                  );
-                }
-                return null;
-              })}
-              <button className="create-board-button" onClick={()=>abrirModal(1)}>
-                <h3>Añade otra tarjeta</h3>
-                <h2>+</h2>
-              </button>
+            <Droppable droppableId="1">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps} className="board-list-body">
+                  {boards.map((board, index) => {
+                    if (board.columna_referencia === 1) {
+                      return (
+                        <Draggable key={board.id_tablero} draggableId={board.id_tablero.toString()} index={index}>
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 1)}>
+                                <label>{board.nombre_tablero}</label>
+                                <img src={pencilIcon} alt="" className="pencil-icon"/>
+                              </div>
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    }
+                    return null;
+                  })}
+                  {provided.placeholder}
+                  <button className="create-board-button" onClick={() => abrirModal(1)}>
+                    <h3>Añade otra tarjeta</h3>
+                    <h2>+</h2>
+                  </button>
+                </div>
+              )}
+            </Droppable>
+          </div>
+          <div className="board-list-card">
+            <div className="board-list-head" style={{backgroundColor:"#00b350"}}>
+              <h1>EN PROGRESO</h1>
             </div>
+            <Droppable droppableId="2">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps} className="board-list-body">
+                  {boards.map((board, index) => {
+                    if (board.columna_referencia === 2) {
+                      return (
+                        <Draggable key={board.id_tablero} draggableId={board.id_tablero.toString()} index={index}>
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 2)}>
+                                <label>{board.nombre_tablero}</label>
+                                <img src={pencilIcon} alt="" className="pencil-icon"/>
+                              </div>
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    }
+                    return null;
+                  })}
+                  {provided.placeholder}
+                  <button className="create-board-button" onClick={() => abrirModal(2)}>
+                    <h3>Añade otra tarjeta</h3>
+                    <h2>+</h2>
+                  </button>
+                </div>
+              )}
+            </Droppable>
           </div>
           <div className="board-list-card">
             <div className="board-list-head">
-              <h1>EN PROCESO</h1>
+              <h1>TERMINADO</h1>
             </div>
-            <div className="board-list-body">
-              {boards.map((board) => {
-                if (board.columna_referencia === 2) {
-                  return (
-                    <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 2)}>
-                      <label>{board.nombre_tablero}</label>
-                      <img src={pencilIcon} alt="" className="pencil-icon"/>
-                    </div>
-                  );
-                }
-                return null;
-              })}
-              <button className="create-board-button" onClick={()=>abrirModal(2)}>
-                <h3>Añade otra tarjeta</h3>
-                <h2>+</h2>
-              </button>
-            </div>
-          </div>
-          <div className="board-list-card">
-            <div className="board-list-head">
-              <h1>TERMINADOS</h1>
-            </div>
-            <div className="board-list-body">
-              {boards.map((board) => {
-                if (board.columna_referencia === 3) {
-                  return (
-                    <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 3)}>
-                      <label>{board.nombre_tablero}</label>
-                      <img src={pencilIcon} alt="" className="pencil-icon"/>
-                    </div>
-                  );
-                }
-                return null;
-              })}
-              <button className="create-board-button" onClick={()=>abrirModal(3)}>
-                <h3>Añade otra tarjeta</h3>
-                <h2>+</h2>
-              </button>
-            </div>
+            <Droppable droppableId="3">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps} className="board-list-body">
+                  {boards.map((board, index) => {
+                    if (board.columna_referencia === 3) {
+                      return (
+                        <Draggable key={board.id_tablero} draggableId={board.id_tablero.toString()} index={index}>
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 3)}>
+                                <label>{board.nombre_tablero}</label>
+                                <img src={pencilIcon} alt="" className="pencil-icon"/>
+                              </div>
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    }
+                    return null;
+                  })}
+                  {provided.placeholder}
+                  <button className="create-board-button" onClick={() => abrirModal(3)}>
+                    <h3>Añade otra tarjeta</h3>
+                    <h2>+</h2>
+                  </button>
+                </div>
+              )}
+            </Droppable>
           </div>
         </div>
       </div>
     </div>
-  );
+    <div className="home-footer">
+      <div className="footer-upper">
+          <div className="contact-email-footer">
+              <p>Contactanos</p>
+              <a href="mailto:hnwitak@gmail.com" style={{color: "white"}}>hnwitak@gmail.com</a>
+          </div>
+          <div className="redes-footer">
+              <p>Redes Sociales</p>
+              <Link to="https://www.instagram.com/witak.co/">
+                  <img src={InstaIcon} alt="" style={{ height: "30px", marginRight: "10px" }} />
+              </Link>
+              <Link to="https://www.facebook.com/">
+                  <img src={FaceIcon} alt="" style={{ height: "25px" , marginRight: "10px" }} />
+              </Link>
+              <Link>
+                  <img src={TwitIcon} alt="" style={{ height: "25px", borderRadius:"6px" }} />
+              </Link>
+          </div>
+      </div>
+      <div className="white-line-footer"/>
+      <div className="rights-footer">
+          <p>&copy; Witak 2023. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </DragDropContext>);
 }
 
 export default BoardList;

@@ -31,6 +31,8 @@
     margin-left: 5%;
 }
 
+
+
 .Formulario-body {
     display: flex;
     flex-direction: column;
@@ -71,6 +73,10 @@
     margin: 5px;
     padding: 8px 15px;
     flex: 0 0 calc(25.1% - 10px);
+}
+
+.tono-button.selected{
+    background-color: #7d3535;
 }
 
 .tono-button:hover {
