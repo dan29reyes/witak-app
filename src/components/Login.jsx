@@ -1,5 +1,6 @@
 import {React, useState, useEffect} from "react";
 import "../styles/CSS/InicioDeSesion.css";
+import "../styles/CSS/Home.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import emailjs from 'emailjs-com';
@@ -44,8 +45,13 @@ function InicioDeSesion(props) {
     inputType1,
     inputPlaceholder1,
     contrasea,
+    logoWitakNegro,
     inputType2,
     inputPlaceholder2,
+    InstaIcon,
+    FaceIcon,
+    TwitIcon,
+    imageCircle,
   } = props;
 
   const [formData, setFormData] = useState({
@@ -158,6 +164,14 @@ function InicioDeSesion(props) {
 
   return (
     <div className="login-container-center-horizontal">
+        <div className="home-header">
+          <img src={logoWitakNegro} alt="" className="witak-logo-home"/>
+          <div className="links-home">
+              <Link to="/Registrar" className="home-link-style">Registrarse</Link>
+              <Link to="/QuienesSomos" className="home-link-style">¿Quiénes somos?</Link>
+              <Link to="/Formularios" className="home-link-style">Contacta un Diseñador</Link>
+          </div>
+      </div>
         <div className="login-overlap-group">
             <img className="login-group-2 animate-enter" alt="" src={group2} />
             {resetPassword.reset === false ? (

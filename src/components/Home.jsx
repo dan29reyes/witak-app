@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/CSS/Home.css"
 
 function Home(props) {
-    const { logoWitakNegro, chicaHome, InstaIcon, FaceIcon, TwitIcon } = props;
+    const { logoWitakNegro, chicaHome, InstaIcon, FaceIcon, TwitIcon, imageCircle } = props;
 
     return (
         <div className="home-container">
@@ -38,12 +38,14 @@ function Home(props) {
             <div className="home-footer">
                 <Link to="https://www.instagram.com/witak.co/">
                     <img src={InstaIcon} alt="" style={{ height: "35px" }} />
+                    <img src={imageCircle} alt="" className="circleImg1-home"/>
+                    <img src={imageCircle} alt="" className="circleImg2-home"/>
                 </Link>
                 <Link>
                     <img src={FaceIcon} alt="" style={{ height: "35px" }} />
                 </Link>
                 <Link>
-                    <img src={TwitIcon} alt="" style={{ height: "35px" }} />
+                    <img src={TwitIcon} alt="" style={{ height: "35px",borderRadius:"9px" }} />
                 </Link>
             </div>
         </div>

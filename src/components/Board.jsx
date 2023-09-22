@@ -92,6 +92,32 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
         });
     }
 
+    const marcarEnProgreso = () => {
+        const options = {
+            method: 'POST',
+            url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/tablero/actualizar',
+            data: {
+                id_tablero: parseInt(tablero.id_tablero),
+                nombre_tablero: tablero.nombre_tablero,
+                descripcion_tablero: tablero.descripcion_tablero,
+                columna_referencia: 2,
+                fecha_limite: tablero.fecha_limite,
+                id_usuario: parseInt(localStorage.getItem("id_usuario"))
+            }
+        }
+        axios.request(options).then(function (response) {
+            console.log(response.data);
+            setTablero({
+                ...tablero,
+                columna_referencia: 2,
+                abrir_tablero: "none",
+            });
+        }
+        ).catch(function (error) {
+            console.error(error);
+        });
+    }
+
     getTablero();
     
     return(
@@ -124,6 +150,13 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
                 <p className="paragraph-board">{tablero.fecha_limite}</p>
             </div>
             <div className="modal-design-footer">
+                { idColumna === 2 ? null :
+                <button 
+                    className="marcar-terminado"
+                    onClick={()=>{marcarEnProgreso()}}
+                >Marcar en Progreso
+                </button>
+                }
                 { idColumna === 3 ? null :
                 <button 
                     className="marcar-terminado"
@@ -131,11 +164,13 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
                 >Marcar como Terminado
                 </button>
                 }
+                { tablero.id_formulario === null ? null :
                 <button 
                     onClick={()=>{verFormulario()}}
                     className="ver-formulario"
                     >Ver Formulario
                 </button>
+                }
             </div>
         </div>
     );

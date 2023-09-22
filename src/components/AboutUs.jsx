@@ -7,15 +7,20 @@ function AboutUs(props){
     const navigate = useNavigate();
     return(
         <div className="about-container">
-            <div className="about-header">
-                <button className="regresar-about" onClick={()=>{navigate("/Inicio")}}>
-                    <img src={backIcon} alt=""/>
-                    <p>Regresar</p>
-                </button>
+            <div className="home-header">
+                <img src={logoWitakNegro} alt="" className="witak-logo-home"/>
+                <div className="links-home">
+                    {localStorage.getItem("id_usuario") !== null ? 
+                        <Link to="/Tablero" className="home-link-style">Tablero</Link>
+                        : 
+                        <Link to="/InicioSesion" className="home-link-style">Iniciar sesión</Link>
+                    }
+                    <Link to="/Registrar" className="home-link-style">Registrarse</Link>
+                    <Link to="/Formularios" className="home-link-style">Contacta un Diseñador</Link>
+                </div>
             </div>
             <div className="about-body animated-element">
                 <div className="columna-texto-about">
-                    <img src={logoWitakNegro} alt="" className="witak-logo-about"/>
                     <h1 className="about-text-1">¿Quiénes somos?</h1>
                     <h3 className="about-text-3">
                         Witak está diseñada para ayudar a los diseñadores
@@ -28,21 +33,20 @@ function AboutUs(props){
                         compañero esencial para el exito en el mundo del
                         diseño grafico.
                     </h3>
-                    <img src={imageCircle} alt="" className="circleImg1"/>
-                    <img src={imageCircle} alt="" className="circleImg2"/>
                 </div>
                 <img src={chicaHome} alt="" className="about-image"/>
-                <div className='about-barra-azul'></div>
             </div>
-            <div className="about-footer">
+            <div className="home-footer">
                 <Link to="https://www.instagram.com/witak.co/">
                     <img src={InstaIcon} alt="" style={{ height: "35px" }} />
+                    <img src={imageCircle} alt="" className="circleImg1-home"/>
+                    <img src={imageCircle} alt="" className="circleImg2-home"/>
                 </Link>
                 <Link>
                     <img src={FaceIcon} alt="" style={{ height: "35px" }} />
                 </Link>
                 <Link>
-                    <img src={TwitIcon} alt="" style={{ height: "35px" }} />
+                    <img src={TwitIcon} alt="" style={{ height: "35px", borderRadius:"8px"}} />
                 </Link>
             </div>
         </div>

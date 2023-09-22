@@ -1,10 +1,14 @@
 .home-container{
     position: relative;
+    height: 100vh;
 }
 
 .home-header{
+    background-color: white;
     display: flex;
     flex-direction: row;
+    height: 70px;
+    align-items: center;
 }
 
 .home-body{
@@ -13,20 +17,26 @@
 }
 
 .columna-texto{
-    margin-top: 10%;
+    margin-top: 4%;
 }
 
 .home-image{
-    width:45%;
+    width:48%;
+    height: auto;
     margin-top: 1%;
+    margin-right: 4%;
 }
 
 .home-footer {
     display: flex;
-    flex-direction: row;
+    position: absolute;
     justify-content: flex-end;
-    margin-top: 5%;
-    margin-right: 5%;
+    align-items: center;
+    padding-right: 3%;
+    width: 100%;
+    background-color:#006fff;
+    bottom: 0;
+    height: 50px;
   }
 
   .home-footer img {
@@ -39,9 +49,9 @@
     font-size: 52px;
     font-weight: 600;
     letter-spacing: 0;
-    line-height: 41px;
+    line-height: 50px;
     white-space: nowrap;
-    transform: translate(25px, 0);
+    transform: translate(55px, 0);
 }
 
 .home-text-2{
@@ -50,10 +60,10 @@
     font-size: 40px;
     font-weight: 600;
     letter-spacing: 0;
-    line-height: 31px;
+    line-height: 50px;
     margin-top: 2%;
     white-space: nowrap;
-    transform: translate(25px, 0);
+    transform: translate(55px, 0);
 }
 
 .home-text-3{
@@ -62,9 +72,9 @@
     font-family: var(--home-font-family-montserrat-medium);
     font-size: 19px;
     font-weight: 400;
+    line-height: 35px;
     letter-spacing: 0;
-    margin-top: 2%;
-    transform: translate(25px, 0);
+    transform: translate(55px, 0);
     width: 80%;
 }
 
@@ -89,9 +99,27 @@
 .witak-logo-home {
     filter: brightness(0);
     transition: 0.5s;
-    padding: 20px;
-    width: 220px;
+    width: 210px;
+    margin-left: 2%;
   }
+
+  .circleImg1-home{
+    width: 230px;
+    position: absolute;
+    bottom:0;
+    left: 0;
+    filter: brightness(95%);
+    z-index: -1;
+}
+
+.circleImg2-home{
+    width: 230px;
+    position: absolute;
+    left: 250px;
+    bottom: 0;
+    filter: brightness(95%);
+    z-index: -1;
+}
 
 .home-comenzar{
     color: white;
@@ -104,7 +132,7 @@
     width: 200px;
     height: 50px;
     margin-top: 5%;
-    transform: translate(25px, 0);
+    transform: translate(55px, 0);
 }
   
   :root{

@@ -27,6 +27,7 @@ export default App;
 
 const registrarData = {
   group2: require("./styles/Images/logo-witak.png"),
+  logoWitakNegro: require("./styles/Images/logo-witak.png"),
   title: <React.Fragment>Optimiza <br />tu trabajo con nosotros.</React.Fragment>,
   mejoraLaComunicaci: <React.Fragment>mejora la comunicación<br />con tu cliente y equipo de trabajo<br />para lograr une ejecución eficiente</React.Fragment>,
   crearCuenta: "Crear cuenta",
@@ -58,7 +59,12 @@ const inicioDeSesionData = {
   inputPlaceholder1: "witak@gmail.com",
   contrasea: "Contraseña",
   inputType2: "password",
-  inputPlaceholder2: "••••••••••••••••"
+  inputPlaceholder2: "••••••••••••••••",
+  logoWitakNegro: require("./styles/Images/logo-witak.png"),
+  InstaIcon: require("./styles/Images/instagram-icon.png"),
+  FaceIcon: require("./styles/Images/facebook-icon.png"),
+  TwitIcon: require("./styles/Images/x-icon.png"),
+  imageCircle: require("./styles/Images/circles-white.png"),
 }
 
 const boardListData = {
@@ -82,7 +88,8 @@ const homeData = {
   chicaHome: require("./styles/Images/chica-home.png"),
   InstaIcon: require("./styles/Images/instagram-icon.png"),
   FaceIcon: require("./styles/Images/facebook-icon.png"),
-  TwitIcon: require("./styles/Images/twitter-icon.png"),
+  TwitIcon: require("./styles/Images/x-icon.png"),
+  imageCircle: require("./styles/Images/circles-white.png"),
 }
 
 const aboutData = {
@@ -90,7 +97,7 @@ const aboutData = {
   chicaHome: require("./styles/Images/chica-home.png"),
   InstaIcon: require("./styles/Images/instagram-icon.png"),
   FaceIcon: require("./styles/Images/facebook-icon.png"),
-  TwitIcon: require("./styles/Images/twitter-icon.png"),
+  TwitIcon: require("./styles/Images/x-icon.png"),
   imageCircle: require("./styles/Images/circles-white.png"),
   backIcon: require("./styles/Images/backIcon.png")
 }

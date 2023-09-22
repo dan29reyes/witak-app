@@ -2,7 +2,7 @@
     position:fixed;
     margin: auto;
     top: 30%;
-    left: 34%;
+    left: 34.5%;
     color: #ffffff;
     width: 450px;
     height: auto;
@@ -49,13 +49,14 @@
     height: 30px;
     border: none;
     font-family: var(--font-family-montserrat-semibold);
-    margin-top: 15px;
+    margin-top: 10px;
     margin-bottom: 15px;
 }
 
 .marcar-terminado{
     background-color: var(--blue-ribbon);
     border-radius: 10px;
+    margin-bottom: 10px;
     height: 30px;
     color: #ffffff;
     border: none;

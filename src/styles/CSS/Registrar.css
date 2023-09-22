@@ -1,14 +1,17 @@
-.overlap-group {
-    align-items: flex-start;
-    background-color: var(--blue-ribbon);
-    border-radius: 0px 35px 35px 0px;
-    box-shadow: 0px 3px 6px #00000029;
+.register-container-page{
     display: flex;
     flex-direction: column;
-    padding: 5% 5%;
-    width: 50%;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--desert-storm);
+}
+
+.overlap-group {
+    box-shadow: 0px 3px 6px #00000029;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
     margin-right: 5%;
-    zoom: 109%;
   }
   
   .group-2 {
@@ -28,17 +31,18 @@
     margin-top: 6px;
     min-height: 113px;
     opacity: 0;
-    transform: translate(-25px, 0);
     white-space: nowrap;
+    margin-left: 5%;
+    margin-top: 4%;
   }
   
   .title.animate-enter1 {
     animation: animate-enter1-frames 0.50s ease-in 0.00s 1 normal forwards;
     opacity: 0;
-    transform: translate(-25px, 0);
   }
   
   .mejora-la-comunicaci {
+    margin-left: 5%;
     color: var(--desert-storm);
     font-family: var(--reg-font-family-neuemontreal-medium);
     font-size: var(--reg-font-size-xl);
@@ -48,7 +52,6 @@
     margin-top: 6px;
     min-height: 118px;
     opacity: 0;
-    transform: translate(-25px, 0);
     white-space: nowrap;
   }
   
@@ -59,13 +62,11 @@
   }
   
   .rectangle-3 {
-    align-self: center;
-    height: 361px;
-    margin-right: 28.0px;
-    margin-top: 32px;
+    height: 340px;
+    margin-left: 5%;
     opacity: 0;
-    transform: scale(1.1);
-    width: 361px;
+    width: 380px;
+    margin-bottom: 5%;
   }
   
   .rectangle-3 video {
@@ -83,14 +84,32 @@
     opacity: 0;
     transform: scale(1.1);
   }
-  
-  .flex-col {
-    align-items: left;
+
+  .register-column-container-1{
+    background-color: var(--blue-ribbon);
     display: flex;
     flex-direction: column;
-    margin-top: 5%;
-    width: 45%;
-    margin-right: 5%;
+    width: 50%;
+    height: 100%;
+    border-radius: 0px 25px 25px 0px;
+  }
+  
+  .register-column-container-2{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+  }
+
+  .flex-col {
+    display: flex;
+    align-self: flex-end;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    padding: 20px 0px 20px 0px;
+    background-color: white;
   }
   
   .crear-cuenta {
@@ -102,7 +121,6 @@
     line-height: 51px;
     min-height: 53px;
     opacity: 0;
-    transform: translate(-25px, 0);
     white-space: nowrap;
   }
   
@@ -158,13 +176,16 @@
   .input-form {
     align-self: left;
     background-color: var(--desert-storm);
-    border: 1px solid;
-    border-color: var(--black);
+    border: 0.1px solid;
+    border-color: rgb(157, 157, 157);
     border-radius: 15px;
     box-shadow: 0px 3px 6px #00000029;
-    height: 5%;
+    height: 10%;
     margin-top: 8px;
+    margin-bottom: 5px;
     padding: 7px 28px;
+    color: black;
+    width: 90%;
   }
   
   .flex-col-item {
@@ -212,14 +233,14 @@
   
   .rectangle-9 {
     align-self: left;
-    margin-top: 5%;
+    margin-top: 3%;
     width: 42%;
     background-color: var(--blue-ribbon);
     border-radius: 30px;
     border: none;
     box-shadow: 0px 3px 6px #00000029;
     cursor: pointer;
-    height: 50px;
+    height: 80px;
     top: 0;
     transition: all 0.2s ease;
     color: white;
@@ -287,13 +308,13 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  height: 100vh;
 }
 
 
 @media (max-width: 767px) {
   .container-center-horizontal {
     flex-direction: column;
-    zoom: 65%;
   }
   .overlap-group {
     width: fit-content;
@@ -342,7 +363,6 @@
 @media (min-width: 768px) {
   .container-center-horizontal {
     flex-direction: row;
-    zoom: 90%;
   }
 }
 

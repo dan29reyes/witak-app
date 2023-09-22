@@ -5,7 +5,7 @@
   justify-content: center;
   padding-top:8.5%;
   padding-bottom:12%;
-  height: 100vh;
+  height: 90vh;
 }
 
 .login-division-input{
@@ -13,7 +13,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 50%;
 }
 
 .login-form{
@@ -42,6 +42,7 @@
   font-style: normal;
   font-weight: 700;
   margin-top: 10px;
+  width: 370px;
 }
 
 .login-input-form{
@@ -53,7 +54,7 @@
   height: 53px;
   margin-top: 8px;
   margin-bottom: 10px;
-  width: 25%;
+  width: 370px;
 }
 
 .login-texto-extra{
@@ -145,7 +146,6 @@ transform: scale(1);
 }
 
 :root { 
-  zoom: 80%;
   --black: #000000;
   --desert-storm: #f8f6f6;
   --dove-gray: #707070;
