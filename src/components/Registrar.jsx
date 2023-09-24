@@ -73,7 +73,7 @@ function Registrar(props) {
     e.preventDefault();
     if (!validator.isPassword(formData.password)){
       toast.error(
-        "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número",
+        "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula, un simbolo de los siguientes: !@#$%^&* y un número",
         { 
           position: "top-center",
           autoClose: 3500,
@@ -117,10 +117,34 @@ function Registrar(props) {
     };
     emailjs.send('service_vjk9kxd', 'template_68ejdt1', templateParams, 'kg_5ysJdpJrEsa2zm')
       .then(() => {
-        alert('Correo de registro enviado con éxito');
+        toast.success(
+          'Correo de registro enviado con éxito',
+          { 
+            position: "top-center",
+            autoClose: 3500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+          }
+        );
       })
       .catch((error) => {
-        alert('Error al enviar el correo de confirmación:', error);
+        toast.error(
+          "Error al enviar el correo de confirmación"+error,
+          { 
+            position: "top-center",
+            autoClose: 3500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+          }
+        );
       });
   }
 

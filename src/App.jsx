@@ -38,7 +38,7 @@ const registrarData = {
   nombreDeUsuario: "Nombre de usuario",
   inputType1: "text",
   inputPlaceholder1: "Santiago P.",
-  correoElectronico: "Correo electronico",
+  correoElectronico: "Correo electrónico",
   inputType2: "text",
   inputPlaceholder2: "witak@gmail.com",
   contrasea: "Contraseña",
@@ -54,7 +54,7 @@ const registrarData = {
 
 const inicioDeSesionData = {
   group2: require("./styles/Images/logo-witak.png"),
-  correoElectronico: "Correo electronico",
+  correoElectronico: "Correo electrónico",
   inputType1: "text",
   inputPlaceholder1: "witak@gmail.com",
   contrasea: "Contraseña",

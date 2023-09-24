@@ -60,6 +60,7 @@
 }
 
 .tono-group {
+    padding-top: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -85,12 +86,12 @@
 
 .formulario-date{
     border: none;
-    height: 60px;
+    height: 80px;
 }
 
 .formulario-select{
     border: none;
-    height: 60px;
+    height: 80px;
 }
 
 .label-formulario {
@@ -107,11 +108,20 @@
     padding: 0.5%;
 }
 
+.formulario-group-column {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 16vh;
+    border: 1px solid #d9d9d9;
+    padding: 0.5%;
+}
+
 .formulario-group-tono {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 24vh;
+    height: 28vh;
     border: 1px solid #d9d9d9;
     padding: 0.5%;
 }

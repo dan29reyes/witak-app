@@ -150,16 +150,64 @@ function InicioDeSesion(props) {
         };
         emailjs.send('service_vjk9kxd', 'template_68ejdt1', templateParams, 'kg_5ysJdpJrEsa2zm')
         .then(() => {
-            alert("Revisa tu correo para cambiar tu contraseña");
+            toast.info(
+                "Revisa tu correo para cambiar tu contraseña",
+                { 
+                position: "top-center",
+                autoClose: 3500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light"
+                }
+            );
         })
         .catch((error) => {
-            alert('Error al enviar el correo de recuperacion:', error);           
+            toast.error(
+                'Error al enviar el correo de recuperacion:'+error,
+                { 
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                }
+            );           
         });
     } catch (error) {
         if (error.response && error.response.status === 401) {
-        alert("Email not found");
+            toast.error(
+                "Email not found",
+                { 
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                }
+            );
         } else {
-        alert("An error occurred:", error);
+            toast.error(
+                "An error occurred:"+error,
+                { 
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                }
+            );
         }
     }
   }
@@ -169,7 +217,22 @@ function InicioDeSesion(props) {
     try{
         if(resetPassword.token === token){
             if(resetPassword.pass === resetPassword.newPass){
-                console.log("ping")
+                if (!validator.isPassword(resetPassword.pass)){
+                    toast.error(
+                      "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula, un simbolo de los siguientes: !@#$%^&* y un número",
+                      { 
+                        position: "top-center",
+                        autoClose: 3500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light"
+                      }
+                    );
+                    return;
+                  }
                 const options = {
                     method: "POST",
                     url: "https://quiet-wildwood-64002-14321b752be3.herokuapp.com/usuarios/forgot-password",
@@ -179,27 +242,88 @@ function InicioDeSesion(props) {
                     }
                 };
                 axios.request(options).then(function (response) {
-                    alert("Contraseña cambiada exitosamente");
+                    toast.success(
+                        "Contraseña cambiada exitosamente",
+                        { 
+                            position: "top-center",
+                            autoClose: 3500,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light"
+                        }
+                    );
                     setResetPassword({
                         ...resetPassword,
                         emailSent: false,
-                        tokenSent: false
+                        tokenSent: false,
+                        reset: false
                     });
                 }).catch(function (error) {
                     console.error(error);
                 });
                 console.log("pong")
             }else{
-                alert("Las contraseñas no coinciden");
+                toast.error(
+                    "Las contraseñas no coinciden",
+                    { 
+                        position: "top-center",
+                        autoClose: 3500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light"
+                    }
+                );
             }
         }else{
-            alert("El token ingresado es incorrecto");
+            toast.error(
+                "El token ingresado es incorrecto",
+                { 
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                }
+            );
         }
     } catch (error) {
         if (error.response && error.response.status === 401) {
-        alert("Email not found");
+            toast.error(
+                "Email not found",
+                { 
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                }
+            );
         } else {
-        alert("An error occurred:", error);
+            toast.error(
+                "An error occurred:"+error,
+                { 
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                }
+            );
         }
     }
   }
@@ -253,7 +377,6 @@ function InicioDeSesion(props) {
                             className="login-input-form neuemontreal-bold-dove-gray-18px"
                             id="email"
                             name="email"
-                            placeholder={inputPlaceholder1}
                             type={inputType1}
                             required
                             onChange={handleFormChange}
@@ -270,7 +393,6 @@ function InicioDeSesion(props) {
                             className="login-input-form neuemontreal-bold-dove-gray-18px"
                             id="token"
                             name="token"
-                            placeholder="WT-2JA920SL"
                             type={inputType1}
                             required
                             onChange={handleFormChange}
@@ -282,7 +404,6 @@ function InicioDeSesion(props) {
                             className="login-input-form neuemontreal-bold-dove-gray-18px"
                             id="pass"
                             name="pass"
-                            placeholder={inputPlaceholder2}
                             type={inputType2}
                             required
                             onChange={handleFormChange}
@@ -294,7 +415,6 @@ function InicioDeSesion(props) {
                             className="login-input-form neuemontreal-bold-dove-gray-18px"
                             id="newPass"
                             name="newPass"
-                            placeholder={inputPlaceholder2}
                             type={inputType2}
                             required
                             onChange={handleFormChange}
@@ -321,6 +441,7 @@ function InicioDeSesion(props) {
             </div>
             }
         </div>
+        <ToastContainer />
     </div>
   );
 }

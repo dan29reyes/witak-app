@@ -17,7 +17,6 @@ function Home(props) {
                     }
                     <Link to="/Registrar" className="home-link-style">Registrarse</Link>
                     <Link to="/QuienesSomos" className="home-link-style">¿Quiénes somos?</Link>
-                    <Link to="/Formularios" className="home-link-style">Contacta un Diseñador</Link>
                 </div>
             </div>
             <div className="home-body animated-element">
@@ -26,8 +25,8 @@ function Home(props) {
                     <h1 className="home-text-1">Para optimizar tu trabajo</h1>
                     <h2 className="home-text-2">Expresa mejor tus ideas</h2>
                     <h3 className="home-text-3">
-                        mejora la comunicacion con tu cliente y equipo de 
-                        trabajo para lograr una ejecucion eficiente
+                        Mejora la comunicación con tu cliente y equipo de 
+                        trabajo para lograr una ejecución eficiente
                     </h3>
                     <Link to="/Registrar">
                         <button className="home-comenzar">Comenzar</button>

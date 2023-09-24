@@ -243,13 +243,13 @@ function BoardList(props) {
               </div>
               <div style={{ marginBottom: '25px' }}>
                 <Link to="/QuienesSomos" style={{ color: 'black', textDecoration: 'none' }}>
-                  <label className="navigation-text">Quienes Somos</label>
+                  <label className="navigation-text">Quiénes Somos</label>
                 </Link>
               </div>
               <div style={{marginTop:"62vh"}}>
                 <Link to="/Inicio" onClick={()=>{logOut()}} style={{ color: 'black', textDecoration: 'none' }}>
                   <img src={logIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
-                  <label className="navigation-text">Cerrar Sesion</label>
+                  <label className="navigation-text">Cerrar Sesión</label>
                 </Link>
               </div>
             </ModalBody>

@@ -50,6 +50,21 @@ function Formulario(props){
         }, 4500)// Hide after 5 seconds
     }
 
+    useEffect(() => {
+        getDesigners();
+        // Obtener el valor del parámetro de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const parametro = urlParams.get('id_usuario');
+        if (parametro === null) {
+            return;
+        }
+        
+        setFormularioData({
+            ...formularioData,
+            id_usuario: parseInt(parametro),
+        })
+    }, []); // El segundo argumento del useEffect vacío significa que este efecto se ejecuta solo una vez al montar el componente
+
     const [formularioData, setFormularioData] = useState({
         objetivo: "",
         publico: "",
@@ -75,27 +90,6 @@ function Formulario(props){
                 ...formularioData,
                 [event.target.name]: fecha
             })
-            return;
-        }
-        if(event.target.name === "diseñador"){
-            let id = 0;
-            let nameDesigner = "";
-            let correo = ""
-            designers.map((designer) => {
-                if(designer.nombre_usuario === event.target.value){
-                    id = designer.id_usuario;
-                    nameDesigner = designer.nombre_usuario;
-                    correo = designer.correo_usuario;
-                }
-            })
-            setFormularioData({
-                ...formularioData,
-                [event.target.name]: event.target.value,
-                id_usuario: id,
-                nombre_diseñador: nameDesigner,
-                designerMail: correo
-            })
-            console.log(formularioData)
             return;
         }
         setFormularioData({
@@ -200,27 +194,40 @@ function Formulario(props){
             console.error(error);
         })
 
+        let nameDesigner = "";
+        let correo = ""
+        designers.map((designer) => {
+            if(designer.id_usuario === formularioData.id_usuario){
+                nameDesigner = designer.nombre_usuario;
+                correo = designer.correo_usuario;
+                console.log(correo)
+            }
+        })
+
         let fecha = formularioData.fecha_limite.replace("/", "-");
         let modifiedHtml = htmlPlantilla.html.replace(/{{tamaño_formulario}}/g, formularioData.tamaño);
-        modifiedHtml = modifiedHtml.replace(/{{remitente}}/g, formularioData.nombre_diseñador);
+        modifiedHtml = modifiedHtml.replace(/{{remitente}}/g, nameDesigner);
         modifiedHtml = modifiedHtml.replace(/{{descripcion_formulario}}/g, formularioData.descripcion);
         modifiedHtml = modifiedHtml.replace(/{{objetivo_formulario}}/g, formularioData.objetivo);
         modifiedHtml = modifiedHtml.replace(/{{publico_formulario}}/g, formularioData.publico);
         modifiedHtml = modifiedHtml.replace(/{{tono_formulario}}/g, formularioData.tono);
         modifiedHtml = modifiedHtml.replace(/{{fecha_limite}}/g, fecha);
 
+        
+
         options = {
             method: 'POST',
             url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formularios/enviarCorreo',
             data: {
-                from: formularioData.nombre_diseñador,
-                to: formularioData.designerMail,
+                from: nameDesigner,
+                to: correo,
                 subject: "Idea de Proyecto",
                 text: "",
                 html: modifiedHtml,
                 attachments: []
             }
         }
+        console.log(options.data)
         axios.request(options).then(function (response) {
             console.log("Correo enviado!")
         }).catch(function (error) {
@@ -298,9 +305,9 @@ function Formulario(props){
                             }
                         </div>
                         <div className="formulario-group">
-                            <label className="label-formulario">Publico</label>
+                            <label className="label-formulario">Público</label>
                             {localStorage.getItem("id_formulario") !== null ?
-                                <textarea type="text" name="publico" value={formularioData.publico} className="formulario-area" disabled placeholder="A que publico esta dirigido" onChange={handleInputChange}/>
+                                <textarea type="text" name="publico" value={formularioData.publico} className="formulario-area" disabled placeholder="A que público está dirigido" onChange={handleInputChange}/>
                                 :
                                 <textarea type="text" name="publico" className="formulario-area" required placeholder="A que publico esta dirigido" onChange={handleInputChange}/>
                             }        
@@ -346,27 +353,7 @@ function Formulario(props){
                                     }
                                 </div>
                             </div>
-                            <div className="formulario-group" style={{width:"100%"}}>
-                                <label className="label-formulario">Diseñador Grafico</label>
-                                {localStorage.getItem("id_formulario") !== null ?
-                                    <div>
-                                        {designers.map((designer) => designer.id_usuario === formularioData.id_diseñador ? 
-                                            (<select className="formulario-select" disabled>
-                                                <option value={designer.nombre_usuario} selected>{designer.nombre_usuario}</option>
-                                            </select>)
-                                            :null
-                                        )}
-                                    </div>
-                                    :
-                                    <select className="formulario-select" required onChange={(e)=>handleInputChange(e)} name="diseñador">
-                                        <option value="" disabled selected>Selecciona un diseñador</option>
-                                        {designers.map((designer) => (
-                                            <option value={designer.nombre_usuario}>{designer.nombre_usuario}</option>
-                                        ))}
-                                    </select>
-                                }
-                            </div>
-                            <div className="formulario-group" style={{width:"100%"}}>
+                            <div className="formulario-group-column" style={{width:"100%"}}>
                                 <label className="label-formulario">Tamaño</label>
                                 {localStorage.getItem("id_formulario") !== null ?
                                     <textarea type="text" name="tamaño" value={formularioData.tamaño} disabled className="formulario-area" placeholder="Tamaño de tu post" onChange={handleInputChange}/>
@@ -374,7 +361,7 @@ function Formulario(props){
                                     <textarea type="text" name="tamaño" required className="formulario-area" placeholder="Tamaño de tu post" onChange={handleInputChange}/>
                                 }
                             </div>
-                            <div className="formulario-group" style={{width:"100%"}}>
+                            <div className="formulario-group-column" style={{width:"100%"}}>
                                 <label className="label-formulario">Fecha Limite</label>
                                 {localStorage.getItem("id_formulario") !== null ?
                                     <input type="text" value={formularioData.fecha_limite} className="formulario-date" disabled onChange={handleInputChange} name="fecha_limite"/>

@@ -31,7 +31,7 @@ function AboutUs(props){
                         manera más eficiente. Ya sea para diseñadores
                         independientes o equipos creativos, Witak es una
                         herramienta poderosa y versátil que se convierte en un
-                        compañero esencial para el exito en el mundo del
+                        compañero esencial para el éxito en el mundo del
                         diseño grafico.
                     </h3>
                 </div>
