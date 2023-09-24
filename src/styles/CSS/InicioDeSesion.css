@@ -183,22 +183,25 @@ transform: scale(1);
 }
 
 @media (max-width: 767px){
-  .login-overlap-group {
-    padding-top: 25%;
-    padding-bottom: 30%;
+  .login-overlap-group{
+    margin-top: 12%;
+    background-color: #006fff;
+    height: 100vh;
   }
-  
+
+  .login-container-center-horizontal{
+    height: 100%;
+    background-color: white;
+  }
+
   .login-access-button {
     width: 40%;
   }
 
-  .login-input-form {
-    width: 60%;
-    padding-left: 3.5%;
-  }
-
   .login-group-2{
-    width: 450px;
+    width: 80%;
+    height: auto;
+    margin-top: -30%;
   }
   
   .enviar-correo{
@@ -213,9 +216,6 @@ transform: scale(1);
   }
   .login-texto-extra{
     font-size: 14px;
-  }
-  .login-overlap-group{
-    margin-bottom: 5%;
   }
   .login-input-form{
     font-size: 15px;

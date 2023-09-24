@@ -28,8 +28,8 @@ export default App;
 const registrarData = {
   group2: require("./styles/Images/logo-witak.png"),
   logoWitakNegro: require("./styles/Images/logo-witak.png"),
-  title: <React.Fragment>Optimiza <br />tu trabajo con nosotros.</React.Fragment>,
-  mejoraLaComunicaci: <React.Fragment>mejora la comunicación<br />con tu cliente y equipo de trabajo<br />para lograr une ejecución eficiente</React.Fragment>,
+  title: "Optimiza tu trabajo con nosotros.",
+  mejoraLaComunicaci: "Mejora la comunicación con tu cliente y equipo de trabajo para lograr une ejecución eficiente",
   crearCuenta: "Crear cuenta",
   spanText1: "¿Ya eres parte de ",
   spanText2: "WITAK",

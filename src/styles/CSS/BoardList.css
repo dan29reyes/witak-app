@@ -250,6 +250,23 @@ transform: scale(1);
   .name-user{
     font-size: 22px;
   }
+  .generar-link{
+    visibility: hidden;
+    position:relative;
+  }
+  .generar-link:after{
+    visibility: visible;
+    content: "Generar Enlace";
+    display: flex;
+    width: 350px;
+    height: 50px;
+    border-radius: 50px;
+    margin-left: 80px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--blue-ribbon);
+    
+  }
   .description-tablero{
     font-size: 14px;
   }

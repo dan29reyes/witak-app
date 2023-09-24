@@ -118,6 +118,17 @@
     margin: 5px 0px 0px 5px;
 }
 
+@media (max-width: 768px){
+    .modal-design{
+        width: 100%;
+        position: fixed;
+        left: auto;
+        right: auto;
+        background-color: rgba(237, 237, 237, 1);
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    }
+}
+
 :root {
     --white: #ffffff;
     --blue-ribbon: #006fff;

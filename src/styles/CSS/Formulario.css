@@ -31,8 +31,6 @@
     margin-left: 5%;
 }
 
-
-
 .Formulario-body {
     display: flex;
     flex-direction: column;
@@ -280,11 +278,22 @@ border: 1px solid #555;
   }
 }
 
+.formularios-container{
+
+}
+
 :root {
     --blue-ribbon: #006fff;
 }
 
 @media (max-width: 768px) {
+    .formularios-container{
+        height: 100vh;
+    }
+    .formulario-container-cb{
+        display: flex;
+        flex-direction: column;
+    }
     .formulario-body-row {
         flex-direction: column;
     }
@@ -316,5 +325,8 @@ border: 1px solid #555;
         position: fixed;
         justify-content: center;
         width: 100%;
+    }
+    .Formulario-body{
+        height: 100%;
     }
 }

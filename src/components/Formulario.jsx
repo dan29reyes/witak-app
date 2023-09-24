@@ -269,7 +269,7 @@ function Formulario(props){
     }
 
     return(
-        <div>
+        <div className="formularios-container">
             {showEnviado && (
             <div className="formulario-enviado animate-enter">
                 <div className="formulario-enviado-row">
