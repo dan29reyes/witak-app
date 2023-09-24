@@ -4,6 +4,8 @@ import "../styles/CSS/Home.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import emailjs from 'emailjs-com';
+import validator from '../Utilities/validator';
+import { ErrorSharp } from "@mui/icons-material";
 
 function InicioDeSesion(props) {
   const navigate = useNavigate();
@@ -66,32 +68,66 @@ function InicioDeSesion(props) {
     });
   };
 
-  const handleFormChange = (e) => {
-    setResetPassword({
-        ...resetPassword,
-        [e.target.name]: e.target.value,
+    const handleFormChange = (e) => {
+        setResetPassword({
+            ...resetPassword,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const [errors, setErrors] = useState({
+        email: "",
+        password: "",
+        general: "",
     });
-};
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const options = {
-        method: "POST",
-        url: "https://quiet-wildwood-64002-14321b752be3.herokuapp.com/usuarios/login",
-        data: {
-            email: formData.email,
-            password: formData.password,
+    if(!validator.isEmail(formData.email)){
+        setErrors({
+            ...errors,
+            email: "El correo no es valido",
+            general: "La contraseña no es valida"
+        });
+        console.log(errors)
+    }
+
+    if(!validator.isPassword(formData.password)){
+        setErrors({
+            ...errors,
+            password: "La contraseña no es valida",
+            general: "La contraseña no es valida"
+        });
+        console.log(errors)
+    }
+
+    if(!validator.isEmail(formData.email) && !validator.isPassword(formData.password)){
+        setErrors({
+            ...errors,
+            general: "Los datos ingresados no son validos"
+        });
+        console.log(errors)
+    }
+    if(errors.email !== "" && errors.password !== "" && errors.general !== ""){
+        console.log("ping")
+        console.log(errors)
+        const options = {
+            method: "POST",
+            url: "https://quiet-wildwood-64002-14321b752be3.herokuapp.com/usuarios/login",
+            data: {
+                email: formData.email,
+                password: formData.password,
+            }
+        };
+        const response = axios.request(options);
+        if(!response.message){
+            // localStorage.setItem("accessToken", response.data.accessToken);
+            // localStorage.setItem("refreshToken", response.data.refreshToken);
+            // localStorage.setItem("id_usuario", response.data.id_user);
+            // localStorage.setItem("nombre_usuario", response.data.nombre_usuario);
+            // navigate("/Tablero");
         }
-    };
-    axios.request(options).then(function (response) {
-        localStorage.setItem("accessToken", response.data.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.data.refreshToken);
-        localStorage.setItem("id_usuario", response.data.data.id_user);
-        localStorage.setItem("nombre_usuario", response.data.data.nombre_usuario);
-        navigate("/Tablero");
-    }).catch(function (error) {
-        console.error(error);
-    });
+    }
   };
 
   const handleReset = (e) => {
@@ -170,7 +206,6 @@ function InicioDeSesion(props) {
                 <Link to="/Inicio" className="home-link-style">Inicio</Link>
                 <Link to="/Registrar" className="home-link-style">Registrarse</Link>
                 <Link to="/QuienesSomos" className="home-link-style">¿Quiénes somos?</Link>
-                <Link to="/Formularios" className="home-link-style">Contacta un Diseñador</Link>
           </div>
       </div>
         <div className="login-overlap-group">
@@ -183,7 +218,6 @@ function InicioDeSesion(props) {
                             className="login-input-form neuemontreal-bold-dove-gray-18px"
                             id="email"
                             name="email"
-                            placeholder={inputPlaceholder1}
                             type={inputType1}
                             required
                             onChange={handleChange}
@@ -195,12 +229,14 @@ function InicioDeSesion(props) {
                             className="login-input-form neuemontreal-bold-dove-gray-18px"
                             id="password"
                             name="password"
-                            placeholder={inputPlaceholder2}
                             type={inputType2}
                             required
                             onChange={handleChange}
                         />
                     </div>
+                    <label className="error">
+                        {errors.general}
+                    </label>
                     <button className="login-access-button" type="submit">Iniciar Sesion</button>
                 </form>
             ) : (resetPassword.tokenSent === false &&
