@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import emailjs from 'emailjs-com';
 import validator from '../Utilities/validator';
-import { ErrorSharp } from "@mui/icons-material";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function InicioDeSesion(props) {
   const navigate = useNavigate();
@@ -83,13 +84,27 @@ function InicioDeSesion(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if(!validator.isEmail(formData.email) || !validator.isPassword(formData.password)){
+        setErrors({
+            ...errors,
+            general: "Los datos ingresados no son validos"
+        });
+    }else{
+        setErrors({
+            ...errors,
+            email: "",
+            password: "",
+            general: ""
+        });
+    }
+
     if(!validator.isEmail(formData.email)){
         setErrors({
             ...errors,
             email: "El correo no es valido",
             general: "La contraseña no es valida"
         });
-        console.log(errors)
     }
 
     if(!validator.isPassword(formData.password)){
@@ -98,19 +113,9 @@ function InicioDeSesion(props) {
             password: "La contraseña no es valida",
             general: "La contraseña no es valida"
         });
-        console.log(errors)
     }
 
-    if(!validator.isEmail(formData.email) && !validator.isPassword(formData.password)){
-        setErrors({
-            ...errors,
-            general: "Los datos ingresados no son validos"
-        });
-        console.log(errors)
-    }
-    if(errors.email !== "" && errors.password !== "" && errors.general !== ""){
-        console.log("ping")
-        console.log(errors)
+    if(!errors.email && !errors.password && !errors.general){
         const options = {
             method: "POST",
             url: "https://quiet-wildwood-64002-14321b752be3.herokuapp.com/usuarios/login",
@@ -119,14 +124,15 @@ function InicioDeSesion(props) {
                 password: formData.password,
             }
         };
-        const response = axios.request(options);
-        if(!response.message){
-            // localStorage.setItem("accessToken", response.data.accessToken);
-            // localStorage.setItem("refreshToken", response.data.refreshToken);
-            // localStorage.setItem("id_usuario", response.data.id_user);
-            // localStorage.setItem("nombre_usuario", response.data.nombre_usuario);
-            // navigate("/Tablero");
-        }
+        axios.request(options).then(function (response) {
+            localStorage.setItem("accessToken", response.data.data.accessToken);
+            localStorage.setItem("refreshToken", response.data.data.refreshToken);
+            localStorage.setItem("id_usuario", response.data.data.id_user);
+            localStorage.setItem("nombre_usuario", response.data.data.nombre_usuario);
+            navigate("/Tablero");
+        }).catch(function (error) {
+            console.error(error);
+        });
     }
   };
 

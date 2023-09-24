@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/CSS/NavigationBar.css'
 import "../styles/CSS/Board.css";
 import axios from "axios";
+  import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 // import Board from "./Board";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Label, Input, FormGroup, Button } from 'reactstrap';
 import {DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -13,7 +15,7 @@ import Board from "./Board"
 
 function BoardList(props) {
   const { group2, notificationImg, menuImg, closeIcon, homeIcon, logIcon,
-    taskIcon, formIcon, pencilIcon, exitIcon, descripIcon, fechaIcon, InstaIcon, FaceIcon, TwitIcon } = props;
+    pencilIcon, exitIcon, descripIcon, fechaIcon} = props;
 
   //Logica mostrar tablero
   const [propsTablero, setpropsTablero] = useState({ 
@@ -194,6 +196,32 @@ function BoardList(props) {
   //Modal de notificaciones
   const [caja, setCaja] = useState(false);
 
+  //Generar enlace
+  const notify = () => 
+    toast.success(
+      "Enlace copiado al portapapeles",
+      { position: "top-center",
+        autoClose: 3500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      }
+    );
+
+  function copiarEnlaceAlPortapapeles(){
+    const enlace = 'https://www.witakhn.com/Formularios?id_usuario=' + localStorage.getItem("id_usuario");
+    const temporalInput = document.createElement('input');
+    document.body.appendChild(temporalInput);
+    temporalInput.value = enlace;
+    temporalInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(temporalInput);
+    notify();
+  }
+
   return (
     <DragDropContext onDragEnd={result => onDragEnd(result,[1,2, 3])}>
       <div className="board-main-container animate-enter">
@@ -208,16 +236,14 @@ function BoardList(props) {
               </div>
             </ModalHeader>
             <ModalBody style={{ height: `${modalHeight}px`, overflowY: "auto" }}>
-              <div style={{ marginBottom: '25px' }}>
-                <Link to="/Tablero" style={{ color: 'black', textDecoration: 'none' }}>
-                  <img src={taskIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
-                  <label className="navigation-text">Tablero</label>
+            <div style={{ marginBottom: '25px' }}>
+                <Link to="/Registrar" style={{ color: 'black', textDecoration: 'none' }}>
+                  <label className="navigation-text">Registrar</label>
                 </Link>
               </div>
-              <div>
-                <Link to="/Formularios" style={{ color: 'black', textDecoration: 'none'}}>
-                  <img src={formIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
-                  <label className="navigation-text">Formulario</label>
+              <div style={{ marginBottom: '25px' }}>
+                <Link to="/QuienesSomos" style={{ color: 'black', textDecoration: 'none' }}>
+                  <label className="navigation-text">Quienes Somos</label>
                 </Link>
               </div>
               <div style={{marginTop:"62vh"}}>
@@ -298,7 +324,7 @@ function BoardList(props) {
           </div>
         <div className="lista-boards">
           <div className="board-list-card">
-            <div className="board-list-head" style={{backgroundColor:"#ffe000"}}>
+            <div className="board-list-head" style={{backgroundColor:"#F33D53"}}>
               <h1>PENDIENTES</h1>
             </div>
             <Droppable droppableId="1">
@@ -314,7 +340,7 @@ function BoardList(props) {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
-                              <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 1)}>
+                              <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 1)} style={{backgroundColor:"rgb(245, 111, 127)"}}>
                                 <label>{board.nombre_tablero}</label>
                                 <img src={pencilIcon} alt="" className="pencil-icon"/>
                               </div>
@@ -327,15 +353,15 @@ function BoardList(props) {
                   })}
                   {provided.placeholder}
                   <button className="create-board-button" onClick={() => abrirModal(1)}>
-                    <h3>Añade otra tarjeta</h3>
-                    <h2>+</h2>
+                    <h3 style={{color:"#F33D53"}}>Añade otra tarjeta</h3>
+                    <h2 style={{color:"#F33D53"}}>+</h2>
                   </button>
                 </div>
               )}
             </Droppable>
           </div>
           <div className="board-list-card">
-            <div className="board-list-head" style={{backgroundColor:"#00b350"}}>
+            <div className="board-list-head">
               <h1>EN PROGRESO</h1>
             </div>
             <Droppable droppableId="2">
@@ -351,7 +377,7 @@ function BoardList(props) {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
-                              <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 2)}>
+                              <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 2)} >
                                 <label>{board.nombre_tablero}</label>
                                 <img src={pencilIcon} alt="" className="pencil-icon"/>
                               </div>
@@ -371,8 +397,8 @@ function BoardList(props) {
               )}
             </Droppable>
           </div>
-          <div className="board-list-card">
-            <div className="board-list-head">
+          <div className="board-list-card" >
+            <div className="board-list-head" style={{backgroundColor:"#00b350"}}>
               <h1>TERMINADO</h1>
             </div>
             <Droppable droppableId="3">
@@ -388,7 +414,7 @@ function BoardList(props) {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                             >
-                              <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 3)}>
+                              <div className="board-card" onClick={()=>handleAbrir(board.id_tablero, 3)} style={{backgroundColor:"#75c99a"}}>
                                 <label>{board.nombre_tablero}</label>
                                 <img src={pencilIcon} alt="" className="pencil-icon"/>
                               </div>
@@ -401,8 +427,8 @@ function BoardList(props) {
                   })}
                   {provided.placeholder}
                   <button className="create-board-button" onClick={() => abrirModal(3)}>
-                    <h3>Añade otra tarjeta</h3>
-                    <h2>+</h2>
+                    <h3 style={{color: "#00b350"}}>Añade otra tarjeta</h3>
+                    <h2 style={{color: "#00b350"}}>+</h2>
                   </button>
                 </div>
               )}
@@ -410,32 +436,21 @@ function BoardList(props) {
           </div>
         </div>
       </div>
+      <button className="generar-link" onClick={()=>{copiarEnlaceAlPortapapeles()}}>+</button>
+      <ToastContainer 
+        position="top-center"
+        autoClose={3500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
-    <div className="home-footer">
-      <div className="footer-upper">
-          <div className="contact-email-footer">
-              <p>Contactanos</p>
-              <a href="mailto:hnwitak@gmail.com" style={{color: "white"}}>hnwitak@gmail.com</a>
-          </div>
-          <div className="redes-footer">
-              <p>Redes Sociales</p>
-              <Link to="https://www.instagram.com/witak.co/">
-                  <img src={InstaIcon} alt="" style={{ height: "30px", marginRight: "10px" }} />
-              </Link>
-              <Link to="https://www.facebook.com/">
-                  <img src={FaceIcon} alt="" style={{ height: "25px" , marginRight: "10px" }} />
-              </Link>
-              <Link>
-                  <img src={TwitIcon} alt="" style={{ height: "25px", borderRadius:"6px" }} />
-              </Link>
-          </div>
-      </div>
-      <div className="white-line-footer"/>
-      <div className="rights-footer">
-          <p>&copy; Witak 2023. Todos los derechos reservados.</p>
-      </div>
-    </div>
-  </DragDropContext>);
+  </DragDropContext>)
 }
 
 export default BoardList;

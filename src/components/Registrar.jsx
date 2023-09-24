@@ -5,6 +5,9 @@ import "../styles/CSS/Home.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import emailjs from 'emailjs-com';
+import validator from "../Utilities/validator"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Registrar(props) {
   const navigate = useNavigate();
@@ -52,8 +55,38 @@ function Registrar(props) {
     })
   }
 
+  const notify = () => 
+    toast.error(
+      "Enlace copiado al portapapeles",
+      { position: "top-center",
+        autoClose: 3500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      }
+    );
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validator.isPassword(formData.password)){
+      toast.error(
+        "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una minúscula y un número",
+        { 
+          position: "top-center",
+          autoClose: 3500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        }
+      );
+      return;
+    }
     if (formData.password !== formData.conpassword) {
       setPasswordsMatch(false);
       return;
@@ -103,7 +136,6 @@ function Registrar(props) {
                   <Link to="/InicioSesion" className="home-link-style">Iniciar sesión</Link>
               }
               <Link to="/QuienesSomos" className="home-link-style">¿Quiénes somos?</Link>
-              <Link to="/Formularios" className="home-link-style">Contacta un Diseñador</Link>
           </div>
       </div>
       <div className="overlap-group">
@@ -187,8 +219,9 @@ function Registrar(props) {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }
 
-export default Registrar;
+export default Registrar;
