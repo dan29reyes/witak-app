@@ -37,6 +37,28 @@
   z-index: 1;
 }
 
+.div-notificaciones{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  margin-right: 3%;
+}
+
+.notificacion-cant{
+  background-color: red;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: -10px;
+  margin-top: -10px;
+}
+
 .menu-button{
   background: none;
   border: none;
@@ -250,6 +272,13 @@ transform: scale(1);
   .name-user{
     font-size: 22px;
   }
+  .div-notificaciones{
+    margin-right: 3%;
+  }
+  .notificacion-cant{
+    margin-left: -10px;
+    margin-top: -10px;
+  }
   .generar-link{
     visibility: hidden;
     position:relative;
@@ -291,7 +320,7 @@ transform: scale(1);
   }
 
   .logo-witak-head {
-    height: 2rem;
+    height: 3rem;
   }
 
   .menu-button {

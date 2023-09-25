@@ -15,7 +15,7 @@ import Board from "./Board"
 
 function BoardList(props) {
   const { group2, notificationImg, menuImg, closeIcon, homeIcon, logIcon,
-    pencilIcon, exitIcon, descripIcon, fechaIcon} = props;
+    pencilIcon, exitIcon, descripIcon, fechaIcon, trashIcon} = props;
 
   //Logica mostrar tablero
   const [propsTablero, setpropsTablero] = useState({ 
@@ -37,14 +37,17 @@ function BoardList(props) {
       idColumna: columna,
       exitIcon: exitIcon,
       descripIcon: descripIcon,
-      fechaIcon: fechaIcon
+      fechaIcon: fechaIcon,
+      trashIcon: trashIcon
     })
   }
   //Modal y logica de agregar tablero
   const [boards, setBoards] = useState([]);
 
   useEffect(() => {
-    getBoards();
+    if(boards.length === 0){
+      getBoards();
+    }
   }, []);
 
   async function getBoards (){
@@ -196,6 +199,33 @@ function BoardList(props) {
   //Modal de notificaciones
   const [caja, setCaja] = useState(false);
 
+  const [cantNotificaciones, setCantNotificaciones] = useState({
+    cant: -1
+  });
+
+  const getCantNotificaciones = () => {
+    const options = {
+      method: 'POST',
+      url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formularios/obtenerCant',
+      data: { id_usuario: parseInt(localStorage.getItem("id_usuario"))}
+    };
+    return axios.request(options)
+      .then(function (response) {
+        setCantNotificaciones({
+          cant: response.data.cant
+        })
+      })
+      .catch(function (error) {
+        throw error;
+      });
+  }
+
+  useEffect(() => {
+    if(cantNotificaciones.cant === -1){
+      getCantNotificaciones();
+    }
+  }, []); 
+
   //Generar enlace
   const notify = () => 
     toast.success(
@@ -307,9 +337,13 @@ function BoardList(props) {
           <Link to="/Inicio">
             <img className="logo-witak-head" src={group2} alt="" />
           </Link>
-          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", marginRight: "3%"}}>
+          <div className="div-notificaciones">
             <button style={{ background: "none", border: "none", padding: "0", cursor: "pointer" }}>
-              {caja === false ? (<img src={notificationImg} style={{ height: "27px" }} alt="" onClick={()=>setCaja(!caja)}/>
+              {caja === false ? (
+                <div>
+                  {cantNotificaciones.cant > 0 && <div className="notificacion-cant">{cantNotificaciones.cant}</div>}
+                  <img src={notificationImg} style={{ height: "27px" }} alt="" onClick={()=>setCaja(!caja)}/>
+                </div>
               ) : (
                 <img src={closeIcon} style={{ height: "27px" }} alt="" onClick={()=>setCaja(!caja)}/>
               )}

@@ -37,7 +37,7 @@
 .modal-design-footer{
     background: none;
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
@@ -56,12 +56,15 @@
 .marcar-terminado{
     background-color: var(--blue-ribbon);
     border-radius: 10px;
-    margin-bottom: 10px;
-    height: 30px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+    margin-right:auto;
+    margin-left:50px;
+    height: 40px;
     color: #ffffff;
     border: none;
     font-family: var(--font-family-montserrat-semibold);
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .modal-exit-button{
@@ -92,6 +95,18 @@
     font-weight: 700;
     font-size: 27px;
     margin: 0px 0px 0px 8px;
+}
+
+.trash-icon{
+    width: 30px;
+}
+
+.trash-button{
+    background: none;
+    border: none;
+    margin-left: auto;
+    margin-right: 10px;
+    width:30px;
 }
 
 .columna-board{

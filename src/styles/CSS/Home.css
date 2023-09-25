@@ -263,7 +263,7 @@
     }
 
     .home-text-1{
-        font-size: 32px;
+        font-size: 30px;
         line-height: 31px;
         transform: none;
     }
@@ -298,6 +298,7 @@
         justify-content: center;
         align-items: center;
         position: relative;
+        width: 100%;
         margin-top: -15%;
     }
     .circleImg1-home, .circleImg2-home{

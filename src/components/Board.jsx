@@ -3,7 +3,7 @@ import "../styles/CSS/Board.css";
 import {useNavigate} from "react-router-dom";
 import axios from "axios"
 
-function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fechaIcon}){
+function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fechaIcon, trashIcon}){
     const navigate = useNavigate();
     
     const [tablero, setTablero] = useState({
@@ -55,6 +55,21 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
                         return;
                     }
                 }
+            })
+            .catch(function (error) {
+                throw error;
+            });
+    }
+
+    const eliminarFormulario = () => {
+        const options = {
+            method: 'POST',
+            url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formulario/eliminar',
+            data: { id_formulario: tablero.id_formulario }
+        };
+        return axios.request(options)
+            .then(function (response) {
+                console.log(response.data);
             })
             .catch(function (error) {
                 throw error;
@@ -168,11 +183,14 @@ function Board({abrirTablero, idTablero, idColumna, exitIcon, descripIcon, fecha
                 }
                 { tablero.id_formulario === null ? null :
                 <button 
-                    onClick={()=>{verFormulario()}}
+                    onClick={()=>{verFormulario()}} 
                     className="ver-formulario"
                     >Ver Formulario
                 </button>
                 }
+                <button className="trash-button">
+                    <img src={trashIcon} alt="" className="trash-icon"/>
+                </button>
             </div>
         </div>
     );
