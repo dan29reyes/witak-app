@@ -85,6 +85,23 @@
   font-weight: 500;
 }
 
+.generar-celular{
+  display: none;
+  border-radius: 50px;
+  width: 320px;
+  background-color: var(--blue-ribbon);
+  height: 60px;
+  text-wrap: wrap;
+  padding: 10px;
+  border:none;
+  color: white;
+  font-size:x-large;
+  font-weight: 500;
+  margin-bottom: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
 .logo-witak-head{
   height: 3.5rem;
   margin-left: 1.5%;
@@ -269,6 +286,12 @@ transform: scale(1);
 }
 
 @media (max-width: 728px){
+  .generar-celular{
+    display: block;
+  }
+  .generar-link{
+    display: none;
+  }
   .name-user{
     font-size: 22px;
   }
@@ -281,20 +304,6 @@ transform: scale(1);
   }
   .generar-link{
     visibility: hidden;
-    position:relative;
-  }
-  .generar-link:after{
-    visibility: visible;
-    content: "Generar Enlace";
-    display: flex;
-    width: 350px;
-    height: 50px;
-    border-radius: 50px;
-    margin-left: 80px;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--blue-ribbon);
-    
   }
   .description-tablero{
     font-size: 14px;

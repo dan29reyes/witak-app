@@ -92,35 +92,37 @@ function Notificaciones(props){
                 <div className="centro-notificaciones">
                     <h1 className='titulo-centro'>Centro de Notificaciones</h1>
                 </div>
-                {notificaciones.length > 0 && hasPendingNotifications? (
-                    notificaciones.map((notificacion) => {
-                        if(notificacion.estado_formulario === "PENDIENTE"){
-                        return(
-                        <div className="carta-notificacion">
-                            <h3 className='carta-h1'>{notificacion.nombre_formulario} acaba de enviar un proyecto</h3>
-                            <div className="carta-botones">
-                                <button 
-                                    className='boton-aceptar'
-                                    onClick={() => agregarTablero(
-                                        notificacion.id_formulario,
-                                        notificacion.nombre_formulario, 
-                                        notificacion.descripcion_formulario, 
-                                        notificacion.fecha_limite
-                                    )}
-                                    >ACEPTAR
-                                </button>
-                                <button 
-                                    className='boton-rechazar'
-                                    onClick={() => rechazarTablero(notificacion.id_formulario)}
-                                    >RECHAZAR
-                                </button>
+                <div style={{width: "100%", overflow:"auto", height:"295px"}}>
+                    {notificaciones.length > 0 && hasPendingNotifications? (
+                        notificaciones.map((notificacion) => {
+                            if(notificacion.estado_formulario === "PENDIENTE"){
+                            return(
+                            <div className="carta-notificacion">
+                                <h3 className='carta-h1'>{notificacion.nombre_formulario} acaba de enviar un proyecto</h3>
+                                <div className="carta-botones">
+                                    <button 
+                                        className='boton-aceptar'
+                                        onClick={() => agregarTablero(
+                                            notificacion.id_formulario,
+                                            notificacion.nombre_formulario, 
+                                            notificacion.descripcion_formulario, 
+                                            notificacion.fecha_limite
+                                        )}
+                                        >ACEPTAR
+                                    </button>
+                                    <button 
+                                        className='boton-rechazar'
+                                        onClick={() => rechazarTablero(notificacion.id_formulario)}
+                                        >RECHAZAR
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                        )}
-                    })
-                ) : (
-                    <h3 className="no-hay-notificaciones">No hay notificaciones</h3>
-                )}
+                            )}
+                        })
+                    ) : (
+                        <h3 className="no-hay-notificaciones">No hay notificaciones</h3>
+                    )}
+                </div>
             </div>
         </div>
     )

@@ -5,6 +5,8 @@ import '../styles/CSS/Formulario.css'
 import axios from 'axios';
 import { Link,useNavigate } from "react-router-dom";
 import htmlPlantilla from "../plantilla.json";
+import { toast, ToastContainer } from 'react-toastify';
+import {uploadFile} from "../Utilities/config"
 
 function Formulario(props){
     const {backIcon, sendIcon, checkIcon, logoWitak} = props;
@@ -13,7 +15,6 @@ function Formulario(props){
     const [designers, setDesigners] = useState([]);
 
     useEffect(() => {
-        getDesigners();
         getFormulario();
     }, []);
     
@@ -63,6 +64,7 @@ function Formulario(props){
             ...formularioData,
             id_usuario: parseInt(parametro),
         })
+
     }, []); // El segundo argumento del useEffect vacío significa que este efecto se ejecuta solo una vez al montar el componente
 
     const [formularioData, setFormularioData] = useState({
@@ -79,6 +81,7 @@ function Formulario(props){
         nombre_diseñador: "",
         designerMail:"",
         id_diseñador: 0,
+        urls: [],
     });
 
     const handleInputChange = (event) => {
@@ -96,7 +99,7 @@ function Formulario(props){
             ...formularioData,
             [event.target.name]: event.target.value,
         })
-        console.log(formularioData)
+        console.log(imageFiles)
     }
 
     const fileInputRef = useRef(null);
@@ -106,6 +109,24 @@ function Formulario(props){
     };
 
     const handleTono = (e) => {
+        if (formularioData.tono.includes(e.target.value)) {
+            let tonos = formularioData.tono.split(", ");
+            let newTono = "";
+            tonos.map((tono) => {
+                if (tono !== e.target.value) {
+                    if (newTono === "") {
+                        newTono = tono;
+                    } else {
+                        newTono += ", " + tono;
+                    }
+                }
+            });
+            setFormularioData({
+                ...formularioData,
+                tono: newTono,
+            });
+            return;
+        }
         if (formularioData.tono === "") {
             setFormularioData({
                 ...formularioData,
@@ -119,61 +140,93 @@ function Formulario(props){
         }
         console.log(formularioData)
     };
-
-    // const handleFileChange = (e) => {
-    //     const file = e.target.files[0];
-    //     if (file && file.type === 'application/pdf') {
-    //     const formDT = new FormData();
-    //     formDT.append('pdf', file);
-        
-    //     axios.post('https://quiet-wildwood-64002-14321b752be3.herokuapp.com/upload', formDT)
-    //         .then((response) => {
-    //         setFormularioData({
-    //             ...formularioData,
-    //             pdf: response.data
-    //         });
-    //         })
-    //         .catch((error) => {
-    //         console.error(error);
-    //         });
-    //     } else {
-    //     console.error('Invalid file type. Only PDF files are allowed.');
-    //     }
-    // };
     
     const handleDragOver = (e) => {
         e.preventDefault();
     };
 
+    const [imagePreviews, setImagePreviews] = useState([]);
+    const [imageFiles, setImageFiles] = useState([]);
+
     const handleDrop = (e) => {
         e.preventDefault();
-        const file = e.dataTransfer.files[0];
-        if (file && file.type === 'application/pdf') {
-        const formDT = new FormData();
-        formDT.append('pdf', file);
+        const files = e.dataTransfer.files;
+        const previews = [...imagePreviews]; 
+    
+        if (files.length + previews.length > 4) {
+            toast.warn(
+                `Solo se permiten ${4} imágenes.`,
+                { 
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                }
+            );
+            return;
+        }
+    
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    previews.push(reader.result);
+                    setImagePreviews(previews);
+                    setImageFiles(prevFiles => [...prevFiles, files[i]]);
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        }
+    };    
+    
+    const handleFileChange = (e) => {
+        const files = e.target.files;
+        const previews = [...imagePreviews];
         
-        axios
-            .post('https://quiet-wildwood-64002-14321b752be3.herokuapp.com/upload', formDT)
-            .then((response) => {
-            setFormularioData({
-                ...formularioData,
-                pdf: {
-                filename: response.data.filename,
-                originalname: response.data.originalname,
-                path: response.data.path,
-                },
-            });
-            })
-            .catch((error) => {
-            console.error(error);
-            });
-        } else {
-        console.error('Invalid file type. Only PDF files are allowed.');
+        if (files.length + previews.length > 4) {
+            toast.warn(
+                `Solo se permiten ${4} imágenes.`,
+                { 
+                    position: "top-center",
+                    autoClose: 3500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                }
+            );
+            return;
+        }
+    
+        for (let i = 0; i < files.length; i++) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                previews.push(reader.result);
+                setImagePreviews(previews);
+                setImageFiles(prevFiles => [...prevFiles, files[i]]);
+            };
+            reader.readAsDataURL(files[i]);
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleDeletePreview = (index) => {
+        const previews = [...imagePreviews];
+        previews.splice(index, 1);
+        setImagePreviews(previews);
+    };
+
+    const handleSubmit = async(e) =>{
         e.preventDefault();
+        let urls = [];
+        for(let i = 0; i < imageFiles.length; i++){
+            urls.push(await uploadFile(imageFiles[i]));
+        }
         let options = {
             method: 'POST',
             url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formularios/crear',
@@ -186,6 +239,10 @@ function Formulario(props){
                 fecha_limite: formularioData.fecha_limite,
                 id_usuario: formularioData.id_usuario,
                 tamaño_formulario: formularioData.tamaño,
+                ref_img1: urls[0],
+                ref_img2: urls[1],
+                ref_img3: urls[2],
+                ref_img4: urls[3],
             }
         };
         axios.request(options).then(function (response) {
@@ -213,8 +270,6 @@ function Formulario(props){
         modifiedHtml = modifiedHtml.replace(/{{tono_formulario}}/g, formularioData.tono);
         modifiedHtml = modifiedHtml.replace(/{{fecha_limite}}/g, fecha);
 
-        
-
         options = {
             method: 'POST',
             url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/formularios/enviarCorreo',
@@ -229,7 +284,6 @@ function Formulario(props){
         }
         console.log(options.data)
         axios.request(options).then(function (response) {
-            console.log("Correo enviado!")
         }).catch(function (error) {
             console.error(error);
         })
@@ -258,8 +312,24 @@ function Formulario(props){
                     tono: response.data[0].tono_formulario,
                     tamaño: response.data[0].tamaño_formulario,
                     fecha_limite: fecha, 
-                    id_diseñador: response.data[0].id_usuario,                  
+                    id_diseñador: response.data[0].id_usuario,       
                 })
+                let respPreview = [];
+                if(response.data[0].ref_img1 !== null){
+                    respPreview.push(response.data[0].ref_img1)
+                }
+                if(response.data[0].ref_img2 !== null){
+                    respPreview.push(response.data[0].ref_img2)
+                }
+                if(response.data[0].ref_img3 !== null){
+                    respPreview.push(response.data[0].ref_img3)
+                }
+                if(response.data[0].ref_img4 !== null){
+                    respPreview.push(response.data[0].ref_img4)
+                }
+                setImagePreviews([
+                    ...respPreview
+                ])
             }).catch(function (error) {
               console.error(error);
             });
@@ -337,18 +407,38 @@ function Formulario(props){
                                 <label className="label-formulario">Tono</label>
                                 <div>
                                     {localStorage.getItem("id_formulario") !== null ? 
-                                        <div>
+                                        <div className="tono-group">
                                             {formularioData.tono.split(", ").map((tono) => (
                                                 <button className="tono-button">{tono}</button>
                                             ))}
                                         </div>
                                         :
                                         <div className="tono-group">
-                                            <button className="tono-button" value="Elegante" name="tono" onClick={(e)=> {handleTono(e)}}>Elegante</button>
-                                            <button className="tono-button" value="Jugueton" name="tono" onClick={(e)=> {handleTono(e)}}>Jugueton</button>
-                                            <button className="tono-button" value="Ejecutivo" name="tono" onClick={(e)=>{handleTono(e)}}>Ejecutivo</button>
-                                            <button className="tono-button" value="Llamativo" name="tono" onClick={(e)=> {handleTono(e)}}>Llamativo</button>
-                                            <button className="tono-button" value="Persuasivo" name="tono" onClick={(e)=> {handleTono(e)}}>Persuasivo</button>
+                                            {!formularioData.tono.includes("Elegante") ? 
+                                                <button className="tono-button" value="Elegante" name="tono" onClick={(e)=> {handleTono(e)}}>Elegante</button>
+                                                : 
+                                                <button className="tono-button" style={{backgroundColor:"#dbdbdb"}}  value="Elegante" name="tono" onClick={(e)=> {handleTono(e)}}>Elegante</button>
+                                            }
+                                            {!formularioData.tono.includes("Jugueton") ? 
+                                                <button className="tono-button" value="Jugueton" name="tono" onClick={(e)=> {handleTono(e)}}>Jugueton</button>
+                                                : 
+                                                <button className="tono-button" style={{backgroundColor:"#dbdbdb"}}  value="Jugueton" name="tono" onClick={(e)=> {handleTono(e)}}>Jugueton</button>
+                                            }
+                                            {!formularioData.tono.includes("Ejecutivo") ? 
+                                                <button className="tono-button" value="Ejecutivo" name="tono" onClick={(e)=> {handleTono(e)}}>Ejecutivo</button>
+                                                : 
+                                                <button className="tono-button" style={{backgroundColor:"#dbdbdb"}}  value="Ejecutivo" name="tono" onClick={(e)=> {handleTono(e)}}>Ejecutivo</button>
+                                            }
+                                            {!formularioData.tono.includes("Llamativo") ? 
+                                                <button className="tono-button" value="Llamativo" name="tono" onClick={(e)=> {handleTono(e)}}>Llamativo</button>
+                                                : 
+                                                <button className="tono-button" style={{backgroundColor:"#dbdbdb"}}  value="Llamativo" name="tono" onClick={(e)=> {handleTono(e)}}>Llamativo</button>
+                                            }
+                                            {!formularioData.tono.includes("Persuasivo") ? 
+                                                <button className="tono-button" value="Persuasivo" name="tono" onClick={(e)=> {handleTono(e)}}>Persuasivo</button>
+                                                : 
+                                                <button className="tono-button" style={{backgroundColor:"#dbdbdb"}} value="Persuasivo" name="tono" onClick={(e)=> {handleTono(e)}}>Persuasivo</button>
+                                            }
                                         </div>
                                     }
                                 </div>
@@ -372,15 +462,44 @@ function Formulario(props){
                         </div>
                         <div className="formulario-group-file">
                             <label className="label-formulario">Inspiración</label>
-                            <label 
-                                for="images" 
-                                className="formulario-file" 
-                                onDragOver={handleDragOver} 
-                                onDrop={(e) => handleDrop(e, 1)}>
-                                <span className="drop-title">Arrastra un archivo</span>
-                                o
-                                <input type="file" onClick={() => handleIconClick(fileInputRef)} name="inspiracion"/>
-                            </label>
+                            {localStorage.getItem("id_formulario") === null ?
+                                <label 
+                                    for="images" 
+                                    className="formulario-file" 
+                                    onDragOver={handleDragOver} 
+                                    onDrop={(e) => handleDrop(e, 1)}>
+                                    <span className="drop-title">Arrastra un archivo</span>
+                                    o
+                                    <input type="file" accept="image/*" multiple="multiple" max="4" name="inspiracion" onChange={(e)=>{handleFileChange(e)}}/>
+                                    <div className="image-previews">
+                                        {imagePreviews.map((preview, index) => (
+                                            <div key={index} className="image-preview">
+                                                <img src={preview} alt={`Preview ${index}`} key={index} />
+                                                <button 
+                                                    type="button" 
+                                                    onClick={() => handleDeletePreview(index)} 
+                                                    className="delete-button"
+                                                ></button>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </label>
+                            :
+                                <div className="image-previews-lleno">
+                                    {imagePreviews.map((preview, index) => (
+                                        <div key={index} className="image-preview-lleno">
+                                            <img src={preview} alt={`Preview ${index}`} key={index} />
+                                        </div>
+                                    ))}
+                                </div>
+                            }
+                        </div>
+                        <div className="Formulario-footer-celular">
+                            {localStorage.getItem("id_formulario") !== null ? null :
+                            <button className="formulario-button-send" onClick={(e)=>(handleEnviadoPreview(), handleSubmit(e))}>
+                                <label className="formulario-button-label">Enviar Formulario</label>
+                                <img src={sendIcon} alt="" className="formulario-send-icon"/>
+                            </button>}
                         </div>
                     </div>
                 </div>
@@ -392,6 +511,7 @@ function Formulario(props){
                     </button>}
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     )
 }

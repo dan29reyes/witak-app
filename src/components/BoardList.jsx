@@ -43,14 +43,14 @@ function BoardList(props) {
   }
   //Modal y logica de agregar tablero
   const [boards, setBoards] = useState([]);
+  const [boardFilled, setBoardFilled] = useState(false);
 
   useEffect(() => {
-    if(boards.length === 0){
-      getBoards();
-    }
+    getBoards();
   }, []);
 
   async function getBoards (){
+    if(boardFilled === false){
       const options = {
           method: 'POST',
           url: 'https://quiet-wildwood-64002-14321b752be3.herokuapp.com/tablero/obtener',
@@ -59,11 +59,13 @@ function BoardList(props) {
       return await axios.request(options)
           .then(function (response) {
             setBoards(response.data);
+            setBoardFilled(true);
           })
           .catch(function (error) {
             throw error;
           });
     }
+  }
 
   const [form, setForm] = useState({
     nombre_tablero: "",
@@ -87,8 +89,8 @@ function BoardList(props) {
     };
     axios.request(options)
       .then(function (response) {
-        getBoards();
         abrirModal();
+        window.location.reload();
       })
       .catch(function (error) {
         console.error(error);
@@ -276,7 +278,7 @@ function BoardList(props) {
                   <label className="navigation-text">Quiénes Somos</label>
                 </Link>
               </div>
-              <div style={{marginTop:"62vh"}}>
+              <div style={{marginTop:"64vh"}}>
                 <Link to="/Inicio" onClick={()=>{logOut()}} style={{ color: 'black', textDecoration: 'none' }}>
                   <img src={logIcon} alt="" style={{ height: '40px', width: '35px', marginRight: '15px' }} />
                   <label className="navigation-text">Cerrar Sesión</label>
@@ -468,9 +470,10 @@ function BoardList(props) {
               )}
             </Droppable>
           </div>
+          <button className="generar-celular" onClick={()=>{copiarEnlaceAlPortapapeles()}}>Generar Enlace</button>
+          <button className="generar-link" onClick={()=>{copiarEnlaceAlPortapapeles()}}>+</button>
         </div>
       </div>
-      <button className="generar-link" onClick={()=>{copiarEnlaceAlPortapapeles()}}>+</button>
       <ToastContainer 
         position="top-center"
         autoClose={3500}
